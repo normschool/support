@@ -26,7 +26,7 @@
                             {{ __('messages.web.welcome_to') }} {{ $settings['application_name'] }}
                         </h1>
                         <div data-wow-duration="2.5s" class="search-container wow fadeInRight">
-                            {{ Form::text('search', null, ['id' => 'publicTicketsSearch', 'class' => 'form-control', 'required', 'placeholder'=> __('messages.web.search_public_ticket').'...', 'autocomplete' => 'off']) }}
+                            {{ html()->text('search')->id('publicTicketsSearch')->class('form-control')->required()->placeholder(__('messages.web.search_public_ticket') . '...')->attribute('autocomplete', 'off') }}
                             <button type="submit"
                                     class="btn btn-primary landing-btn">{{ __('messages.ticket.search_ticket') }}</button>
                             <div id="publicTicketsSearchResults" class="position-absolute w-100"></div>

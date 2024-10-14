@@ -43,7 +43,7 @@
                                                 </div>
                                             </div>
                                             <div class="ticket-description">
-                                                <b>{{ Form::label('description', __('messages.common.description').':') }}</b>
+                                                <b>{{ html()->label(__('messages.common.description') . ':', 'description') }}</b>
                                                 <p>{!! $ticket->description ?  $ticket->description : __('messages.common.n/a') !!}</p>
                                             </div>
                                             <div class="ticket-divider"></div>
@@ -51,10 +51,10 @@
                                                 <div class="ticket-form">
                                                     @include('flash::message')
                                                     <div class="form-group">
-                                                        <strong>{{ Form::label('add_comment', __('messages.common.replay').':') }}</strong>
+                                                        <strong>{{ html()->label(__('messages.common.replay') . ':', 'add_comment') }}</strong>
                                                         <div id="addReplyContainer"></div>
                                                         <div class="text-left mt-3">
-                                                            {{ Form::button(__('messages.common.save'), ['type'=>'button', 'class' => 'btn btn-primary', 'id'=>'addTicketReply', 'data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+                                                            {{ html()->button(__('messages.common.save'), 'button')->class('btn btn-primary')->id('addTicketReply')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
                                                             <a href="{{ route('customer.myTicket') }}"
                                                                class="btn btn-secondary text-dark">{{__('messages.common.cancel')}}</a>
                                                         </div>

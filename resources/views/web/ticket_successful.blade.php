@@ -11,20 +11,20 @@
                 <div class="card-body mt-0 pt-0">
                     <div class="row">
                         <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                            <h6>{{ Form::label('ticket_number', __('messages.ticket.ticket_number').':') }}</h6>
+                            <h6>{{ html()->label(__('messages.ticket.ticket_number') . ':', 'ticket_number') }}</h6>
                             <span id="copyTicketId">{{ $ticket->ticket_id }}</span>
                         </div>
                         <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                            <h6>{{ Form::label('title', __('messages.ticket.ticket_title').':') }}</h6>
+                            <h6>{{ html()->label(__('messages.ticket.ticket_title') . ':', 'title') }}</h6>
                             <span>{{ $ticket->title }}</span>
                         </div>
                         <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                            <h6>{{ Form::label('email', __('messages.common.email').':') }}</h6>
+                            <h6>{{ html()->label(__('messages.common.email') . ':', 'email') }}</h6>
                             <span>{{ $ticket->email }}</span>
                         </div>
                         @if(count($ticket->media) > 0)
                             <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                                <h6>{{ Form::label('attachments', __('messages.ticket.attachments').':') }}</h6>
+                                <h6>{{ html()->label(__('messages.ticket.attachments') . ':', 'attachments') }}</h6>
                                 <div class="gallery gallery-md attachment__section">
                                     @foreach($ticket->media as $media)
                                         <div class="gallery-item ticket-attachment"

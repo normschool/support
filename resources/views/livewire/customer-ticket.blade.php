@@ -40,10 +40,10 @@
                                    class="form-control customer-dashboard-ticket-search t-control-height show-overflow-ellipsis mr-0">
                         </div>
                         <div class="px-2 ticket-filter-spacer status-select">
-                            {{ Form::select('status', $status, null, ['id'=>'ticketFilter', 'class' => 'form-control','placeholder' => __('messages.common.all'), 'wire:model' => 'ticketFilter']) }}
+                            {{ html()->select('status', $status)->id('ticketFilter')->class('form-control')->placeholder(__('messages.common.all'))->attribute('wire:model', 'ticketFilter') }}
                         </div>
                         <div class="px-2 mt-lg-0 ticket-filter-spacer category-select">
-                            {{ Form::select('category_id', array_flip($ticketCategories), null, ['id'=>'categoryFilterId','class' => 'form-control','placeholder' => __('messages.admin_dashboard.select_category'), 'wire:model' => 'categoryFilter']) }}
+                            {{ html()->select('category_id', array_flip($ticketCategories))->id('categoryFilterId')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category'))->attribute('wire:model', 'categoryFilter') }}
                         </div>
                         <div class="px-2 pr-0 mt-lg-0 sm-hide">
                             <button type="button"

@@ -8,10 +8,10 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger d-none" id="emailSettingMessageBox"></div>
-                {{ Form::open(['id' => 'changeEmailSettingFrom']) }}
+                {{ html()->form('POST', url()->current())->id('changeEmailSettingFrom')->open() }}
                 <div class="row">
                     <div class="form-group col-12">
-                        {{ Form::label('email_setting',__('messages.email_setting.email_setting') .':') }}<span
+                        {{ html()->label(__('messages.email_setting.email_setting') . ':', 'email_setting') }}<span
                                 class="text-danger">*</span>
                         <span data-toggle="tooltip" data-html="true" title="" data-original-title="{{__('messages.email_setting.get_ticket_updates_through_email')}}"><i class="fas fa-question-circle"></i></span><br>
                         <label class="custom-switch pl-0 mt-2">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-12">
-                        {{ Form::label('email_cases',__('messages.email_setting.email_cases') .':') }}
+                        {{ html()->label(__('messages.email_setting.email_cases') . ':', 'email_cases') }}
                         <ul>
                             @role('Admin')
                             <li>{{ __('messages.email_notification.making_ticket') }}</li>
@@ -39,12 +39,11 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    {{ Form::button(__('messages.common.save'),['type' => 'submit','class' => 'btn btn-primary mr-2', 'id' => 'btnEmailSettingChange', 
-'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+                    {{ html()->submit(__('messages.common.save'))->class('btn btn-primary mr-2')->id('btnEmailSettingChange')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
                     <button type="button" class="btn btn-light left-margin"
                             data-dismiss="modal">{{ __('messages.common.cancel') }} </button>
                 </div>
-                {{ Form::close() }}
+                {{ html()->form()->close() }}
             </div>
         </div>
     </div>

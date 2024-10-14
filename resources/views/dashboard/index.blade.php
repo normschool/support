@@ -93,11 +93,11 @@
                         <div class="d-flex mt-md-0 mt-3 flex-wrap ml-auto mobile-width-100">
                             @role('Admin')
                             <div class="mr-2  mb-2 responsive-100">
-                                {{ Form::select('agents', $data['dashboardData']['agents'], null, ['id' => 'agents','class' => 'form-control', 'placeholder' => __('messages.admin_dashboard.select_agent')]) }}
+                                {{ html()->select('agents', $data['dashboardData']['agents'])->id('agents')->class('form-control')->placeholder(__('messages.admin_dashboard.select_agent')) }}
                             </div>
                             @endrole
                             <div class="mb-2 responsive-100">
-                                {{ Form::select('categories', $data['dashboardData']['categories'], null, ['id' => 'categories','class' => 'form-control', 'placeholder' => __('messages.admin_dashboard.select_category')]) }}
+                                {{ html()->select('categories', $data['dashboardData']['categories'])->id('categories')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category')) }}
                             </div>
                             <div id="time_range" class="time_range time_range_width ml-sm-2 ml-0 mb-2 responsive-100">
                                 <i class="far fa-calendar-alt"

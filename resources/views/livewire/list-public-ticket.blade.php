@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-2">
-            {{ Form::select('status', $status, \App\Models\Ticket::STATUS_ACTIVE, ['id'=>'statusFilterId','class' => 'form-control','placeholder' => __('messages.common.show_all'), 'wire:model' => 'statusFilter']) }}
+            {{ html()->select('status', $status, \App\Models\Ticket::STATUS_ACTIVE)->id('statusFilterId')->class('form-control')->placeholder(__('messages.common.show_all'))->attribute('wire:model', 'statusFilter') }}
         </div>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 mb-md-3 mb-2">
-            {{ Form::select('category_id', array_flip($ticketCategories), null, ['id'=>'categoryFilterId','class' => 'form-control','placeholder' => __('messages.admin_dashboard.select_category'), 'wire:model' => 'categoryFilter']) }}
+            {{ html()->select('category_id', array_flip($ticketCategories))->id('categoryFilterId')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category'))->attribute('wire:model', 'categoryFilter') }}
         </div>
         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-2">
             <div class="public-ticket-reset w-100">

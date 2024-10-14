@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{ Form::label('phone', __('messages.common.phone').':') }}<span
+                        {{ html()->label(__('messages.common.phone') . ':', 'phone') }}<span
                                 class="text-danger">*</span><br>
                         <div class="d-flex">
                             <div class="region-code">

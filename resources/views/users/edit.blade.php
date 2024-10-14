@@ -19,11 +19,11 @@
             @include('layouts.errors')
             <div class="card">
                 <div class="card-body">
-                    {{ Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'put', 'files' => 'true', 'id' => 'editCompanyForm', 'autocomplete' => 'off']) }}
+                    {{ html()->modelForm($user, 'PUT', route('user.update', [$user->id]))->acceptsFiles()->id('editCompanyForm')->attribute('autocomplete', 'off')->open() }}
 
                     @include('users.edit_fields')
 
-                    {{ Form::close() }}
+                    {{ html()->closeModelForm() }}
                 </div>
             </div>
         </div>

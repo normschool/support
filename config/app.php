@@ -169,11 +169,9 @@ return [
          * Package Service Providers...
          */
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
@@ -244,8 +242,6 @@ return [
         'Validator'  => Illuminate\Support\Facades\Validator::class,
         'View'       => Illuminate\Support\Facades\View::class,
         'Debugbar'   => Barryvdh\Debugbar\Facade::class,
-        'Form'       => Collective\Html\FormFacade::class,
-        'Html'       => Collective\Html\HtmlFacade::class,
         'Flash'      => Laracasts\Flash\Flash::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'OneSignal'  => Berkayk\OneSignal\OneSignalFacade::class,

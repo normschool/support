@@ -73,12 +73,12 @@
                                 <div class="ticket-form ">
                                     <div class="form-group">
                                         <form id="addRelyForm" action="{{ route('ticket.add-reply') }}">
-                                            {{ Form::hidden('ticket_id',$ticket->id) }}
-                                            <strong>{{ Form::label('addReplyContainer', __('messages.ticket.add_reply').':') }}
+                                            {{ html()->hidden('ticket_id', $ticket->id) }}
+                                            <strong>{{ html()->label(__('messages.ticket.add_reply') . ':', 'addReplyContainer') }}
                                                 <span class="text-danger">*</span></strong>
                                             <textarea name="description" id="addReplyContainer"></textarea>
                                             <div class="text-left mt-3">
-                                                {{ Form::button(__('messages.ticket.post_reply'), ['type'=>'submit', 'class' => 'btn btn-primary custom-ticket-btn', 'id'=>'addTicketReply', 'data-loading-text'=>"<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+                                                {{ html()->submit(__('messages.ticket.post_reply'))->class('btn btn-primary custom-ticket-btn')->id('addTicketReply')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
                                                 <button type="button" id="attachmentButton" data-toggle="modal"
                                                         data-target="#addAttachment" class="btn btn-info btn-icon custom-ticket-btn">
                                                     <i class="fas fa-paperclip"></i>

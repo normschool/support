@@ -19,9 +19,9 @@
             @include('layouts.errors')
             <div class="card">
                 <div class="card-body">
-                    {{ Form::open(['route' => 'admins.store', 'files' => 'true', 'autocomplete' => 'off','id'=>'adminAddForm']) }}
+                    {{ html()->form('POST', route('admins.store'))->acceptsFiles()->attribute('autocomplete', 'off')->id('adminAddForm')->open() }}
                     @include('admins.field')
-                    {{ Form::close() }}
+                    {{ html()->form()->close() }}
                 </div>
             </div>
         </div>

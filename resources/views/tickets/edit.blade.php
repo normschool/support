@@ -29,15 +29,15 @@
             <div class="card">
                 <div class="card-body">
                     @role('Admin')
-                    {{ Form::model($ticket, ['route' => ['ticket.update', $ticket->id], 'method' => 'put', 'autocomplete' => 'off', 'files' => 'true', 'id' => 'editTicketForm']) }}
+                    {{ html()->modelForm($ticket, 'PUT', route('ticket.update', [$ticket->id]))->attribute('autocomplete', 'off')->acceptsFiles()->id('editTicketForm')->open() }}
                     @endrole
                     @role('Agent')
-                    {{ Form::model($ticket, ['route' => ['agent.ticket.update', $ticket->id], 'method' => 'put', 'autocomplete' => 'off', 'files' => 'true', 'id' => 'editTicketForm']) }}
+                    {{ html()->modelForm($ticket, 'PUT', route('agent.ticket.update', [$ticket->id]))->attribute('autocomplete', 'off')->acceptsFiles()->id('editTicketForm')->open() }}
                     @endrole
 
                     @include('tickets.edit_fields')
 
-                    {{ Form::close() }}
+                    {{ html()->closeModelForm() }}
                 </div>
             </div>
         </div>

@@ -8,25 +8,25 @@
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
-            <b>{{ Form::label('name',  __('messages.common.name').':') }}</b>
+            <b>{{ html()->label(__('messages.common.name') . ':', 'name') }}</b>
             <p>{{ $categories->name }}</p>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <b>{{ Form::label('color', __('messages.common.color').':') }}</b>
+            <b>{{ html()->label(__('messages.common.color') . ':', 'color') }}</b>
             <p {{$inStyle}}="{{$bgColor}} {{ $categories->color }}" class="category-color">{{ $categories->color }}</p>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <b>{{ Form::label('total_ticket',__('messages.ticket.total_ticket').':') }}</b>
+            <b>{{ html()->label(__('messages.ticket.total_ticket') . ':', 'total_ticket') }}</b>
             <p>{{ $categories->ticket_count }}</p>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <b>{{ Form::label('open_ticket',__('messages.admin_dashboard.open_tickets').':') }}</b>
+            <b>{{ html()->label(__('messages.admin_dashboard.open_tickets') . ':', 'open_ticket') }}</b>
             <p>{{ $counter['openTicket'] }}</p>
         </div>
     </div>
@@ -35,13 +35,13 @@
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
-            <b>{{ Form::label('close_ticket',__('messages.admin_dashboard.closed_tickets').':') }}</b>
+            <b>{{ html()->label(__('messages.admin_dashboard.closed_tickets') . ':', 'close_ticket') }}</b>
             <p>{{ $counter['closeTicket'] }}</p>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <b>{{ Form::label('progress_ticket',__('messages.admin_dashboard.in_progress_tickets').':') }}</b>
+            <b>{{ html()->label(__('messages.admin_dashboard.in_progress_tickets') . ':', 'progress_ticket') }}</b>
             <p>{{ $counter['inProgressTicket'] }}</p>
         </div>
     </div>

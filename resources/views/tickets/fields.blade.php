@@ -1,16 +1,16 @@
 <div class="row">
     <div class="form-group col-xl-6 col-md-6 col-sm-12">
-        {{ Form::label('title', __('messages.ticket.ticket_title').':') }}<span class="text-danger">*</span>
-        {{ Form::text('title', null, ['class' => 'form-control','required','autofocus'=>'true']) }}
+        {{ html()->label(__('messages.ticket.ticket_title') . ':', 'title') }}<span class="text-danger">*</span>
+        {{ html()->text('title')->class('form-control')->required()->autofocus('true') }}
     </div>
     <div class="form-group col-xl-6 col-md-6 col-sm-12">
-        {{ Form::label('email', __('messages.common.email').':') }}<span class="text-danger">*</span>
-        {{ Form::email('email', null, ['class' => 'form-control', 'required','id'=>'email']) }}
+        {{ html()->label(__('messages.common.email') . ':', 'email') }}<span class="text-danger">*</span>
+        {{ html()->email('email')->class('form-control')->attribute('required', )->id('email') }}
     </div>
     <div class="form-group col-xl-6 col-md-6 col-sm-12">
-        {{ Form::label('category_id', __('messages.category.category').':') }}<span class="text-danger">*</span>
+        {{ html()->label(__('messages.category.category') . ':', 'category_id') }}<span class="text-danger">*</span>
         <div class="input-group">
-            {{ Form::select('category_id', $data['categories'] ,null, ['id'=>'categoryId','class' => 'form-control','placeholder' => __('messages.admin_dashboard.select_category'), 'required']) }}
+            {{ html()->select('category_id', $data['categories'])->id('categoryId')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category'))->required() }}
             <div class="input-group-append plus-icon-height">
                 <div class="input-group-text">
                     <a href="#" data-toggle="modal" class="addCategoryModal" data-target="#addModal">
@@ -23,13 +23,13 @@
         </div>
     </div>
     <div class="form-group col-xl-6 col-md-6 col-sm-12">
-        {{ Form::label('assignTo', __('messages.agent.agents').':') }}<span class="text-danger">*</span>
-        {{ Form::select('assignTo[]', $data['users'] ,null, ['id'=>'assignedTo','class' => 'form-control dropup','required','multiple' => 'multiple']) }}
+        {{ html()->label(__('messages.agent.agents') . ':', 'assignTo') }}<span class="text-danger">*</span>
+        {{ html()->multiselect('assignTo[]', $data['users'])->id('assignedTo')->class('form-control dropup')->required() }}
     </div>
     <div class="form-group col-xl-6 col-md-6 col-sm-12">
-        {{ Form::label('customer', __('messages.customer.customer').':') }}<span class="text-danger">*</span>
+        {{ html()->label(__('messages.customer.customer') . ':', 'customer') }}<span class="text-danger">*</span>
         <div class="input-group">
-            {{ Form::select('customer', $data['customers'] ,null, ['id'=>'customer','class' => 'form-control', 'required', 'placeholder' => __('messages.user.select_customer')]) }}
+            {{ html()->select('customer', $data['customers'])->id('customer')->class('form-control')->required()->placeholder(__('messages.user.select_customer')) }}
             <div class="input-group-append plus-icon-height">
                 <div class="input-group-text">
                     <a href="#" data-toggle="modal" class="addCustomerModal" data-target="#createCustomerModal">
@@ -43,7 +43,7 @@
     </div>
     <div class="form-group col-xl-6 col-md-6 col-sm-12">
         <div class="selectgroup selectgroup-pills">
-            {{ Form::label('is_public', __('messages.ticket.ticket_type').':') }}
+            {{ html()->label(__('messages.ticket.ticket_type') . ':', 'is_public') }}
             <div class="row ticket-type-add">
                 <label class="selectgroup-item mb-0 ml-3 public-ticket-select-w">
                     <input type="radio" name="is_public" value="1" class="selectgroup-input">
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="form-group col-xl-12 col-md-12 col-sm-12">
-        {{ Form::label('attachment', __('messages.ticket.attachments').':') }}
+        {{ html()->label(__('messages.ticket.attachments') . ':', 'attachment') }}
         <span><span id="attachment-counter">0</span> {{ strtolower(__('messages.ticket.attachments')) }}</span>
         <div class="d-flex">
             <a href="javascript:void(0)" id="attachmentButton" class="btn btn-primary px-8"
@@ -69,13 +69,13 @@
         </div>
     </div>
     <div class="form-group col-xl-12 col-md-12 col-sm-12">
-        {{ Form::label('description', __('messages.common.description').':') }}<span class="text-danger">*</span>
-        {{ Form::textarea('description', null, ['class' => 'form-control' , 'id' => 'details', 'rows' => '5']) }}
+        {{ html()->label(__('messages.common.description') . ':', 'description') }}<span class="text-danger">*</span>
+        {{ html()->textarea('description')->class('form-control')->id('details')->rows('5') }}
     </div>
 
     <!-- Submit Field -->
     <div class="form-group col-sm-12">
-        {{ Form::button(__('messages.common.save'), ['type' => 'submit', 'class' => 'btn btn-primary', 'id' => 'btnSave', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+        {{ html()->submit(__('messages.common.save'))->class('btn btn-primary')->id('btnSave')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
         <a href="{{ route('ticket.index') }}" class="btn btn-secondary text-dark">{{__('messages.common.cancel')}}</a>
     </div>
 

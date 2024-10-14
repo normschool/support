@@ -47,11 +47,11 @@
                                    class="form-control customer-dashboard-ticket-search t-control-height show-overflow-ellipsis mr-0">
                         </div>
                         <div class="px-2 ticket-filter-spacer status-select">
-                            {{ Form::select('status', $ticketStatus, null, ['id'=>'statusFilter','class' => 'form-control','placeholder' => __('messages.common.all'), 'wire:model' => 'statusFilter']) }}
+                            {{ html()->select('status', $ticketStatus)->id('statusFilter')->class('form-control')->placeholder(__('messages.common.all'))->attribute('wire:model', 'statusFilter') }}
                         </div>
                         @if(!$isEnabledCategory)
                             <div class="px-2 mt-lg-0 mt-2 ticket-filter-spacer category-select">
-                                {{ Form::select('category_id', array_flip($ticketCategories), null, ['id'=>'categoryFilterId','class' => 'form-control','placeholder' => __('messages.admin_dashboard.select_category'), 'wire:model' => 'categoryFilter']) }}
+                                {{ html()->select('category_id', array_flip($ticketCategories))->id('categoryFilterId')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category'))->attribute('wire:model', 'categoryFilter') }}
                             </div>
                         @endif
                         <div class="pl-2 pr-0 mt-lg-0 mt-2 sm-hide">

@@ -7,20 +7,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            {{ Form::open(['id' => 'showForm']) }}
+            {{ html()->form('POST', url()->current())->id('showForm')->open() }}
             <div class="modal-body">
                 <div class="row details-page">
                     <div class="form-group col-sm-12">
-                        {{ Form::label('name',__('messages.faq.title').':') }}<br>
+                        {{ html()->label(__('messages.faq.title') . ':', 'name') }}<br>
                         <span id="showName"></span>
                     </div>
                     <div class="form-group col-sm-12 faqs-description">
-                        {{ Form::label('description',__('messages.faq.description').':') }}<br>
+                        {{ html()->label(__('messages.faq.description') . ':', 'description') }}<br>
                         <span id="showDescription"></span>
                     </div>
                 </div>
             </div>
-            {{ Form::close() }}
+            {{ html()->form()->close() }}
         </div>
     </div>
 </div>

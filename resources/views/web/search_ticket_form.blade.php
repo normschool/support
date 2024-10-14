@@ -25,12 +25,12 @@
                             <div class="form-group col-md-12">
                                 <label id="ticket_id" class="ml-1">{{ __('messages.ticket.ticket_number').':' }}</label>
                                 <span class="text-danger">*</span>
-                                {{ Form::text('ticket_id',  null , ['class' => 'form-control','required','maxlength'=>'8','style'=>'text-transform:uppercase']) }}
+                                {{ html()->text('ticket_id')->class('form-control')->required()->maxlength('8')->style('text-transform:uppercase') }}
                             </div>
                             <div class="form-group col-md-12 ">
                                 <label id="ticket_id" class="ml-1">{{ __('messages.common.email').':' }}</label>
                                 <span class="text-danger">*</span>
-                                {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
+                                {{ html()->email('email')->class('form-control')->attribute('required', ) }}
                             </div>
                             <div class="mt-3 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block btn-submit">
