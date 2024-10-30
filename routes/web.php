@@ -59,7 +59,7 @@ Route::middleware(['xss'])->group(function () {
     Route::post('web-read-message', [WebUserController::class, 'readMessages']);
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']], function () {
+Route::prefix('admin')->middleware('auth', 'xss', 'role:Admin')->group(function () {
     // Route for laravel log viewer
     Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
@@ -117,14 +117,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']
     Route::delete('ticket-attachment-delete', [TicketController::class, 'attachmentDelete'])->name('ticket.attachment');
 
     /** Translation Manager Routes */
-    Route::group(['prefix' => 'translation-manager'], function () {
+    Route::prefix('translation-manager')->group(function () {
         Route::get('/', [TranslationManagerController::class, 'index'])->name('translation-manager.index');
         Route::post('/', [TranslationManagerController::class, 'store'])->name('translation-manager.store');
         Route::post('/update', [TranslationManagerController::class, 'update'])->name('translation-manager.update');
     });
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']], function () {
+Route::prefix('admin')->middleware('auth', 'xss', 'role:Admin')->group(function () {
 
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -145,7 +145,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']
     Route::put('tickets/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
 });
 
-Route::group(['prefix' => 'agent', 'middleware' => ['auth', 'xss', 'role:Agent']], function () {
+Route::prefix('agent')->middleware('auth', 'xss', 'role:Agent')->group(function () {
 
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'agentDashBoard'])->name('agent.dashboard');
@@ -166,7 +166,7 @@ Route::group(['prefix' => 'agent', 'middleware' => ['auth', 'xss', 'role:Agent']
     Route::get('tickets/media/{id}', [TicketController::class, 'downloadAttachment'])->name('agent-download-attachment');
 });
 
-Route::group(['middleware' => ['auth', 'role:Admin|Agent|Customer', 'xss']], function () {
+Route::middleware('auth', 'role:Admin|Agent|Customer', 'xss')->group(function () {
     Route::post('/add-reply', [TicketReplayController::class, 'store'])->name('ticket.add-reply');
     Route::put('/reply-update/{ticketReplay}', [TicketReplayController::class, 'update'])->name('ticket.reply.update');
     Route::delete('reply/{ticketReplay}', [TicketReplayController::class, 'destroy'])->name('replay.destroy');
@@ -195,7 +195,7 @@ Route::group(['middleware' => ['auth', 'role:Admin|Agent|Customer', 'xss']], fun
     Route::post('/email-update-setting', [UserController::class, 'setEmailUpdateSetting'])->name('set.email-update');
 });
 
-Route::group(['namespace' => 'API'], function () {
+Route::namespace('API')->group(function () {
     Route::post('send-message', [ChatAPIController::class, 'sendMessage'])->name('conversations.store');
     Route::get('users/{id}/conversation', [ChatAPIController::class, 'getConversation']);
     Route::get('user/{id}/conversation', [ChatAPIController::class, 'getFrontConversation']);
@@ -203,11 +203,11 @@ Route::group(['namespace' => 'API'], function () {
     Route::post('update-last-seen', [UserAPIController::class, 'updateLastSeen']);
 });
 
-Route::group(['middleware' => ['auth', 'xss']], function () {
+Route::middleware('auth', 'xss')->group(function () {
     //view routes
     Route::get('/conversations', [ChatController::class, 'index'])->name('conversations')->middleware('role:Admin|Agent');
     Route::get('profile', [UserController::class, 'getProfile']);
-    Route::group(['namespace' => 'API'], function () {
+    Route::namespace('API')->group(function () {
         //        Route::get('logout', [API\Auth\LoginController::class, 'logout']);
 
         //get all user list for chat
@@ -245,7 +245,7 @@ Route::group(['middleware' => ['auth', 'xss']], function () {
     });
 });
 
-Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'xss', 'role:Customer']], function () {
+Route::prefix('customer')->middleware('auth', 'xss', 'role:Customer')->group(function () {
     Route::get('dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
 
     Route::get('tickets', [CustomerDashboardController::class, 'viewCustomerTicket'])->name('customer.myTicket');
