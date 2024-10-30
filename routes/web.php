@@ -195,54 +195,50 @@ Route::middleware('auth', 'role:Admin|Agent|Customer', 'xss')->group(function ()
     Route::post('/email-update-setting', [UserController::class, 'setEmailUpdateSetting'])->name('set.email-update');
 });
 
-Route::namespace('API')->group(function () {
-    Route::post('send-message', [ChatAPIController::class, 'sendMessage'])->name('conversations.store');
-    Route::get('users/{id}/conversation', [ChatAPIController::class, 'getConversation']);
-    Route::get('user/{id}/conversation', [ChatAPIController::class, 'getFrontConversation']);
-    Route::post('assign-to-agent', [UserAPIController::class, 'assignAgent']);
-    Route::post('update-last-seen', [UserAPIController::class, 'updateLastSeen']);
-});
+Route::post('send-message', [ChatAPIController::class, 'sendMessage'])->name('conversations.store');
+Route::get('users/{id}/conversation', [ChatAPIController::class, 'getConversation']);
+Route::get('user/{id}/conversation', [ChatAPIController::class, 'getFrontConversation']);
+Route::post('assign-to-agent', [UserAPIController::class, 'assignAgent']);
+Route::post('update-last-seen', [UserAPIController::class, 'updateLastSeen']);
 
 Route::middleware('auth', 'xss')->group(function () {
     //view routes
     Route::get('/conversations', [ChatController::class, 'index'])->name('conversations')->middleware('role:Admin|Agent');
     Route::get('profile', [UserController::class, 'getProfile']);
-    Route::namespace('API')->group(function () {
-        //        Route::get('logout', [API\Auth\LoginController::class, 'logout']);
+    //        Route::get('logout', [API\Auth\LoginController::class, 'logout']);
 
-        //get all user list for chat
-        Route::get('users-list', [UserAPIController::class, 'getUsersList']);
-        Route::get('get-users', [UserAPIController::class, 'getUsers']);
-        Route::delete('remove-profile-image', [UserAPIController::class, 'removeProfileImage']);
-        Route::get('conversations/{ownerId}/archive-chat', [UserAPIController::class, 'archiveChat']);
+    //get all user list for chat
+    Route::get('users-list', [UserAPIController::class, 'getUsersList']);
+    Route::get('get-users', [UserAPIController::class, 'getUsers']);
+    Route::delete('remove-profile-image', [UserAPIController::class, 'removeProfileImage']);
+    Route::get('conversations/{ownerId}/archive-chat', [UserAPIController::class, 'archiveChat']);
 
-        Route::get('get-profile', [UserAPIController::class, 'getProfile']);
-        Route::get('conversations-list', [ChatAPIController::class, 'getLatestConversations']);
-        Route::get('archive-conversations', [ChatAPIController::class, 'getArchiveConversations']);
-        Route::post('read-message', [ChatAPIController::class, 'updateConversationStatus']);
-        Route::post('file-upload', [ChatAPIController::class, 'addAttachment'])->name('file-upload');
-        Route::post('image-upload', [ChatAPIController::class, 'imageUpload'])->name('image-upload');
-        Route::get('conversations/{userId}/delete', [ChatAPIController::class, 'deleteConversation']);
-        Route::post('conversations/message/{conversation}/delete', [ChatAPIController::class, 'deleteMessage']);
-        Route::post('conversations/{conversation}/delete', [ChatAPIController::class, 'deleteMessageForEveryone']);
-        Route::get('/conversations/{conversation}', [ChatAPIController::class, 'show']);
+    Route::get('get-profile', [UserAPIController::class, 'getProfile']);
+    Route::get('conversations-list', [ChatAPIController::class, 'getLatestConversations']);
+    Route::get('archive-conversations', [ChatAPIController::class, 'getArchiveConversations']);
+    Route::post('read-message', [ChatAPIController::class, 'updateConversationStatus']);
+    Route::post('file-upload', [ChatAPIController::class, 'addAttachment'])->name('file-upload');
+    Route::post('image-upload', [ChatAPIController::class, 'imageUpload'])->name('image-upload');
+    Route::get('conversations/{userId}/delete', [ChatAPIController::class, 'deleteConversation']);
+    Route::post('conversations/message/{conversation}/delete', [ChatAPIController::class, 'deleteMessage']);
+    Route::post('conversations/{conversation}/delete', [ChatAPIController::class, 'deleteMessageForEveryone']);
+    Route::get('/conversations/{conversation}', [ChatAPIController::class, 'show']);
 
-        // Conversation request route
-        Route::post('send-chat-request', [ChatAPIController::class, 'sendChatRequest'])->name('send-chat-request');
-        Route::post('accept-chat-request', [ChatAPIController::class, 'acceptChatRequest'])->name('accept-chat-request');
-        Route::post('decline-chat-request', [ChatAPIController::class, 'declineChatRequest'])->name('decline-chat-request');
+    // Conversation request route
+    Route::post('send-chat-request', [ChatAPIController::class, 'sendChatRequest'])->name('send-chat-request');
+    Route::post('accept-chat-request', [ChatAPIController::class, 'acceptChatRequest'])->name('accept-chat-request');
+    Route::post('decline-chat-request', [ChatAPIController::class, 'declineChatRequest'])->name('decline-chat-request');
 
-        /** BLock-Unblock User */
-        Route::put('users/{user}/block-unblock', [BlockUserAPIController::class, 'blockUnblockUser']);
-        Route::get('blocked-users', [BlockUserAPIController::class, 'blockedUsers']);
+    /** BLock-Unblock User */
+    Route::put('users/{user}/block-unblock', [BlockUserAPIController::class, 'blockUnblockUser']);
+    Route::get('blocked-users', [BlockUserAPIController::class, 'blockedUsers']);
 
-        Route::get('users-blocked-by-me', [BlockUserAPIController::class, 'blockUsersByMe']);
-        Route::get('notification/{notification}/read', [NotificationController::class, 'readNotification']);
-        Route::get('notification/read-all', [NotificationController::class, 'readAllNotification']);
+    Route::get('users-blocked-by-me', [BlockUserAPIController::class, 'blockUsersByMe']);
+    Route::get('notification/{notification}/read', [NotificationController::class, 'readNotification']);
+    Route::get('notification/read-all', [NotificationController::class, 'readAllNotification']);
 
-        //report user
-        Route::post('report-user', [API\ReportUserController::class, 'store'])->name('report-user.store');
-    });
+    //report user
+    Route::post('report-user', [API\ReportUserController::class, 'store'])->name('report-user.store');
 });
 
 Route::prefix('customer')->middleware('auth', 'xss', 'role:Customer')->group(function () {
