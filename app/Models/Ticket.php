@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -147,7 +148,7 @@ class Ticket extends Model implements HasMedia
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function replay()
+    public function replay(): HasMany
     {
         return $this->hasMany(TicketReplay::class, 'ticket_id', 'id')->orderByDesc('updated_at');
     }
@@ -155,7 +156,7 @@ class Ticket extends Model implements HasMedia
     /**
      * @return BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -163,7 +164,7 @@ class Ticket extends Model implements HasMedia
     /**
      * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
@@ -171,7 +172,7 @@ class Ticket extends Model implements HasMedia
     /**
      * @return BelongsToMany
      */
-    public function assignTo()
+    public function assignTo(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id');
     }

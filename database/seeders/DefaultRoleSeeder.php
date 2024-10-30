@@ -13,7 +13,7 @@ class DefaultRoleSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $roles = [
             [

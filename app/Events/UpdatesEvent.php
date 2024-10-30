@@ -32,7 +32,7 @@ class UpdatesEvent implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
         return new PrivateChannel('updates');
     }

@@ -10,7 +10,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Artisan::call('db:seed', ['--class' => 'DefaultCountryCodeSeeder', '--force' => true]);
     }
@@ -20,7 +20,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         //
     }

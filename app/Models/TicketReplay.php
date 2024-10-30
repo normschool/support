@@ -71,7 +71,7 @@ class TicketReplay extends Model implements HasMedia
     /**
      * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -79,7 +79,7 @@ class TicketReplay extends Model implements HasMedia
     /**
      * @return BelongsTo
      */
-    public function ticket()
+    public function ticket(): BelongsTo
     {
         return $this->belongsTo(Ticket::class, 'ticket_id');
     }

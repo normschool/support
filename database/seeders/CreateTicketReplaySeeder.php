@@ -17,7 +17,7 @@ class CreateTicketReplaySeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $users = User::pluck('id')->toArray();
         $ticketReplay = App::make(TicketReplayRepository::class);

@@ -50,7 +50,7 @@ class ArchivedUser extends Model
     /**
      * @return BelongsTo
      */
-    public function archivedBy()
+    public function archivedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'archived_by');
     }

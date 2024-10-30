@@ -12,7 +12,7 @@ class AddRegionCodeInSettingsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $phone = Setting::where(['key' => 'phone'])->first();
         $phone->update(['key' => 'phone', 'value' => '70963 36561']);

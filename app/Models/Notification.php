@@ -71,7 +71,7 @@ class Notification extends Model
     /**
      * @return BelongsTo
      */
-    public function receiver()
+    public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'to_id');
     }
@@ -79,7 +79,7 @@ class Notification extends Model
     /**
      * @return BelongsTo
      */
-    public function sender()
+    public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
@@ -87,7 +87,7 @@ class Notification extends Model
     /**
      * @return BelongsTo
      */
-    public function latestMsg()
+    public function latestMsg(): BelongsTo
     {
         return $this->belongsTo(Notification::class, 'latest_id');
     }

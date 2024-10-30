@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Traits\ImageTrait;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -170,7 +171,7 @@ class Conversation extends Model
     /**
      * @return BelongsTo
      */
-    public function sender()
+    public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'from_id');
     }
@@ -178,7 +179,7 @@ class Conversation extends Model
     /**
      * @return BelongsTo
      */
-    public function receiver()
+    public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'to_id');
     }
@@ -186,7 +187,7 @@ class Conversation extends Model
     /**
      * @return BelongsTo
      */
-    public function sendByUser()
+    public function sendByUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'send_by');
     }
@@ -194,7 +195,7 @@ class Conversation extends Model
     /**
      * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -202,7 +203,7 @@ class Conversation extends Model
     /**
      * @return BelongsTo
      */
-    public function archiveConversation()
+    public function archiveConversation(): BelongsTo
     {
         return $this->belongsTo(ArchivedUser::class, 'to_id', 'owner_id')->where('archived_by', '=',
             getLoggedInUserId());
@@ -211,7 +212,7 @@ class Conversation extends Model
     /**
      * @return BelongsTo
      */
-    public function archiveUsers()
+    public function archiveUsers(): BelongsTo
     {
         return $this->belongsTo(ArchivedUser::class, DB::raw('user_id'), 'owner_id')->where('archived_by', '=',
             getLoggedInUserId());
@@ -220,7 +221,7 @@ class Conversation extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function messageAction()
+    public function messageAction(): HasOne
     {
         return $this->hasOne(MessageAction::class, 'conversation_id')->where('deleted_by', getLoggedInUserId());
     }

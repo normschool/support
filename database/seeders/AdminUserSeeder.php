@@ -14,7 +14,7 @@ class AdminUserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $user = (new User)->fill([
             'name' => 'Super Admin',

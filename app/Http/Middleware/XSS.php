@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 use Closure;
 use Mews\Purifier\Facades\Purifier;
 
@@ -13,7 +15,7 @@ class XSS
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         $input = $request->all();
         array_walk_recursive($input, function (&$input) {

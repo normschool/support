@@ -34,7 +34,7 @@ class UserEvent implements ShouldBroadcast
     /**
      * @return \Illuminate\Broadcasting\Channel|\Illuminate\Broadcasting\Channel[]|PrivateChannel
      */
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
         $channels = [];
 

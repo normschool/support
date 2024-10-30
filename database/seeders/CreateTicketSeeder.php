@@ -17,7 +17,7 @@ class CreateTicketSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $users = User::pluck('id')->toArray();
         /** @var $ticketRepo TicketRepository */

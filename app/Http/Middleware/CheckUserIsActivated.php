@@ -20,7 +20,7 @@ class CheckUserIsActivated
      * @param  Request  $request
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): \Symfony\Component\HttpFoundation\Response
     {
         /** @var User $user */
         $user = Auth::user();

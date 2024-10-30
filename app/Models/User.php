@@ -321,7 +321,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return BelongsToMany
      */
-    public function ticket()
+    public function ticket(): BelongsToMany
     {
         return $this->belongsToMany(Ticket::class, 'ticket_user', 'user_id', 'ticket_id');
     }
@@ -329,7 +329,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return hasMany
      */
-    public function tickets()
+    public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by');
     }
@@ -337,7 +337,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return HasMany
      */
-    public function activeTickets()
+    public function activeTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by')
             ->where('status', Ticket::STATUS_OPEN);
@@ -346,7 +346,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return HasMany
      */
-    public function inProgressTickets()
+    public function inProgressTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by')
             ->where('status', Ticket::STATUS_IN_PROGRESS);
@@ -355,7 +355,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return HasMany
      */
-    public function closeTickets()
+    public function closeTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by')
             ->where('status', Ticket::STATUS_CLOSED);
@@ -364,7 +364,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return HasMany
      */
-    public function blockedBy()
+    public function blockedBy(): HasMany
     {
         return $this->hasMany(BlockedUser::class, 'blocked_by');
     }
@@ -372,7 +372,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return HasOne
      */
-    public function assign()
+    public function assign(): HasOne
     {
         return $this->hasOne(AssignedChat::class, 'customer_id', 'id');
     }

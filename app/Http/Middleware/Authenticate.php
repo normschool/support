@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
@@ -18,7 +19,7 @@ class Authenticate extends Middleware
      *
      * @throws AuthenticationException
      */
-    public function handle($request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, ...$guards): Response
     {
         $this->authenticate($request, $guards);
 
@@ -33,7 +34,7 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
+    protected function redirectTo($request): ?string
     {
         if (! $request->expectsJson()) {
             return route('login');

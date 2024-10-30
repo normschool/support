@@ -12,7 +12,7 @@ class DefaultCountryCodeSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $countryCodeExist = Setting::where('key', 'default_country_code')->exists();
 

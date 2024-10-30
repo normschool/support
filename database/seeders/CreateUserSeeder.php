@@ -18,7 +18,7 @@ class CreateUserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $userRepo = App::make(UserRepository::class);
         $faker = Faker::create();

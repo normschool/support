@@ -12,12 +12,12 @@ class UpdateUserNotificationRequest extends \App\Http\Requests\APIRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'is_subscribed' => 'required',
