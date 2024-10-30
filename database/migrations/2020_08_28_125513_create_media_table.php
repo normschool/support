@@ -17,7 +17,7 @@ class CreateMediaTable extends Migration
             $table->string('model_type', 191);
             $table->unsignedBigInteger('model_id');
             $table->index(['model_id', 'model_type'], 'media_model_type_model_id_index');
-            
+
             $table->string('collection_name');
             $table->string('name');
             $table->string('file_name');

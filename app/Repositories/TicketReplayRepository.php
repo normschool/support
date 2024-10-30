@@ -16,6 +16,7 @@ use Throwable;
 
 /**
  * Class TicketRepository
+ *
  * @version August 25, 2020, 10:52 am UTC
  */
 class TicketReplayRepository extends BaseRepository
@@ -47,10 +48,9 @@ class TicketReplayRepository extends BaseRepository
 
     /**
      * @param  array  $input
+     * @return TicketReplay
      *
      * @throws Throwable
-     *
-     * @return TicketReplay
      */
     public function store($input)
     {
@@ -60,7 +60,7 @@ class TicketReplayRepository extends BaseRepository
             $input['user_id'] = Auth::id();
             /** @var TicketReplay $ticketReplay */
             $ticketReplay = $this->create($input);
-           
+
             if (isset($input['file'])) {
                 foreach ($input['file'] as $file) {
                     $ticketReplay->addMedia($file)
@@ -68,7 +68,7 @@ class TicketReplayRepository extends BaseRepository
                             config('app.media_disc'));
                 }
             }
-            
+
             $this->sendTicketReplyMail($ticketReplay);
 
             DB::commit();
@@ -83,8 +83,6 @@ class TicketReplayRepository extends BaseRepository
 
     /**
      * @param  array  $input
-     * @param $id
-     *
      * @return Builder|Builder[]|Collection|Model|int
      */
     public function update($input, $id)
@@ -116,11 +114,9 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @param $input
-     * @param $id
-     * @throws Throwable
-     *
      * @return array
+     *
+     * @throws Throwable
      */
     public function updateReplyWithAttachment($input, $id)
     {
@@ -150,8 +146,8 @@ class TicketReplayRepository extends BaseRepository
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
     }
-    
-    function sendTicketReplyMail(TicketReplay $ticketReplay)
+
+    public function sendTicketReplyMail(TicketReplay $ticketReplay)
     {
         $data = [];
         /** @var User $currentUser */
@@ -159,13 +155,13 @@ class TicketReplayRepository extends BaseRepository
 
         /** @var Ticket $ticket */
         $ticket = Ticket::whereId($ticketReplay->ticket_id)->firstOrFail();
-        
+
         /** @var User $ticketCustomer */
         $ticketCustomer = $ticket->user;
-        
+
         /** @var User $ticketAgents */
         $ticketAgents = $ticket->assignTo;
-        
+
         $data['ticket_id'] = $ticket->ticket_id;
         $data['title'] = $ticket->title;
         $data['description'] = $ticketReplay->description;
@@ -178,15 +174,15 @@ class TicketReplayRepository extends BaseRepository
                 $data['reply_user_name'].' Replied on Your Ticket',
                 $data);
         }
-        
-        if($currentUser->id != getAdminUserId()){
+
+        if ($currentUser->id != getAdminUserId()) {
             sendEmailToAdmin('mail.ticket_reply_for_admin_agent',
                 $data['reply_user_name'].' Replied on Ticket '.ucfirst($ticket->title),
                 $data);
         }
 
-        foreach ($ticketAgents as $ticketAgent){
-            if($currentUser->id != $ticketAgent->id && $ticketCustomer->id != $ticketAgent->id){
+        foreach ($ticketAgents as $ticketAgent) {
+            if ($currentUser->id != $ticketAgent->id && $ticketCustomer->id != $ticketAgent->id) {
                 sendEmailToAgent($ticketAgent->id,
                     'mail.ticket_reply_for_admin_agent',
                     $data['reply_user_name'].' Replied on Ticket '.ucfirst($ticket->title),

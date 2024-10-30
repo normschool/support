@@ -12,6 +12,7 @@ use Eloquent as Model;
  * @property int $deleted_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction query()
@@ -20,9 +21,13 @@ use Eloquent as Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
+ *
  * @property int $is_hard_delete
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MessageAction whereIsHardDelete($value)
+ *
  * @property-write mixed $raw
  */
 class MessageAction extends Model
@@ -37,6 +42,6 @@ class MessageAction extends Model
 
     public static $rules = [
         'conversation_id' => 'required|integer',
-        'deleted_by'      => 'required|integer',
+        'deleted_by' => 'required|integer',
     ];
 }

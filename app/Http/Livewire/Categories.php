@@ -12,9 +12,11 @@ use Livewire\WithPagination;
 class Categories extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $searchByCategory = '';
+
     protected $listeners = ['deleteCategory'];
 
     /**
@@ -25,19 +27,19 @@ class Categories extends Component
         return 'livewire.custom-pagenation';
     }
 
-//    public function nextPage($lastPage)
-//    {
-//        if ($this->page < $lastPage) {
-//            $this->page = $this->page + 1;
-//        }
-//    }
-//
-//    public function previousPage()
-//    {
-//        if ($this->page > 1) {
-//            $this->page = $this->page - 1;
-//        }
-//    }
+    //    public function nextPage($lastPage)
+    //    {
+    //        if ($this->page < $lastPage) {
+    //            $this->page = $this->page + 1;
+    //        }
+    //    }
+    //
+    //    public function previousPage()
+    //    {
+    //        if ($this->page > 1) {
+    //            $this->page = $this->page - 1;
+    //        }
+    //    }
 
     /**
      * @param  Category  $id

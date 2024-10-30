@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FAQ newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FAQ newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FAQ query()
@@ -20,18 +21,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FAQ whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FAQ whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FAQ whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class FAQ extends Model
 {
     const FaqImg = 'faq_image';
+
     /**
      * Validation rules
      *
      * @var array
      */
     public static $rules = [
-        'title'       => 'required',
+        'title' => 'required',
         'description' => 'required',
     ];
 
@@ -44,14 +47,15 @@ class FAQ extends Model
         'title',
         'description',
     ];
+
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'id'          => 'integer',
-        'title'       => 'string',
+        'id' => 'integer',
+        'title' => 'string',
         'description' => 'string',
     ];
 }

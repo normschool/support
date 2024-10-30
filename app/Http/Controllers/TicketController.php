@@ -26,11 +26,11 @@ use Yajra\DataTables\DataTables;
 class TicketController extends AppBaseController
 {
     private $ticketRepository;
+
     public $settings = null;
 
     /**
      * TicketController constructor.
-     * @param  TicketRepository  $ticketRepository
      */
     public function __construct(TicketRepository $ticketRepository)
     {
@@ -41,11 +41,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
+     * @return Factory|View
      *
      * @throws Exception
-     *
-     * @return Factory|View
      */
     public function index(Request $request)
     {
@@ -69,31 +67,28 @@ class TicketController extends AppBaseController
 
         return view('tickets.create')->with('data', $data);
     }
-    
+
     /**
-     * @param  CreateTicketRequest  $request
-     * @throws Throwable
-     *
      * @return RedirectResponse
+     *
+     * @throws Throwable
      */
     public function store(CreateTicketRequest $request)
     {
         $input = $request->all();
         $data = $this->ticketRepository->store($input);
-        
+
         Flash::success(__('messages.success_message.ticket_create'));
         if (isset($data['file'])) {
             $data['redirectUrl'] = route('ticket.index');
 
             return $this->sendResponse($data, __('messages.success_message.ticket_create'));
         }
-        
+
         return redirect()->route('ticket.index');
     }
 
     /**
-     * @param $id
-     *
      * @return Factory|View
      */
     public function show($id)
@@ -115,7 +110,6 @@ class TicketController extends AppBaseController
 
     /**
      * @param  Ticket  $ticket
-     *
      * @return Application|Factory|RedirectResponse|View
      */
     public function edit($ticket_id)
@@ -128,7 +122,7 @@ class TicketController extends AppBaseController
             $ticket = Ticket::findOrFail($ticket_id);
         }
         if ($ticket->status == Ticket::STATUS_CLOSED) {
-//            notify()->warning('Close ticket not editable.');
+            //            notify()->warning('Close ticket not editable.');
             Flash::warning(__('messages.error_message.ticket_not_editable'));
 
             if (getLoggedInUserRoleId() == getAgentRoleId()) {
@@ -143,12 +137,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  UpdateTicketRequest  $request
-     * @param  Ticket  $ticket
+     * @return RedirectResponse
      *
      * @throws Throwable
-     *
-     * @return RedirectResponse
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
@@ -173,10 +164,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  CreateTicketRequest  $request
-     * @throws Throwable
-     *
      * @return Application|Factory|RedirectResponse|View
+     *
+     * @throws Throwable
      */
     public function webStore(CreateTicketRequest $request)
     {
@@ -185,7 +175,7 @@ class TicketController extends AppBaseController
         if (isset($data['file'])) {
             Flash::success(__('messages.success_message.ticket_create'));
             $data['redirectUrl'] = route('web.ticket_successful', $data['ticket_id']);
-            
+
             return $this->sendResponse($data, 'Ticket created successfully.');
         }
         Flash::success(__('messages.success_message.ticket_create'));
@@ -194,7 +184,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param $ticketId
      * @return Application|Factory|View
      */
     public function ticketSuccessView($ticketId)
@@ -218,29 +207,24 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param $id
-     * @param  Request  $request
+     * @return mixed
      *
      * @throws \Exception
-     *
-     * @return mixed
      */
     public function ticketByUser($id, Request $request)
     {
         $statusId = $request->get('statusId');
         $categoryId = $request->get('categoryId');
         if ($request->ajax()) {
-            return DataTables::of((new TicketDataTable())->getTicketByUser($id, $statusId, $categoryId))->make(true);
+            return DataTables::of((new TicketDataTable)->getTicketByUser($id, $statusId, $categoryId))->make(true);
         }
     }
 
     /**
-     * @param $id
-     * @param  Request  $request
-     *
+     * @param  $id
      * @return JsonResponse
      */
-    public function changeStatus(Request $request, Ticket $ticket )
+    public function changeStatus(Request $request, Ticket $ticket)
     {
         $status = $request->input('ticket_status');
         $this->ticketRepository->updateStatus($status, $ticket);
@@ -249,8 +233,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param $ticketId
-     *
      * @return Application|Factory|View
      */
     public function viewTicket($ticketId)
@@ -273,11 +255,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
+     * @return array|string
      *
      * @throws Throwable
-     *
-     * @return array|string
      */
     public function showFilterPublicTickets(Request $request)
     {
@@ -298,8 +278,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Ticket  $ticket
-     *
      * @return JsonResponse
      */
     public function editAssignee(Ticket $ticket)
@@ -314,8 +292,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Ticket  $ticket
-     *
      * @return JsonResponse
      */
     public function getAttachment(Ticket $ticket)
@@ -326,8 +302,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param $id
-     *
      * @return mixed
      */
     public function downloadAttachment($id)
@@ -339,11 +313,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Media  $media
+     * @return JsonResponse
      *
      * @throws \Exception
-     *
-     * @return JsonResponse
      */
     public function deleteAttachment(Media $media)
     {
@@ -358,9 +330,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Ticket  $ticket
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function addAttachment(Ticket $ticket, Request $request)
@@ -389,8 +358,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function unassignedFromTicket(Request $request)

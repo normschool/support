@@ -20,13 +20,11 @@ use Illuminate\Http\Request;
  */
 class ChatAPIController extends AppBaseController
 {
-    /** @var ChatRepository $chatRepository */
+    /** @var ChatRepository */
     private $chatRepository;
 
     /**
      * Create a new controller instance.
-     *
-     * @param  ChatRepository  $chatRepository
      */
     public function __construct(ChatRepository $chatRepository)
     {
@@ -35,8 +33,6 @@ class ChatAPIController extends AppBaseController
 
     /**
      * @param  int  $id
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function getConversation($id, Request $request)
@@ -49,8 +45,6 @@ class ChatAPIController extends AppBaseController
 
     /**
      * @param  int  $id
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function getFrontConversation($id, Request $request)
@@ -86,10 +80,9 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @param  SendMessageRequest  $request
+     * @return JsonResponse
      *
      * @throws \Exception
-     * @return JsonResponse
      */
     public function sendMessage(SendMessageRequest $request)
     {
@@ -99,8 +92,6 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function updateConversationStatus(Request $request)
@@ -111,11 +102,9 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
+     * @return JsonResponse
      *
      * @throws ApiOperationFailedException
-     *
-     * @return JsonResponse
      */
     public function addAttachment(Request $request)
     {
@@ -135,20 +124,16 @@ class ChatAPIController extends AppBaseController
 
     /**
      * @param  int|string  $id
-     *
      * @return JsonResponse
      */
-    public function deleteConversation($id,Request $request)
+    public function deleteConversation($id, Request $request)
     {
-        $this->chatRepository->deleteConversation($id,$request->all());
+        $this->chatRepository->deleteConversation($id, $request->all());
 
         return $this->sendSuccess('Conversation deleted successfully.');
     }
 
     /**
-     * @param  Conversation  $conversation
-     *
-     * @param  Request  $request
      * @return JsonResponse
      */
     public function deleteMessage(Conversation $conversation, Request $request)
@@ -170,8 +155,6 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @param  Conversation  $conversation
-     *
      * @return JsonResponse
      */
     public function show(Conversation $conversation)
@@ -180,12 +163,9 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @param  Conversation  $conversation
-     * @param  Request  $request
+     * @return JsonResponse
      *
      * @throws Exception
-     *
-     * @return JsonResponse
      */
     public function deleteMessageForEveryone(Conversation $conversation, Request $request)
     {
@@ -205,16 +185,16 @@ class ChatAPIController extends AppBaseController
 
         broadcast(new UserEvent(
             [
-                'id'              => $conversation->id,
-                'type'            => User::MESSAGE_DELETED,
-                'from_id'         => $conversation->from_id,
+                'id' => $conversation->id,
+                'type' => User::MESSAGE_DELETED,
+                'from_id' => $conversation->from_id,
                 'previousMessage' => $previousMessage,
             ], $conversation->to_id))->toOthers();
 
         broadcast(new PublicUserEvent([
-            'id'              => $conversation->id,
-            'type'            => User::MESSAGE_DELETED,
-            'from_id'         => $conversation->from_id,
+            'id' => $conversation->id,
+            'type' => User::MESSAGE_DELETED,
+            'from_id' => $conversation->from_id,
             'previousMessage' => $previousMessage,
         ], $conversation->to_id))->toOthers();
 
@@ -222,11 +202,9 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
+     * @return JsonResponse
      *
      * @throws ApiOperationFailedException
-     *
-     * @return JsonResponse
      */
     public function imageUpload(Request $request)
     {

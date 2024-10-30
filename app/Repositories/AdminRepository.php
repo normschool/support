@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Role;
 use App\Models\Ticket;
 use App\Models\User;
 use Auth;
@@ -17,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
  * Class UserRepository
+ *
  * @version January 11, 2020, 11:09 am UTC
  */
 class AdminRepository extends BaseRepository
@@ -49,11 +49,9 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     * @param $input
+     * @return User
      *
      * @throws \Throwable
-     *
-     * @return User
      */
     public function store($input)
     {
@@ -63,10 +61,10 @@ class AdminRepository extends BaseRepository
             $input['password'] = Hash::make($input['password']);
             $input['is_system'] = 1;
             /** @var User $user */
-            $user = User::create(Arr::only($input, (new User())->getFillable()));
+            $user = User::create(Arr::only($input, (new User)->getFillable()));
 
             $user->assignRole($input['role']);
-            if (isset($input['image']) && !empty($input['image'])) {
+            if (isset($input['image']) && ! empty($input['image'])) {
                 $user->addMedia($input['image'])->toMediaCollection(User::PROFILE, config('app.media_disc'));
             }
 
@@ -80,8 +78,7 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     * @param array $input
-     *
+     * @param  array  $input
      * @return bool
      */
     public function profileUpdate($input)
@@ -105,8 +102,7 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     * @param array $input
-     *
+     * @param  array  $input
      * @return bool
      */
     public function changePassword($input)
@@ -114,7 +110,7 @@ class AdminRepository extends BaseRepository
         try {
             /** @var User $user */
             $user = Auth::user();
-            if (!Hash::check($input['password_current'], $user->password)) {
+            if (! Hash::check($input['password_current'], $user->password)) {
                 throw new UnprocessableEntityHttpException('Current password is invalid.');
             }
             $input['password'] = Hash::make($input['password']);
@@ -127,8 +123,7 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     * @param array $input
-     *
+     * @param  array  $input
      * @return bool
      */
     public function storeAndUpdateNotification($input)
@@ -142,9 +137,8 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     * @param array $input
-     * @param int $id
-     *
+     * @param  array  $input
+     * @param  int  $id
      * @return bool|Builder|Builder[]|Collection|Model
      */
     public function update($input, $id)
@@ -155,7 +149,7 @@ class AdminRepository extends BaseRepository
         try {
             $user->update($input);
 
-            if (!empty($input['image'])) {
+            if (! empty($input['image'])) {
                 $user->clearMediaCollection(User::PROFILE);
                 $user->addMedia($input['image'])
                     ->toMediaCollection(User::PROFILE, config('app.media_disc'));

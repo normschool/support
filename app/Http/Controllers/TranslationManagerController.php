@@ -3,18 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TranslationManagerRepository;
-use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TranslationManagerController extends AppBaseController
 {
-    /** @var TranslationManagerRepository $translationManagerRepository */
+    /** @var TranslationManagerRepository */
     private $translationManagerRepository;
 
-    /**
-     * @param  TranslationManagerRepository  $translationManagerRepo
-     */
     public function __construct(TranslationManagerRepository $translationManagerRepo)
     {
         $this->translationManagerRepository = $translationManagerRepo;
@@ -23,10 +19,10 @@ class TranslationManagerController extends AppBaseController
     /**
      * Display a listing of the FAQ.
      *
-     * @param  Request  $request
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      *
      * @throws \Throwable
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -49,11 +45,10 @@ class TranslationManagerController extends AppBaseController
     }
 
     /**
-     * @param Request $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|regex:/^[a-zA-Z]+$/u|min:2',
             'code' => 'required|regex:/^[a-zA-Z]+$/u|min:2|max:2',
@@ -67,10 +62,8 @@ class TranslationManagerController extends AppBaseController
 
         return $this->sendSuccess(__('messages.success_message.language_add'));
     }
-    
+
     /**
-     * @param  Request  $request
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
@@ -78,7 +71,7 @@ class TranslationManagerController extends AppBaseController
         $lang = $request->get('lang');
         $file = $request->get('file');
         $result = $request->except('_token', 'lang', 'file');
-        
+
         $this->translationManagerRepository->update($lang, $file, $result);
 
         return redirect()->route('translation-manager.index', ['lang' => $lang, 'file' => $file]);

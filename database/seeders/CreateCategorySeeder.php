@@ -18,31 +18,31 @@ class CreateCategorySeeder extends Seeder
         $faker = Faker::create();
         $input = [
             [
-                'name'  => 'Customer Services',
+                'name' => 'Customer Services',
                 'color' => $faker->hexColor,
             ],
             [
-                'name'  => 'Services',
+                'name' => 'Services',
                 'color' => $faker->hexColor,
             ],
             [
-                'name'  => 'Password Reset',
+                'name' => 'Password Reset',
                 'color' => $faker->hexColor,
             ],
             [
-                'name'  => 'Data Restore',
+                'name' => 'Data Restore',
                 'color' => $faker->hexColor,
             ],
             [
-                'name'  => 'Technical questions',
+                'name' => 'Technical questions',
                 'color' => $faker->hexColor,
             ],
             [
-                'name'  => 'Billing issues',
+                'name' => 'Billing issues',
                 'color' => $faker->hexColor,
             ],
             [
-                'name'  => 'Server issues',
+                'name' => 'Server issues',
                 'color' => $faker->hexColor,
             ],
         ];

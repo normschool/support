@@ -4,12 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Models\Ticket;
-use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class WebHomeRepository
+ *
  * @version August 25, 2020, 10:52 am UTC
  */
 class WebHomeRepository extends BaseRepository
@@ -49,8 +49,6 @@ class WebHomeRepository extends BaseRepository
     }
 
     /**
-     * @param $input
-     *
      * @return Ticket|null
      */
     public function searchTicket($input)
@@ -58,7 +56,7 @@ class WebHomeRepository extends BaseRepository
         /** @var Ticket $ticket */
         $ticket = Ticket::with(['category', 'replay.user', 'assignTo'])->whereTicketId($input['ticket_id'])->whereEmail($input['email'])->first();
 
-        if(empty($ticket)){
+        if (empty($ticket)) {
             return null;
         }
         if ($ticket->is_public || (\Auth::check() && \Auth::user()->hasRole('Admin'))) {

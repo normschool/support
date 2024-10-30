@@ -33,7 +33,7 @@ class CreateUserSeeder extends Seeder
             'is_system' => 0,
             'is_active' => 1,
             'gender' => User::MALE,
-            'default_language'  => 'en',
+            'default_language' => 'en',
         ];
         $agent['role'] = $agentRole->id;
         $userRepo->store($agent);
@@ -41,22 +41,22 @@ class CreateUserSeeder extends Seeder
         foreach (range(1, 10) as $index) {
             try {
                 $input = [
-                    'name'      => $faker->name,
-                    'email'     => $faker->unique()->safeEmail,
-                    'phone'     => $faker->numerify('##########'),
-                    'password'  => '123456',
-                    'role'      => $agentRole->id,
+                    'name' => $faker->name,
+                    'email' => $faker->unique()->safeEmail,
+                    'phone' => $faker->numerify('##########'),
+                    'password' => '123456',
+                    'role' => $agentRole->id,
                     'is_system' => 0,
                     'is_active' => 1,
                     'gender' => rand(1, 2),
-                    'default_language'  => 'en',
+                    'default_language' => 'en',
                 ];
 
                 $userRepo->store($input);
             } catch (Exception $e) {
                 echo '<pre>';
                 print_r($e->getMessage());
-                die;
+                exit;
             }
         }
 
@@ -64,7 +64,7 @@ class CreateUserSeeder extends Seeder
             'name' => 'Mr. Customer',
             'email' => 'customer@infysupport.com',
             'password' => Hash::make('123456'),
-            'default_language'  => 'en',
+            'default_language' => 'en',
         ]);
         $customerRole = Role::whereName('Customer')->first();
         $user->assignRole($customerRole);
