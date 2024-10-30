@@ -114,23 +114,28 @@ class Ticket extends Model implements HasMedia
     ];
 
     /**
-     * @var array
-     */
-    public $casts = [
-        'id' => 'integer',
-        'category_id' => 'integer',
-        'is_public' => 'boolean',
-        'ticket_id' => 'string',
-        'status' => 'integer',
-        'title' => 'string',
-        'description' => 'string',
-        'email' => 'string',
-    ];
-
-    /**
      * @var string[]
      */
     protected $appends = ['attachments'];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id' => 'integer',
+            'category_id' => 'integer',
+            'is_public' => 'boolean',
+            'ticket_id' => 'string',
+            'status' => 'integer',
+            'title' => 'string',
+            'description' => 'string',
+            'email' => 'string',
+        ];
+    }
 
     public function getAttachmentsAttribute(): bool
     {

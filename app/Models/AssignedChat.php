@@ -36,10 +36,13 @@ class AssignedChat extends Model
         'user_id',
     ];
 
-    protected $casts = [
-        'customer_id' => 'integer',
-        'user_id' => 'integer',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'customer_id' => 'integer',
+            'user_id' => 'integer',
+        ];
+    }
 
     public function agent(): BelongsTo
     {

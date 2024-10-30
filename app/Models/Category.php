@@ -39,15 +39,6 @@ class Category extends Model
     ];
 
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-    ];
-
-    /**
      * Validation rules
      *
      * @var array
@@ -56,6 +47,18 @@ class Category extends Model
         'name' => 'required|unique:categories,name',
         'color' => 'required',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id' => 'integer',
+        ];
+    }
 
     public function ticket(): HasMany
     {

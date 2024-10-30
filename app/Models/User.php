@@ -204,27 +204,30 @@ class User extends Authenticatable implements HasMedia
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
-        'email_verified_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'gender' => 'integer',
-        'archive' => 'integer',
-        'email_update' => 'boolean',
-    ];
-
-    /**
      * @var array
      */
     public static $messages = [
         'email.regex' => 'Please enter valid email.',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'id' => 'integer',
+            'name' => 'string',
+            'email_verified_at' => 'datetime',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'gender' => 'integer',
+            'archive' => 'integer',
+            'email_update' => 'boolean',
+        ];
+    }
 
     public function getNameAttribute($value): string
     {
