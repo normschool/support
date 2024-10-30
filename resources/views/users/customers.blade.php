@@ -36,8 +36,8 @@
     </script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
-    <script src="{{ mix('assets/js/users/users.js') }}"></script>
+    @vite('resources/assets/js/custom/custom-datatable.js')
+    @vite('resources/assets/js/users/users.js')
     @notifyJs
 @endpush
 

@@ -3,7 +3,7 @@
     {{ __('messages.dashboard') }}
 @endsection
 @push('css')
-    <link href="{{ mix('assets/css/dashboard-widgets.css') }}" rel="stylesheet" type="text/css"/>
+    @vite('resources/assets/css/dashboard-widgets.css')
     @livewireStyles
 @endpush
 

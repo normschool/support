@@ -287,7 +287,7 @@
     <script src="{{ asset('js/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ mix('assets/js/tickets/view_tickets.js')}}"></script>
+    @vite('resources/assets/js/tickets/view_tickets.js')
     <script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
     @include('livewire.livewire-turbo')
 @endpush

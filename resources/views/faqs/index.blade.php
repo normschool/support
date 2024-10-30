@@ -39,7 +39,7 @@
         let faqUrl = "{{ route('faqs.index') }}"
     </script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
+    @vite('resources/assets/js/custom/custom-datatable.js')
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
-    <script src="{{mix('assets/js/faqs/faqs.js')}}"></script>
+    @vite('resources/assets/js/faqs/faqs.js')
 @endpush

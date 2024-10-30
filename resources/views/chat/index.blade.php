@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="{{ asset('assets/icheck/skins/all.css') }}">
     <link rel="stylesheet" href="{{ asset('theme-assets/css/dropzone.css') }}">
     <link rel="stylesheet" href="{{ asset('theme-assets/css/ekko-lightbox.css') }}">
-    <link rel="stylesheet" href="{{ mix('assets/css/video-js.css') }}">
-    <link rel="stylesheet" href="{{ mix('assets/css/new-conversation.css') }}">
+    @vite('resources/assets/css/video-js.css')
+    @vite('resources/assets/css/new-conversation.css')
     <link rel="stylesheet" href="{{ asset('theme-assets/css/emojionearea.min.css') }}">
-    <link rel="stylesheet" href="{{ mix('assets/css/chat.css') }}">
+    @vite('resources/assets/css/chat.css')
     <link rel="stylesheet" href="{{ asset('assets/css/admin_theme.css') }}">
     @livewireStyles
     <style>
@@ -202,16 +202,16 @@
     <!--custom js-->
     <script src="{{ asset('js/dropzone.min.js') }}"></script>
     <script src="{{ asset('js/ekko-lightbox.min.js') }}"></script>
-    <script src="{{ mix('assets/js/video.min.js') }}"></script>
+    @vite('resources/assets/js/video.min.js')
     <script src="{{ asset('assets/icheck/icheck.min.js') }}"></script>
     <script src="{{ asset('theme-assets/js/emojionearea.js') }}"></script>
     <script src="{{ asset('assets/js/emojione.min.js') }}"></script>
-    <script src="{{ mix('assets/js/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ mix('assets/js/app.js') }}"></script>
-    <script src="{{ mix('assets/js/notification.js') }}"></script>
-    <script src="{{ mix('assets/js/set-user-on-off.js') }}"></script>
+    @vite('resources/assets/js/sweetalert2.all.min.js')
+    @vite('resources/assets/js/app.js')
+    @vite('resources/assets/js/notification.js')
+    @vite('resources/assets/js/set-user-on-off.js')
     <script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
     @include('livewire.livewire-turbo')
 
-    <script src="{{ mix('assets/js/chat.js') }}"></script>
+    @vite('resources/assets/js/chat.js')
 @endpush

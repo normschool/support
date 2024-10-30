@@ -41,7 +41,7 @@
         let ticketUrl = '{{ url('admin/tickets') }}/'
         let activeStatus = '{{ \App\Models\Ticket::STATUS_ACTIVE }}'
     </script>
-    <script src="{{ mix('assets/js/tickets/tickets.js') }}"></script>
+    @vite('resources/assets/js/tickets/tickets.js')
     @notifyJs
 @endpush
 

@@ -47,6 +47,6 @@
     </script>
     <script src="{{ asset('assets/js/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
-    <script src="{{ mix('assets/js/user_ticket/user_ticket.js') }}"></script>
+    @vite('resources/assets/js/custom/custom-datatable.js')
+    @vite('resources/assets/js/user_ticket/user_ticket.js')
 @endpush

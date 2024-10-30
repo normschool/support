@@ -238,5 +238,5 @@
     <script src="{{ asset('js/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ mix('assets/js/tickets/create_edit.js')}}"></script>
+    @vite('resources/assets/js/tickets/create_edit.js')
 @endpush

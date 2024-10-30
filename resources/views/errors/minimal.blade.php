@@ -10,7 +10,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="//fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('assets/css/error-pages/minimal-error-page.css') }}" type="text/css"/>
+    @vite('resources/assets/css/error-pages/minimal-error-page.css')
 </head>
 <body>
 <div class="flex-center position-ref full-height">

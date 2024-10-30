@@ -39,10 +39,10 @@
         let categorySaveUrl = "{{ route('category.store') }}"
     </script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
-    <script src="{{ mix('assets/js/iziToast.min.js') }}"></script>
+    @vite('resources/assets/js/custom/custom-datatable.js')
+    @vite('resources/assets/js/iziToast.min.js')
     <script src="{{ asset('assets/js/pickr.min.js') }}"></script>
-    <script src="{{ mix('assets/js/categories/categories.js') }}"></script>
+    @vite('resources/assets/js/categories/categories.js')
 @endpush
 
 

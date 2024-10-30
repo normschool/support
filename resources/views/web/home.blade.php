@@ -146,5 +146,5 @@
             });
         });
     </script>
-    <script src="{{ mix('assets/js/web/public-tickets-autocomplete.js') }}"></script>
+    @vite('resources/assets/js/web/public-tickets-autocomplete.js')
 @endpush

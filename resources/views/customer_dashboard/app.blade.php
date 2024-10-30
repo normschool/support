@@ -29,7 +29,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/sweetalert.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ mix('assets/css/phone-number-code.css') }}" type="text/css"/>
+    @vite('resources/assets/css/phone-number-code.css')
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/admin_theme.css') }}">
 </head>
@@ -74,10 +74,10 @@
 <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
 <script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
-<script src="{{ mix('assets/js/custom/phone-number-code.js') }}"></script>
+@vite('resources/assets/js/custom/phone-number-code.js')
 <script src="{{ asset('assets/js/jsrender.js') }}"></script>
 <script src="{{ asset('theme-assets/js/scripts.js') }}"></script>
-<script src="{{ mix('assets/js/custom/custom.js') }}"></script>
+@vite('resources/assets/js/custom/custom.js')
 
 <script>
     let currentLocale = "{{ Config::get('app.locale') }}";
@@ -110,7 +110,7 @@
         $('.alert').delay(5000).slideUp(300);
     });
 </script>
-<script src="{{ mix('assets/js/user_profile/user_profile.js') }}"></script>
+@vite('resources/assets/js/user_profile/user_profile.js')
 
 @stack('scripts')
 </body>
