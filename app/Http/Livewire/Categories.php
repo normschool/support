@@ -19,9 +19,6 @@ class Categories extends Component
 
     protected $listeners = ['deleteCategory'];
 
-    /**
-     * @return string
-     */
     public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
@@ -42,7 +39,6 @@ class Categories extends Component
     //    }
 
     /**
-     * @param  Category  $id
      *
      * @throws Exception
      */

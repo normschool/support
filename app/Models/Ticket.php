@@ -132,9 +132,6 @@ class Ticket extends Model implements HasMedia
      */
     protected $appends = ['attachments'];
 
-    /**
-     * @return bool
-     */
     public function getAttachmentsAttribute(): bool
     {
         $media = $this->getMedia(self::COLLECTION_TICKET)->first();
@@ -145,33 +142,21 @@ class Ticket extends Model implements HasMedia
         return false;
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function replay(): HasMany
     {
         return $this->hasMany(TicketReplay::class, 'ticket_id', 'id')->orderByDesc('updated_at');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function assignTo(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id');

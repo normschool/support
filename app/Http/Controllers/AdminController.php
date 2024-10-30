@@ -52,9 +52,6 @@ class AdminController extends AppBaseController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return RedirectResponse
      */
     public function store(CreateUserRequest $request): RedirectResponse
     {
@@ -91,9 +88,6 @@ class AdminController extends AppBaseController
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @return RedirectResponse
      */
     public function update(UpdateUserRequest $request, User $admin): RedirectResponse
     {
@@ -107,8 +101,6 @@ class AdminController extends AppBaseController
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @return Response
      */
     public function destroy(User $admin): Response
     {

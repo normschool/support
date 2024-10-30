@@ -14,8 +14,6 @@ class TicketsMail extends Mailable
 
     /**
      * Create a new message instance.
-     *
-     * @param  array  $data
      */
     public function __construct($view, $subject, array $data = [])
     {
@@ -26,8 +24,6 @@ class TicketsMail extends Mailable
 
     /**
      * Build the message.
-     *
-     * @return TicketsMail
      */
     public function build(): TicketsMail
     {

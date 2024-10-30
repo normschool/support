@@ -31,9 +31,6 @@ class Customers extends Component
         $this->userRoles = Role::all()->pluck('name', 'id')->toArray();
     }
 
-    /**
-     * @return string
-     */
     public function paginationView(): string
     {
         return 'livewire.custom-pagenation';

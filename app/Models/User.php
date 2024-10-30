@@ -226,17 +226,11 @@ class User extends Authenticatable implements HasMedia
         'email.regex' => 'Please enter valid email.',
     ];
 
-    /**
-     * @return string
-     */
     public function getNameAttribute($value): string
     {
         return ucfirst($value);
     }
 
-    /**
-     * @return string
-     */
     public function getRoleNameAttribute(): string
     {
         $userRoles = $this->roles->first();
@@ -244,9 +238,6 @@ class User extends Authenticatable implements HasMedia
         return (! empty($userRoles)) ? $userRoles->name : 'N/A';
     }
 
-    /**
-     * @return string
-     */
     public function getRoleIdAttribute(): string
     {
         $userRoles = $this->roles->first();
@@ -274,9 +265,6 @@ class User extends Authenticatable implements HasMedia
         return getUserImageInitial($this->id, $this->name);
     }
 
-    /**
-     * @return array
-     */
     public function webObj(): array
     {
         return [
@@ -291,9 +279,6 @@ class User extends Authenticatable implements HasMedia
         ];
     }
 
-    /**
-     * @return array
-     */
     public function apiObj(): array
     {
         return [
@@ -318,60 +303,39 @@ class User extends Authenticatable implements HasMedia
         ];
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function ticket(): BelongsToMany
     {
         return $this->belongsToMany(Ticket::class, 'ticket_user', 'user_id', 'ticket_id');
     }
 
-    /**
-     * @return hasMany
-     */
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by');
     }
 
-    /**
-     * @return HasMany
-     */
     public function activeTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by')
             ->where('status', Ticket::STATUS_OPEN);
     }
 
-    /**
-     * @return HasMany
-     */
     public function inProgressTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by')
             ->where('status', Ticket::STATUS_IN_PROGRESS);
     }
 
-    /**
-     * @return HasMany
-     */
     public function closeTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'created_by')
             ->where('status', Ticket::STATUS_CLOSED);
     }
 
-    /**
-     * @return HasMany
-     */
     public function blockedBy(): HasMany
     {
         return $this->hasMany(BlockedUser::class, 'blocked_by');
     }
 
-    /**
-     * @return HasOne
-     */
     public function assign(): HasOne
     {
         return $this->hasOne(AssignedChat::class, 'customer_id', 'id');

@@ -43,9 +43,6 @@ class DashboardController extends AppBaseController
         return view('dashboard.index', compact('data'));
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function categoryTicketChart(Request $request): JsonResponse
     {
         $data = $this->dashboardRepository->getCategoryReport($request->input('status'));
@@ -53,9 +50,6 @@ class DashboardController extends AppBaseController
         return $this->sendResponse($data, 'Categories Ticket chart data retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function ticketChart(Request $request): JsonResponse
     {
         $input = $request->all();
@@ -64,9 +58,6 @@ class DashboardController extends AppBaseController
         return $this->sendResponse($data, 'Open Vs Close chart data retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function agentTicketReport(Request $request): JsonResponse
     {
         $data = $this->dashboardRepository->agentTicketChart($request->all());

@@ -9,9 +9,6 @@ use App\Models\FAQ;
  */
 class FAQDataTable
 {
-    /**
-     * @return FAQ
-     */
     public function get(): FAQ
     {
         /** @var FAQ $query */

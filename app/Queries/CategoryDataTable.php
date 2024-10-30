@@ -9,9 +9,6 @@ use App\Models\Category;
  */
 class CategoryDataTable
 {
-    /**
-     * @return Category
-     */
     public function get(): Category
     {
         /** @var Category $query */

@@ -46,9 +46,6 @@ class TranslationManagerController extends AppBaseController
             compact('selectedLangMessages', 'allLanguagesArr', 'selectedLang', 'allFilesArr', 'selectedFile'));
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -65,9 +62,6 @@ class TranslationManagerController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.language_add'));
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Request $request): RedirectResponse
     {
         $lang = $request->get('lang');

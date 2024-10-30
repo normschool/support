@@ -38,8 +38,6 @@ class SettingRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return bool
      *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
@@ -68,7 +66,6 @@ class SettingRepository extends BaseRepository
     }
 
     /**
-     * @param  Setting  $setting
      * @return mixed
      *
      * @throws DiskDoesNotExist

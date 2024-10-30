@@ -19,8 +19,6 @@ class UpdatesEvent implements ShouldBroadcast
 
     /**
      * Create a new event instance.
-     *
-     * @param  array  $user
      */
     public function __construct(array $user)
     {
@@ -37,9 +35,6 @@ class UpdatesEvent implements ShouldBroadcast
         return new PrivateChannel('updates');
     }
 
-    /**
-     * @return array
-     */
     public function broadcastWith(): array
     {
         return $this->user;

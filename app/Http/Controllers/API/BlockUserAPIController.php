@@ -27,7 +27,6 @@ class BlockUserAPIController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
      *
      * @throws Exception
      */
@@ -57,9 +56,6 @@ class BlockUserAPIController extends AppBaseController
         );
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function blockUsersByMe(): JsonResponse
     {
         $blockedUserIds = BlockedUser::whereBlockedBy(Auth::id())->pluck('blocked_to')->toArray();

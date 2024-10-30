@@ -43,8 +43,6 @@ class NotificationRepository extends BaseRepository
 
     /**
      * Return searchable fields.
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {
@@ -59,10 +57,6 @@ class NotificationRepository extends BaseRepository
         return Notification::class;
     }
 
-    /**
-     * @param  array  $notificationInput
-     * @param  int  $receiverId
-     */
     public function sendNotification(array $notificationInput, int $receiverId, $userEventType = 0)
     {
         /** @var Notification $notification */
@@ -88,9 +82,6 @@ class NotificationRepository extends BaseRepository
         broadcast(new UserEvent($notificationArray, $receiverId))->toOthers();
     }
 
-    /**
-     * @return array
-     */
     public function getNotifications(): array
     {
         $notifications = Notification::whereIsRead(0)->whereToId(getLoggedInUserId())->with([
@@ -121,9 +112,6 @@ class NotificationRepository extends BaseRepository
         return $notificationsArray;
     }
 
-    /**
-     * @param  int  $notificationId
-     */
     public function readNotification(int $notificationId)
     {
         $notification = Notification::find($notificationId);
@@ -133,9 +121,6 @@ class NotificationRepository extends BaseRepository
         ]);
     }
 
-    /**
-     * @param  int  $senderId
-     */
     public function readNotificationWhenOpenChatWindow(int $senderId)
     {
         Notification::whereOwnerId($senderId)->whereToId(getLoggedInUserId())->update([
@@ -143,9 +128,6 @@ class NotificationRepository extends BaseRepository
         ]);
     }
 
-    /**
-     * @return array
-     */
     public function readAllNotification(): array
     {
         $authId = getLoggedInUserId();

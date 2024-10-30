@@ -22,7 +22,6 @@ class UserEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param  array  $data
      * @param  int|array  $userIds
      */
     public function __construct(array $data, $userIds)
@@ -49,9 +48,6 @@ class UserEvent implements ShouldBroadcast
         return new PrivateChannel('user.'.$this->userIds);
     }
 
-    /**
-     * @return array
-     */
     public function broadcastWith(): array
     {
         return $this->data;

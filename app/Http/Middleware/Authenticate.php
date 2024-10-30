@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class Authenticate extends Middleware
 {
     /**
-     * @param  Request  $request
      * @param  mixed  ...$guards
-     * @return mixed
      *
      * @throws AuthenticationException
      */
@@ -30,9 +28,6 @@ class Authenticate extends Middleware
 
     /**
      * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
      */
     protected function redirectTo(Request $request): ?string
     {

@@ -69,7 +69,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
      *
      * @throws Throwable
      */
@@ -137,7 +136,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
      *
      * @throws Throwable
      */
@@ -222,7 +220,6 @@ class TicketController extends AppBaseController
 
     /**
      * @param  $id
-     * @return JsonResponse
      */
     public function changeStatus(Request $request, Ticket $ticket): JsonResponse
     {
@@ -266,9 +263,6 @@ class TicketController extends AppBaseController
         return view('web.public_ticket_lists', compact('tickets'))->render();
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function attachmentDelete(Request $request): JsonResponse
     {
         $mediaId = $request->all();
@@ -277,9 +271,6 @@ class TicketController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.attachment_delete'));
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function editAssignee(Ticket $ticket): JsonResponse
     {
         $data['assignUsers'] = $ticket->assignTo->pluck('id');
@@ -291,9 +282,6 @@ class TicketController extends AppBaseController
         return $this->sendResponse($data, 'Ticket Assignee retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function getAttachment(Ticket $ticket): JsonResponse
     {
         $result = $this->ticketRepository->getAttachments($ticket->id);
@@ -313,7 +301,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
      *
      * @throws \Exception
      */
@@ -329,9 +316,6 @@ class TicketController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.file_delete'));
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function addAttachment(Ticket $ticket, Request $request): JsonResponse
     {
         $input = $request->all();
@@ -357,9 +341,6 @@ class TicketController extends AppBaseController
         return redirect()->route('ticket.index');
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function unassignedFromTicket(Request $request): JsonResponse
     {
         $result = app(TicketRepository::class)->unassignedFromTicket($request->get('id'));

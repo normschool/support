@@ -16,9 +16,6 @@ class CheckUserIsActivated
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  Request  $request
-     * @return mixed
      */
     public function handle(Request $request, Closure $next): \Symfony\Component\HttpFoundation\Response
     {

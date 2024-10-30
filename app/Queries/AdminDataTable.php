@@ -9,9 +9,6 @@ use App\Models\User;
  */
 class AdminDataTable
 {
-    /**
-     * @return User
-     */
     public function get(): User
     {
         /** @var User $query */

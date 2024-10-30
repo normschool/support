@@ -46,7 +46,6 @@ class SettingController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
      *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist

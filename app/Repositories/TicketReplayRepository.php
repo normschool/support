@@ -30,8 +30,6 @@ class TicketReplayRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {
@@ -47,8 +45,6 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return TicketReplay
      *
      * @throws Throwable
      */
@@ -82,7 +78,6 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
      * @return Builder|Builder[]|Collection|Model|int
      */
     public function update(array $input, $id)
@@ -114,7 +109,6 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @return array
      *
      * @throws Throwable
      */

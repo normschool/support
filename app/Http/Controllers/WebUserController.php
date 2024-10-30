@@ -17,9 +17,6 @@ use Spatie\Permission\Models\Role;
 
 class WebUserController extends AppBaseController
 {
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function storeChatUser(ChatUserRequest $request): JsonResponse
     {
         try {
@@ -56,9 +53,6 @@ class WebUserController extends AppBaseController
         }
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function getAssignAgent(Request $request): JsonResponse
     {
         $id = $request->get('id');
@@ -69,9 +63,6 @@ class WebUserController extends AppBaseController
         return $this->sendResponse($assignAgent, 'Assign Agent retrieved successfully.');
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function readMessages(Request $request): JsonResponse
     {
         $data = app(ChatRepository::class)->markMessagesAsRead($request->all());

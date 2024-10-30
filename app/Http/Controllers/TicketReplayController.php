@@ -22,7 +22,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
      *
      * @throws \Throwable
      */
@@ -47,9 +46,6 @@ class TicketReplayController extends AppBaseController
         return $this->sendResponse($data, __('messages.success_message.reply_create'));
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function update(TicketReplay $ticketReplay, Request $request): JsonResponse
     {
         $input = $request->all();
@@ -59,7 +55,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
      *
      * @throws Exception
      */
@@ -71,7 +66,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
      *
      * @throws Exception
      */
@@ -83,7 +77,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
      *
      * @throws \Throwable
      */

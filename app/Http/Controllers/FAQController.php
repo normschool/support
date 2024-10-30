@@ -45,9 +45,6 @@ class FAQController extends AppBaseController
 
     /**
      * Store a newly created FAQ in storage.
-     *
-     *
-     * @return JsonResource
      */
     public function store(CreateFAQRequest $request): JsonResource
     {
@@ -59,9 +56,6 @@ class FAQController extends AppBaseController
 
     /**
      * Show the form for editing the specified resource.
-     *
-     *
-     * @return JsonResponse
      */
     public function edit(FAQ $faq): JsonResponse
     {
@@ -70,9 +64,6 @@ class FAQController extends AppBaseController
 
     /**
      * Show the form for editing the specified FAQ.
-     *
-     *
-     * @return JsonResource
      */
     public function show(FAQ $faq): JsonResource
     {
@@ -81,10 +72,6 @@ class FAQController extends AppBaseController
 
     /**
      * Update the specified FAQ in storage.
-     *
-     *
-     *
-     * @return JsonResource
      */
     public function update(UpdateFAQRequest $request, FAQ $faq): JsonResource
     {
@@ -98,7 +85,6 @@ class FAQController extends AppBaseController
      * Remove the specified FAQ from storage.
      *
      *
-     * @return JsonResource
      *
      * @throws Exception
      */

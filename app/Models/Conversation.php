@@ -148,9 +148,6 @@ class Conversation extends Model
         return $value;
     }
 
-    /**
-     * @return string
-     */
     public function getPhotoUrlAttribute($value): string
     {
         if (! empty($value)) {
@@ -160,67 +157,43 @@ class Conversation extends Model
         return asset('assets/images/avatar.png');
     }
 
-    /**
-     * @return string
-     */
     public function getTimeFromNowInMinAttribute(): string
     {
         return Carbon::now()->diffInMinutes($this->created_at);
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'from_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'to_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function sendByUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'send_by');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function archiveConversation(): BelongsTo
     {
         return $this->belongsTo(ArchivedUser::class, 'to_id', 'owner_id')->where('archived_by', '=',
             getLoggedInUserId());
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function archiveUsers(): BelongsTo
     {
         return $this->belongsTo(ArchivedUser::class, DB::raw('user_id'), 'owner_id')->where('archived_by', '=',
             getLoggedInUserId());
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function messageAction(): HasOne
     {
         return $this->hasOne(MessageAction::class, 'conversation_id')->where('deleted_by', getLoggedInUserId());

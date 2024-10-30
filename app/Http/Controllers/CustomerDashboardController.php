@@ -60,7 +60,6 @@ class CustomerDashboardController extends AppBaseController
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Throwable
      */

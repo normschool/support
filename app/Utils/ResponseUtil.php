@@ -5,9 +5,7 @@ namespace App\Utils;
 class ResponseUtil
 {
     /**
-     * @param  string  $message
      * @param  mixed  $data
-     * @return array
      */
     public static function makeResponse(string $message, $data): array
     {
@@ -18,10 +16,6 @@ class ResponseUtil
         ];
     }
 
-    /**
-     * @param  string  $message
-     * @return array
-     */
     public static function makeError(string $message, array $data = []): array
     {
         $res = [

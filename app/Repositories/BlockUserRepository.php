@@ -25,8 +25,6 @@ class BlockUserRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {
@@ -42,8 +40,6 @@ class BlockUserRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return bool|null
      *
      * @throws Exception
      */
@@ -74,9 +70,6 @@ class BlockUserRepository extends BaseRepository
         return true;
     }
 
-    /**
-     * @return array
-     */
     public function blockedUserIds(): array
     {
         $blockedUserIds = BlockedUser::toBase()->whereBlockedBy(Auth::id())

@@ -20,8 +20,6 @@ class CategoryRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {

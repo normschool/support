@@ -64,7 +64,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
      *
      * @throws \Throwable
      */
@@ -89,7 +88,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  User  $id
      * @return Application|Factory|View
      */
     public function show(User $id): View
@@ -119,9 +117,6 @@ class UserController extends AppBaseController
         return view('users.edit', compact('user', 'role', 'isAgent'));
     }
 
-    /**
-     * @return RedirectResponse
-     */
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $input = $request->all();
@@ -157,9 +152,6 @@ class UserController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.user_delete'));
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
         $input = $request->all();
@@ -190,9 +182,6 @@ class UserController extends AppBaseController
         }
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function profileUpdate(UpdateUserProfileRequest $request): JsonResponse
     {
         $input = $request->all();
@@ -206,9 +195,6 @@ class UserController extends AppBaseController
         }
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function editProfile(): JsonResponse
     {
         $user = Auth::user();

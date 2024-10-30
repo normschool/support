@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Auth;
  */
 class TicketDataTable
 {
-    /**
-     * @return array
-     */
     public function get(): array
     {
         $query = Ticket::with(['user', 'category'])->select('tickets.*')->get();
@@ -43,9 +40,6 @@ class TicketDataTable
         return $result;
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
     public function getTicketByUser($id, $statusId, $categoryId): Collection
     {
         $query = User::find($id)->ticket()->with('category');

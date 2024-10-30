@@ -23,9 +23,6 @@ class Users extends Component
 
     protected $listeners = ['setEmailVerified'];
 
-    /**
-     * @return string
-     */
     public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
@@ -72,9 +69,6 @@ class Users extends Component
         return view('livewire.users', compact('users'))->with('searchByUser');
     }
 
-    /**
-     * @return LengthAwarePaginator
-     */
     public function searchUser(): LengthAwarePaginator
     {
         /** @var User $query */

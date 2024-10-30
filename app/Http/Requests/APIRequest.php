@@ -11,9 +11,6 @@ class APIRequest extends FormRequest
 {
     /**
      * Get the proper failed validation response for the request.
-     *
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function response(array $errors): \Symfony\Component\HttpFoundation\Response
     {

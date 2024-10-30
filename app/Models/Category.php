@@ -57,9 +57,6 @@ class Category extends Model
         'color' => 'required',
     ];
 
-    /**
-     * @return HasMany
-     */
     public function ticket(): HasMany
     {
         return $this->hasMany(Ticket::class, 'category_id');

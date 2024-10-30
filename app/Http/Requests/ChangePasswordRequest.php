@@ -11,8 +11,6 @@ class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -33,9 +31,6 @@ class ChangePasswordRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return array
-     */
     public function messages(): array
     {
         return [

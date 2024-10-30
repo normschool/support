@@ -41,9 +41,6 @@ class CategoryController extends AppBaseController
 
     /**
      * Store a newly created Category in storage.
-     *
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateCategoryRequest $request): JsonResponse
     {
@@ -71,9 +68,6 @@ class CategoryController extends AppBaseController
 
     /**
      * Show the form for editing the specified Category.
-     *
-     *
-     * @return Response
      */
     public function edit(Category $category): Response
     {
@@ -82,9 +76,6 @@ class CategoryController extends AppBaseController
 
     /**
      * Update the specified Category in storage.
-     *
-     *
-     * @return Response
      */
     public function update(Category $category, UpdateCategoryRequest $request): Response
     {
@@ -95,9 +86,6 @@ class CategoryController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.category_update'));
     }
 
-    /**
-     * @return Response
-     */
     public function destroy(Category $category): Response
     {
         $Models = [

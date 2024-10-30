@@ -36,8 +36,6 @@ class TicketRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {
@@ -70,8 +68,6 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return array
      *
      * @throws Throwable
      */
@@ -162,7 +158,6 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
      * @return mixed
      *
      * @throws Throwable
@@ -242,9 +237,6 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @param  Ticket  $ticket
-     * @return array
      *
      * @throws Throwable
      */
@@ -360,9 +352,6 @@ class TicketRepository extends BaseRepository
 
     }
 
-    /**
-     * @return array
-     */
     public function prepareData(): array
     {
         $data['categories'] = Category::orderBy('name')->pluck('name', 'id');
@@ -377,9 +366,6 @@ class TicketRepository extends BaseRepository
         return $data;
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
     public function deleteTicket($id): Collection
     {
         $ticket = Ticket::findOrFail($id);
@@ -400,9 +386,6 @@ class TicketRepository extends BaseRepository
         return $ticket;
     }
 
-    /**
-     * @return array
-     */
     public function getAttachments($ticketId): array
     {
         /** @var Ticket $ticket */
@@ -423,9 +406,6 @@ class TicketRepository extends BaseRepository
         return $result;
     }
 
-    /**
-     * @return bool
-     */
     public function uploadFile($ticket, $attachments): bool
     {
         try {

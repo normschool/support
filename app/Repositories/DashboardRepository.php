@@ -47,9 +47,6 @@ class DashboardRepository
         return $data;
     }
 
-    /**
-     * @return array
-     */
     public function getCategoryReport($status): array
     {
         $categoriesTicketCounter = [];
@@ -89,9 +86,6 @@ class DashboardRepository
         return $result;
     }
 
-    /**
-     * @return array
-     */
     public function ticketChart($input): array
     {
         $dateS = Carbon::parse($input['start_date']);
@@ -181,9 +175,6 @@ class DashboardRepository
         return $result;
     }
 
-    /**
-     * @return array
-     */
     public function agentTicketChart($input): array
     {
         $status = $input['status'] ?? null;

@@ -23,10 +23,6 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
  */
 trait ImageTrait
 {
-    /**
-     * @param  string  $file
-     * @return bool
-     */
     public static function deleteImage(string $file): bool
     {
         if (Storage::exists($file)) {
@@ -39,10 +35,6 @@ trait ImageTrait
     }
 
     /**
-     * @param  UploadedFile  $file
-     * @param  string  $path
-     * @param  array  $options
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */
@@ -79,8 +71,6 @@ trait ImageTrait
     }
 
     /**
-     * @param  string  $path
-     * @return string
      *
      * @internal param $type
      * @internal param bool $full
@@ -91,10 +81,6 @@ trait ImageTrait
     }
 
     /**
-     * @param  \Symfony\Component\HttpFoundation\File\UploadedFile  $file
-     * @param  array  $input
-     * @param  string  $fileName
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */
@@ -128,7 +114,6 @@ trait ImageTrait
     }
 
     /**
-     * @param  string  $url
      * @return mixed
      */
     public function urlEncoding(string $url)
@@ -145,7 +130,6 @@ trait ImageTrait
     }
 
     /**
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */
@@ -174,7 +158,6 @@ trait ImageTrait
     }
 
     /**
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */
@@ -202,9 +185,6 @@ trait ImageTrait
         }
     }
 
-    /**
-     * @return array
-     */
     private static function getSizeAdjustedToAspectRatio($sourceWidth, $sourceHeight): array
     {
         if ($sourceWidth > $sourceHeight) {
@@ -221,7 +201,6 @@ trait ImageTrait
     }
 
     /**
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */
@@ -249,7 +228,6 @@ trait ImageTrait
     }
 
     /**
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */
@@ -271,8 +249,6 @@ trait ImageTrait
     }
 
     /**
-     * @param  string  $path
-     * @return string
      *
      * @throws UnprocessableEntityHttpException
      */

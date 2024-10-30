@@ -23,8 +23,6 @@ class WebHomeRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {
@@ -48,9 +46,6 @@ class WebHomeRepository extends BaseRepository
             ->withCount('replay')->orderByDesc('created_at')->limit(5)->get();
     }
 
-    /**
-     * @return Ticket|null
-     */
     public function searchTicket($input): ?Ticket
     {
         /** @var Ticket $ticket */

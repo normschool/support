@@ -21,9 +21,6 @@ class MarkdownMail extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  string  $view
-     * @param  string  $subject
-     * @param  array  $data
      * @return void
      */
     public function __construct(string $view, string $subject, array $data = [])
@@ -35,8 +32,6 @@ class MarkdownMail extends Mailable
 
     /**
      * Build the message.
-     *
-     * @return $this
      */
     public function build(): static
     {

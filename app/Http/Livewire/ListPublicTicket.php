@@ -40,9 +40,6 @@ class ListPublicTicket extends Component
         }
     }
 
-    /**
-     * @return string
-     */
     public function paginationView(): string
     {
         return 'livewire.custom-pagenation';

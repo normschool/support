@@ -41,8 +41,6 @@ class ChatRepository extends BaseRepository
 
     /**
      * Return searchable fields.
-     *
-     * @return array
      */
     public function getFieldsSearchable(): array
     {
@@ -141,10 +139,6 @@ class ChatRepository extends BaseRepository
         ];
     }
 
-    /**
-     * @param  array  $input
-     * @return array
-     */
     public function getLatestConversations(array $input = []): array
     {
         $isArchived = isset($input['isArchived']) ? 1 : 0;
@@ -225,8 +219,6 @@ class ChatRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return Conversation
      *
      * @throws Exception
      */
@@ -300,7 +292,6 @@ class ChatRepository extends BaseRepository
     }
 
     /**
-     * @param  UploadedFile  $file
      * @return string|void
      *
      * @throws UnprocessableEntityHttpException
@@ -341,10 +332,6 @@ class ChatRepository extends BaseRepository
         }
     }
 
-    /**
-     * @param  string  $extension
-     * @return int
-     */
     public function getMessageTypeByExtension(string $extension): int
     {
         $extension = strtolower($extension);
@@ -367,10 +354,6 @@ class ChatRepository extends BaseRepository
         }
     }
 
-    /**
-     * @param  array  $input
-     * @return array
-     */
     public function markMessagesAsRead(array $input): array
     {
         $senderId = Auth::id();
@@ -403,11 +386,6 @@ class ChatRepository extends BaseRepository
         return ['senderId' => $senderId, 'remainingUnread' => $remainingUnread];
     }
 
-    /**
-     * @param  int  $senderId
-     * @param  bool  $isGroup
-     * @return int
-     */
     public function getUnreadMessageCount(int $senderId, bool $isGroup = false): int
     {
         return Conversation::where(function (Builder $q) use ($senderId) {
