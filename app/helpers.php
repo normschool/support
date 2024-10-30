@@ -41,8 +41,6 @@ function getLoggedInUser()
 }
 
 /**
- * @param $key
- *
  * @return mixed
  */
 function getSettingValue($key)
@@ -62,10 +60,6 @@ function getNotifications()
 }
 
 /**
- * @param $userId
- * @param $name
- *
- *
  * @return string
  */
 function getUserImageInitial($userId, $name)
@@ -87,7 +81,6 @@ function getAvatarUrl()
  * return random color.
  *
  * @param  int  $userId
- *
  * @return string
  */
 function getRandomColor($userId)
@@ -117,7 +110,6 @@ function getAppName()
 
 /**
  * @param  int  $gender
- *
  * @return string
  */
 function getGender($gender)
@@ -134,7 +126,6 @@ function getGender($gender)
 
 /**
  * @param  int  $status
- *
  * @return string
  */
 function getOnOffClass($status)
@@ -147,9 +138,6 @@ function getOnOffClass($status)
 }
 
 /**
- * @param $url
- *
- *
  * @return mixed
  */
 function isValidURL($url)
@@ -173,7 +161,6 @@ function getAdminUserId()
  * @param  array  $models
  * @param  string  $columnName
  * @param  int  $id
- *
  * @return bool
  */
 function canDelete($models, $columnName, $id)
@@ -246,8 +233,6 @@ function generateNewColor()
 }
 
 /**
- * @param $index
- *
  * @return string
  */
 function getNewColor($index)
@@ -280,28 +265,27 @@ function getNewColor($index)
         '#3772ff',
     ];
 
-    if (30 < $index) {
+    if ($index > 30) {
         return generateNewColor();
     }
 
     return $colorArr[$index];
 }
 
-function addNotification($data){
-    
+function addNotification($data)
+{
+
     $notificationRecord = [
-        'title'       => $data[0],
-        'type'        => $data[1],
+        'title' => $data[0],
+        'type' => $data[1],
         'description' => $data[2],
-        'user_id'     => $data[3],
+        'user_id' => $data[3],
     ];
-    
+
     UserNotification::create($notificationRecord);
 }
 
 /**
- * @param $url
- *
  * @return string
  */
 function mediaUrlEndsWith($url)
@@ -328,7 +312,6 @@ if (! function_exists('canUserReplyTicket')) {
 
     /**
      * @param  \App\Models\Ticket  $ticket
-     *
      * @return bool
      */
     function canUserReplyTicket($ticket)
@@ -347,8 +330,6 @@ if (! function_exists('canUserReplyTicket')) {
 }
 
 /**
- * @param $url
- *
  * @return int
  */
 function detectURL($url)
@@ -405,8 +386,6 @@ if (! function_exists('getNotification')) {
 if (! function_exists('getNotificationIcon')) {
 
     /**
-     * @param $notificationFor
-     *
      * @return string
      */
     function getNotificationIcon($notificationFor)
@@ -461,7 +440,7 @@ function sendEmailToCustomer($customerId, $mailView, $subject, $data)
         return true;
     }
     $data['user_name'] = $user->name;
-    
+
     Email::to($user->email)
         ->send(new \App\Mail\TicketsMail($mailView,
             $subject,

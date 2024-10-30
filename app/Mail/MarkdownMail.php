@@ -20,10 +20,10 @@ class MarkdownMail extends Mailable
 
     /**
      * Create a new message instance.
+     *
      * @param  string  $view
      * @param  string  $subject
      * @param  array  $data
-     *
      * @return void
      */
     public function __construct($view, $subject, $data = [])

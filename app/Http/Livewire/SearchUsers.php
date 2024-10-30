@@ -12,19 +12,21 @@ use Livewire\Component;
 class SearchUsers extends Component
 {
     public $users = [];
+
     public $searchTerm;
+
     public $male;
+
     public $female;
+
     public $isAssignToAgent;
+
     public $blockUserIds = [];
 
     protected $listeners = ['clearSearchUsers' => 'clearSearchUsers', 'setIsAssignToAgent'];
 
-
     /**
      * initialize variables
-     * @param $blockUserIds
-     * @param  bool  $isAssignToAgent
      */
     public function mount($blockUserIds, bool $isAssignToAgent = false)
     {
@@ -76,7 +78,7 @@ class SearchUsers extends Component
                 });
             })
             ->when($this->isAssignToAgent, function ($query) {
-//                return $query->where('is_system', '=', User::IS_SYSTEM);
+                //                return $query->where('is_system', '=', User::IS_SYSTEM);
                 $query->whereHas('roles', function (Builder $q) {
                     $q->where('name', '!=', 'Customer');
                 });

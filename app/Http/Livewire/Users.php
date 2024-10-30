@@ -14,11 +14,15 @@ use Livewire\WithPagination;
 class Users extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $searchByUser;
+
     public $userRoleFilter = '';
+
     protected $listeners = ['setEmailVerified'];
+
     /**
      * @return string
      */
@@ -27,19 +31,19 @@ class Users extends Component
         return 'livewire.custom-pagenation';
     }
 
-//    public function nextPage($lastPage)
-//    {
-//        if ($this->page < $lastPage) {
-//            $this->page = $this->page + 1;
-//        }
-//    }
-//
-//    public function previousPage()
-//    {
-//        if ($this->page > 1) {
-//            $this->page = $this->page - 1;
-//        }
-//    }
+    //    public function nextPage($lastPage)
+    //    {
+    //        if ($this->page < $lastPage) {
+    //            $this->page = $this->page + 1;
+    //        }
+    //    }
+    //
+    //    public function previousPage()
+    //    {
+    //        if ($this->page > 1) {
+    //            $this->page = $this->page - 1;
+    //        }
+    //    }
 
     public function updatingsearchByUser()
     {
@@ -51,7 +55,7 @@ class Users extends Component
         /** @var User $user */
         $user = User::whereId($userId)->firstOrFail();
         $result = $user->update([
-            'email_verified_at' => Carbon::now()
+            'email_verified_at' => Carbon::now(),
         ]);
         if ($result) {
             $this->dispatchBrowserEvent('successEmailVerification');

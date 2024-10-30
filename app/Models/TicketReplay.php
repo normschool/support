@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Embed\Providers\OEmbed\Tiktok;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
@@ -19,6 +18,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $ticket
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplay newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplay newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplay query()
@@ -28,7 +28,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplay whereTicketId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplay whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplay whereUserId($value)
+ *
  * @mixin \Eloquent
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\MediaLibrary\Models\Media[] $media
  * @property-read int|null $media_count
  */
@@ -52,7 +54,7 @@ class TicketReplay extends Model implements HasMedia
      * @var array
      */
     public static $rules = [
-        'ticket_id'   => 'nullable',
+        'ticket_id' => 'nullable',
         'description' => 'required',
     ];
 
@@ -60,9 +62,9 @@ class TicketReplay extends Model implements HasMedia
      * @var array
      */
     public $casts = [
-        'id'          => 'integer',
-        'user_id'     => 'integer',
-        'ticket_id'   => 'integer',
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'ticket_id' => 'integer',
         'description' => 'string',
     ];
 

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification query()
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class UserNotification extends Model
@@ -42,8 +44,10 @@ class UserNotification extends Model
         'read_at',
         'user_id',
     ];
-    
+
     const NEW_TICKET_CREATED = 1;
+
     const ASSIGN_TICKET_TO_AGENT = 2;
+
     const CHANGE_TICKET_STATUS = 3;
 }

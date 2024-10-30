@@ -31,7 +31,6 @@ class SettingController extends AppBaseController
     /**
      * Display a listing of the resource.
      *
-     * @param  Request  $request
      *
      * @return Factory|View
      */
@@ -43,17 +42,15 @@ class SettingController extends AppBaseController
         $composerData = json_decode($composerFile, true);
         $currentVersion = $composerData['version'];
 
-        return view("settings.$sectionName", compact('setting', 'sectionName','currentVersion'));
+        return view("settings.$sectionName", compact('setting', 'sectionName', 'currentVersion'));
     }
 
     /**
-     * @param  UpdateSettingRequest  $request
+     * @return RedirectResponse
      *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
-     *
-     * @return RedirectResponse
      */
     public function update(UpdateSettingRequest $request)
     {

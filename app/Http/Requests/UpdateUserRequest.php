@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
         $requestId = $this->route('user') == null ? $this->route('admin')->id : $this->route('user')->id;
 
         return [
-            'name'  => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$requestId.'|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
             'phone' => 'nullable|unique:users,phone,'.$requestId,
         ];

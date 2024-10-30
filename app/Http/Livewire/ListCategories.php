@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class ListCategories extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     /**
@@ -20,19 +21,19 @@ class ListCategories extends Component
         return 'livewire.custom-pagenation';
     }
 
-//    public function nextPage($lastPage)
-//    {
-//        if ($this->page < $lastPage) {
-//            $this->page = $this->page + 1;
-//        }
-//    }
-//
-//    public function previousPage()
-//    {
-//        if ($this->page > 1) {
-//            $this->page = $this->page - 1;
-//        }
-//    }
+    //    public function nextPage($lastPage)
+    //    {
+    //        if ($this->page < $lastPage) {
+    //            $this->page = $this->page + 1;
+    //        }
+    //    }
+    //
+    //    public function previousPage()
+    //    {
+    //        if ($this->page > 1) {
+    //            $this->page = $this->page - 1;
+    //        }
+    //    }
 
     public function render()
     {

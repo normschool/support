@@ -15,7 +15,6 @@ class TicketReplayController extends AppBaseController
 
     /**
      * TicketReplayController constructor.
-     * @param  TicketReplayRepository  $ticketReplayRepository
      */
     public function __construct(TicketReplayRepository $ticketReplayRepository)
     {
@@ -23,10 +22,9 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
+     * @return JsonResponse
      *
      * @throws \Throwable
-     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -34,7 +32,7 @@ class TicketReplayController extends AppBaseController
 
         /** @var TicketReplay $replay */
         $replay = $this->ticketReplayRepository->store($input);
-        
+
         $replay->load('media');
         $replay->load('user');
         $replay->load('ticket');
@@ -50,9 +48,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @param  TicketReplay  $ticketReplay
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function update(TicketReplay $ticketReplay, Request $request)
@@ -64,10 +59,9 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @param $id
-     * @throws Exception
-     *
      * @return JsonResponse
+     *
+     * @throws Exception
      */
     public function destroy($id)
     {
@@ -77,11 +71,9 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @param  Media  $media
+     * @return JsonResponse
      *
      * @throws Exception
-     *
-     * @return JsonResponse
      */
     public function deleteAttachment(Media $media)
     {
@@ -91,10 +83,9 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     * @throws \Throwable
-     *
      * @return JsonResponse
+     *
+     * @throws \Throwable
      */
     public function addAttachment(Request $request)
     {

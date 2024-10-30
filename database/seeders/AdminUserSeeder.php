@@ -16,16 +16,16 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = (new User())->fill([
-            'name'              => 'Super Admin',
-            'email'             => 'admin@infysupport.com',
+        $user = (new User)->fill([
+            'name' => 'Super Admin',
+            'email' => 'admin@infysupport.com',
             'email_verified_at' => Carbon::now(),
-            'password'          => Hash::make('123456'),
-            'phone'             => '7878454512',
-            'gender'            => User::MALE,
-            'is_system'         => '1',
-            'is_active'         => '1',
-            'default_language'  => 'en',
+            'password' => Hash::make('123456'),
+            'phone' => '7878454512',
+            'gender' => User::MALE,
+            'is_system' => '1',
+            'is_active' => '1',
+            'default_language' => 'en',
         ]);
 
         $user->save();

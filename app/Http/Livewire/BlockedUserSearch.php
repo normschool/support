@@ -11,13 +11,15 @@ use Livewire\Component;
 class BlockedUserSearch extends Component
 {
     public $users = [];
+
     public $blockedContactIds = [];
+
     public $searchTerm;
 
     protected $listeners = [
         'clearSearchOfBlockedUsers' => 'clearSearchUsers',
-        'addBlockedUserId'          => 'addBlockedUserId',
-        'removeBlockedUserId'       => 'removeBlockedUserId',
+        'addBlockedUserId' => 'addBlockedUserId',
+        'removeBlockedUserId' => 'removeBlockedUserId',
     ];
 
     /**
@@ -38,7 +40,6 @@ class BlockedUserSearch extends Component
 
     /**
      * initialize variables
-     * @param $blockedByMeUserIds
      */
     public function mount($blockedByMeUserIds)
     {
@@ -86,7 +87,7 @@ class BlockedUserSearch extends Component
     }
 
     /**
-     * @param  integer  $userId
+     * @param  int  $userId
      */
     public function addBlockedUserId($userId)
     {
@@ -96,7 +97,7 @@ class BlockedUserSearch extends Component
     }
 
     /**
-     * @param  integer  $userId
+     * @param  int  $userId
      */
     public function removeBlockedUserId($userId)
     {

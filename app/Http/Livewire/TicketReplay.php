@@ -4,13 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
-use Laracasts\Flash\Flash;
 use Livewire\Component;
 
 class TicketReplay extends Component
 {
     public $ticket;
+
     public $replays;
+
     public $description;
 
     public function mount($ticket)

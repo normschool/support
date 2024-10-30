@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Category;
-use App\Repositories\BaseRepository;
 
 /**
  * Class CategoryRepository
+ *
  * @version August 25, 2020, 10:52 am UTC
  */
 class CategoryRepository extends BaseRepository

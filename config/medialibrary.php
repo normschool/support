@@ -8,7 +8,7 @@ return [
      * The disk on which to store added files and derived images by default. Choose
      * one or more of the disks you've configured in config/filesystems.php.
      */
-    'disk_name'     => env('MEDIA_DISK', 'public'),
+    'disk_name' => env('MEDIA_DISK', 'public'),
 
     /*
      * The maximum file size of an item in bytes.
@@ -82,19 +82,19 @@ return [
      * Whether to activate versioning when urls to files get generated.
      * When activated, this attaches a ?v=xx query string to the URL.
      */
-    'version_urls'      => false,
+    'version_urls' => false,
 
     /*
      * The class that contains the strategy for determining a media file's path.
      */
-    'path_generator'    => CustomPathGenerator::class,
+    'path_generator' => CustomPathGenerator::class,
 
     /*
      * Medialibrary will try to optimize all converted images by removing
      * metadata and applying a little bit of compression. These are
      * the optimizers that will be used by default.
      */
-    'image_optimizers'  => [
+    'image_optimizers' => [
         Spatie\ImageOptimizer\Optimizers\Jpegoptim::class => [
             '--strip-all', // this strips out all text information such as comments and EXIF data
             '--all-progressive', // this will make sure the resulting image is a progressive one

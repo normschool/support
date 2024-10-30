@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRegionCodeFlagIntoUsers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class AddRegionCodeFlagIntoUsers extends Migration
         });
 
         \App\Models\Setting::firstOrCreate([
-            'key'   => 'region_code_flag',
+            'key' => 'region_code_flag',
             'value' => 'in',
         ]);
     }
@@ -34,4 +34,4 @@ class AddRegionCodeFlagIntoUsers extends Migration
             $table->dropColumn('region_code_flag');
         });
     }
-}
+};

@@ -37,11 +37,11 @@ class TranslationManagerRepository
 
                 //append new language and code in helpers file
                 $fileName = app_path('helpers.php');
-                $search = "";
+                $search = '';
                 foreach (LANGUAGES as $code => $langName) {
                     $search .= "    '$code' => '$langName',\n";
                 }
-                $value = $search ."    '".strtolower($input['code'])."' => '".ucfirst($input['name'])."',\n";
+                $value = $search."    '".strtolower($input['code'])."' => '".ucfirst($input['name'])."',\n";
                 file_put_contents(
                     $fileName,
                     str_replace($search, $value, file_get_contents($fileName))
@@ -53,10 +53,8 @@ class TranslationManagerRepository
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
     }
-    
+
     /**
-     * @param $lang
-     *
      * @return array
      */
     public function getAllFiles($lang)
@@ -71,9 +69,6 @@ class TranslationManagerRepository
     }
 
     /**
-     * @param $selectedLang
-     * @param $selectedFile
-     *
      * @return array
      */
     public function getAllLanguage($selectedLang, $selectedFile)
@@ -91,11 +86,6 @@ class TranslationManagerRepository
         return ['allLanguagesArr' => $allLanguagesArr, 'selectedLangMessages' => $selectedLangMessages];
     }
 
-    /**
-     * @param $lang
-     * @param $file
-     * @param $result
-     */
     public function update($lang, $file, $result)
     {
         $oldLang = app()->getLocale();

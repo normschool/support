@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read User $receiver
+ *
  * @method static Builder|Notification newModelQuery()
  * @method static Builder|Notification newQuery()
  * @method static Builder|Notification query()
@@ -35,11 +36,14 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Notification whereReadAt($value)
  * @method static Builder|Notification whereToId($value)
  * @method static Builder|Notification whereUpdatedAt($value)
+ *
  * @mixin Eloquent
+ *
  * @property-read User $sender
  * @property-read Notification $latestMsg
  * @property int $message_type
  * @property string|null $file_name
+ *
  * @method static Builder|Notification whereFileName($value)
  * @method static Builder|Notification whereMessageType($value)
  */
@@ -59,8 +63,8 @@ class Notification extends Model
     ];
 
     public static $rules = [
-        'owner_id'     => 'required|integer',
-        'to_id'        => 'required|integer',
+        'owner_id' => 'required|integer',
+        'to_id' => 'required|integer',
         'notification' => 'required|string',
     ];
 

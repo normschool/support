@@ -39,12 +39,11 @@ class SettingRepository extends BaseRepository
 
     /**
      * @param  array  $input
+     * @return bool
      *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
-     *
-     * @return bool
      */
     public function updateSetting($input)
     {
@@ -58,6 +57,7 @@ class SettingRepository extends BaseRepository
 
             if (in_array($key, ['logo', 'favicon']) && ! empty($value)) {
                 $this->fileUpload($setting, $value);
+
                 continue;
             }
 
@@ -69,13 +69,11 @@ class SettingRepository extends BaseRepository
 
     /**
      * @param  Setting  $setting
-     * @param $file
+     * @return mixed
      *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
-     *
-     * @return mixed
      */
     public function fileUpload($setting, $file)
     {

@@ -27,11 +27,9 @@ class BlockUserAPIController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
+     * @return JsonResponse
      *
      * @throws Exception
-     *
-     * @return JsonResponse
      */
     public function blockUnblockUser(Request $request)
     {
@@ -52,7 +50,7 @@ class BlockUserAPIController extends AppBaseController
      */
     public function blockedUsers()
     {
-        list($blockedUserIds, $blockByMeUsers) = $this->blockUserRepository->blockedUserIds();
+        [$blockedUserIds, $blockByMeUsers] = $this->blockUserRepository->blockedUserIds();
 
         return $this->sendResponse(
             ['users_ids' => $blockedUserIds], 'Blocked users retrieved successfully.'
