@@ -3,7 +3,7 @@
     {{ __('messages.my_tickets') }}
 @endsection
 @push('css')
-    <link href="{{ mix('assets/css/dashboard-widgets.css') }}" rel="stylesheet" type="text/css"/>
+    @vite('resources/assets/css/dashboard-widgets.css')
     <link href="{{ asset('assets/css/customer_ticket.css') }}" rel="stylesheet" type="text/css"/>
     @livewireStyles
 @endpush
@@ -34,5 +34,5 @@
     <script>
         let activeStatus = "{{ \App\Models\Ticket::STATUS_ACTIVE }}"
     </script>
-    <script src="{{ mix('assets/js/tickets/tickets.js')}}"></script>
+    @vite('resources/assets/js/tickets/tickets.js')
 @endpush

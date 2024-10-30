@@ -3,7 +3,7 @@
     {{ __('messages.login.register') }}
 @endsection
 @push('css')
-    <link rel="stylesheet" href="{{ mix('assets/css/phone-number-code.css') }}" type="text/css"/>
+    @vite('resources/assets/css/phone-number-code.css')
 @endpush
 @section('content')
     <div class="container pt-5">
@@ -159,7 +159,7 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ mix('assets/js/custom/phone-number-code.js') }}"></script>
+    @vite('resources/assets/js/custom/phone-number-code.js')
     <script>
         let isEdit = true;
         let phoneNo = "{{ old('region_code').old('phone') }}";

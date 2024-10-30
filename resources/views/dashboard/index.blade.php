@@ -7,7 +7,7 @@
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
 @endpush
 @push('page_css')
-    <link href="{{ mix('assets/css/dashboard-widgets.css') }}" rel="stylesheet" type="text/css"/>
+    @vite('resources/assets/css/dashboard-widgets.css')
 @endpush
 
 @section('content')
@@ -181,7 +181,7 @@
         @endrole
     </script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ mix('assets/js/Chart.js') }}"></script>
+    @vite('resources/assets/js/Chart.js')
     <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard/dashboard.js') }}"></script>
 @endpush

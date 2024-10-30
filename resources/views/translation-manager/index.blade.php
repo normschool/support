@@ -56,5 +56,5 @@
 <script>
     let translationUrl = '{{ route('translation-manager.index') }}';
 </script>
-<script src="{{mix('assets/js/language_translate/language_translate.js')}}"></script>
+@vite('resources/assets/js/language_translate/language_translate.js')
 @endpush

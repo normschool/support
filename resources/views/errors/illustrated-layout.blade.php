@@ -11,7 +11,7 @@
     <link href="//fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('assets/css/error-pages/illustrated-error.css') }}" type="text/css"/>
+    @vite('resources/assets/css/error-pages/illustrated-error.css')
 </head>
 <body class="antialiased font-sans">
 <div class="md:flex min-h-screen">

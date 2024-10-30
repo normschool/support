@@ -3,7 +3,7 @@
     {{ __('messages.ticket.public_tickets') }}
 @endsection
 @push('css')
-    <link href="{{ mix('assets/css/landing-page-style.css') }}" rel="stylesheet"/>
+    @vite('resources/assets/css/landing-page-style.css')
     <link href="{{ asset('theme-assets/css/animate.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     @livewireStyles
@@ -21,6 +21,6 @@
         let ticketStatus = "{{ \App\Models\Ticket::STATUS_ACTIVE }}"
     </script>
     <script src="{{ asset('theme-assets/js/wow.min.js') }}"></script>
-    <script src="{{ mix('assets/js/web/tickets.js') }}"></script>
+    @vite('resources/assets/js/web/tickets.js')
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 @endpush

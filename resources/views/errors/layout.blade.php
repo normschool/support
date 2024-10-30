@@ -11,7 +11,7 @@
     <link href="//fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('assets/css/error-pages/layout.css') }}" type="text/css"/>
+    @vite('resources/assets/css/error-pages/layout.css')
 </head>
 <body>
 <div class="flex-center position-ref full-height">

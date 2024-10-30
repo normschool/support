@@ -36,7 +36,7 @@
         let userUrl = "{{ route('user.index') }}"
     </script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ mix('assets/js/users/users.js') }}"></script>
+    @vite('resources/assets/js/users/users.js')
     @notifyJs
 @endpush
 

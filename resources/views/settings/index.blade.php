@@ -23,5 +23,5 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
-    <script src="{{ mix('assets/js/settings/settings.js') }}"></script>
+    @vite('resources/assets/js/settings/settings.js')
 @endpush

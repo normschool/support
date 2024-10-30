@@ -41,7 +41,7 @@
         let activeStatus = '{{ \App\Models\Ticket::STATUS_ACTIVE }}'
     </script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    <script src="{{ mix('assets/js/tickets/tickets.js') }}"></script>
+    @vite('resources/assets/js/tickets/tickets.js')
     <script src="{{ asset('assets/js/pickr.min.js') }}"></script>
-    <script src="{{ mix('assets/js/categories/show_category.js') }}"></script>
+    @vite('resources/assets/js/categories/show_category.js')
 @endpush

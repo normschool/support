@@ -39,5 +39,5 @@
     </script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
-    <script src="{{mix('assets/js/users/create_edit.js')}}"></script>
+    @vite('resources/assets/js/users/create_edit.js')
 @endpush

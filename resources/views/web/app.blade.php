@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/web_theme_components.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/sweetalert.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ mix('assets/css/phone-number-code.css') }}" type="text/css"/>
+    @vite('resources/assets/css/phone-number-code.css')
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('theme-assets/css/emojionearea.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/web.css') }}">
@@ -57,9 +57,9 @@
 <script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('theme-assets/js/scripts.js') }}"></script>
-<script src="{{ mix('assets/js/custom/phone-number-code.js') }}"></script>
+@vite('resources/assets/js/custom/phone-number-code.js')
 <script src="{{ asset('assets/js/jsrender.js') }}"></script>
-<script src="{{ mix('assets/js/custom/custom.js') }}"></script>
+@vite('resources/assets/js/custom/custom.js')
 <script src="{{ asset('theme-assets/js/emojionearea.js') }}"></script>
 <script src="{{ asset('assets/js/emojione.min.js') }}"></script>
 <!-- JS Libraies -->
@@ -118,9 +118,9 @@
 
 
 </script>
-<script src="{{ mix('assets/js/app.js') }}"></script>
-<script src="{{ mix('assets/js/web/chat.js') }}"></script>
-<script src="{{ mix('assets/js/web/set-user-on-off.js') }}"></script>
+@vite('resources/assets/js/app.js')
+@vite('resources/assets/js/web/chat.js')
+@vite('resources/assets/js/web/set-user-on-off.js')
 <!-- Page Specific JS File -->
 
 </body>

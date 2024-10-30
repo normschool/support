@@ -32,8 +32,8 @@
         let adminUrl = "{{ route('admins.index') }}"
     </script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ mix('assets/js/custom/custom-datatable.js') }}"></script>
+    @vite('resources/assets/js/custom/custom-datatable.js')
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
-    <script src="{{mix('assets/js/users/admins.js')}}"></script>
-    <script src="{{mix('assets/js/users/users.js')}}"></script>
+    @vite('resources/assets/js/users/admins.js')
+    @vite('resources/assets/js/users/users.js')
 @endpush

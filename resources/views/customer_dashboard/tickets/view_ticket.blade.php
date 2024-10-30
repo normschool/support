@@ -170,7 +170,7 @@
     </script>
     <script src="{{ asset('theme-assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('assets/js/summernote.min.js') }}"></script>
-    <script src="{{ mix('assets/js/tickets/view_tickets.js')}}"></script>
+    @vite('resources/assets/js/tickets/view_tickets.js')
     <script>
         new WOW().init();
     </script>
