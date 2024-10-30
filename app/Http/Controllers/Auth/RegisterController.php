@@ -45,36 +45,34 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
-            'email'      => [
+            'email' => [
                 'required', 'string', 'email', 'max:255', 'unique:users',
                 'regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
             ],
-            'password'   => ['required', 'string', 'min:6', 'confirmed'],
-            'phone'      => ['nullable', 'unique:users,phone'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'phone' => ['nullable', 'unique:users,phone'],
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
         $user = User::create([
-            'name'             => $data['first_name'],
-            'email'            => $data['email'],
-            'password'         => Hash::make($data['password']),
-            'phone'            => $data['phone'] = empty($data['phone']) ? null : $data['phone'],
-            'region_code'      => $data['region_code'],
+            'name' => $data['first_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'phone' => $data['phone'] = empty($data['phone']) ? null : $data['phone'],
+            'region_code' => $data['region_code'],
             'region_code_flag' => $data['region_code_flag'],
         ]);
         $customerRole = Role::whereName('Customer')->first();

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $blocked_to
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BlockedUser newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BlockedUser newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BlockedUser query()
@@ -20,7 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BlockedUser whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BlockedUser whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BlockedUser whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
+ *
  * @property-write mixed $raw
  */
 class BlockedUser extends Model

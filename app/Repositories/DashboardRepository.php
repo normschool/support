@@ -48,8 +48,6 @@ class DashboardRepository
     }
 
     /**
-     * @param $status
-     *
      * @return array
      */
     public function getCategoryReport($status)
@@ -92,7 +90,6 @@ class DashboardRepository
     }
 
     /**
-     * @param $input
      * @return array
      */
     public function ticketChart($input)

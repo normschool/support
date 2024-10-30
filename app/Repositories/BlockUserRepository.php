@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Events\UserEvent;
 use App\Models\BlockedUser;
-use App\Models\Role;
 use App\Models\User;
 use Arr;
 use Auth;
@@ -44,10 +43,9 @@ class BlockUserRepository extends BaseRepository
 
     /**
      * @param  array  $input
+     * @return bool|null
      *
      * @throws Exception
-     *
-     * @return bool|null
      */
     public function blockUnblockUser($input)
     {
@@ -64,7 +62,7 @@ class BlockUserRepository extends BaseRepository
             'blockedBy' => Auth::user(),
             'blockedTo' => $blockedTo,
             'isBlocked' => $input['is_blocked'],
-            'type'      => User::BLOCK_UNBLOCK_EVENT,
+            'type' => User::BLOCK_UNBLOCK_EVENT,
         ], $blockedTo->id))->toOthers();
 
         if ($input['is_blocked'] == false && ! empty($blockedUser)) {
@@ -87,7 +85,7 @@ class BlockUserRepository extends BaseRepository
             ->toArray();
 
         $blockedByMe = Arr::where($blockedUserIds, function ($value, $key) {
-            return ($value == getLoggedInUserId());
+            return $value == getLoggedInUserId();
         });
         $blockedByMe = array_unique(array_keys($blockedByMe));
 

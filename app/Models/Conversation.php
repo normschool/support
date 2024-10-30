@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property-read User|null $receiver
  * @property-read User|null $sender
  * @property-read User|null $sendByUser
+ *
  * @method static Builder|Conversation newModelQuery()
  * @method static Builder|Conversation newQuery()
  * @method static Builder|Conversation query()
@@ -39,23 +40,31 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Conversation whereStatus($value)
  * @method static Builder|Conversation whereToId($value)
  * @method static Builder|Conversation whereUpdatedAt($value)
+ *
  * @mixin Model
+ *
  * @property Carbon|null $deleted_at
  * @property-read User $user
+ *
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Query\Builder|Conversation onlyTrashed()
  * @method static bool|null restore()
  * @method static Builder|Conversation whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Conversation withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Conversation withoutTrashed()
+ *
  * @property-read string $time_from_now_in_min
  * @property string $to_type 1 => Message, 2 => Group Message
  * @property-write mixed $raw
+ *
  * @method static Builder|Conversation whereToType($value)
  * @method static Builder|Conversation message()
+ *
  * @property-read Collection|MessageAction $messageAction
  * @property-read int|null $read_by_all_count
+ *
  * @method static Builder|Conversation whereReplyTo($value)
+ *
  * @property-read Conversation|null $replyMessage
  */
 class Conversation extends Model
@@ -84,17 +93,17 @@ class Conversation extends Model
      * @var array
      */
     protected $casts = [
-        'from_id'      => 'integer',
-        'to_id'        => 'string',
-        'message'      => 'string',
+        'from_id' => 'integer',
+        'to_id' => 'string',
+        'message' => 'string',
         'message_type' => 'integer',
-        'file_name'    => 'string',
-        'url_details'  => 'json',
-        'status'       => 'integer',
+        'file_name' => 'string',
+        'url_details' => 'json',
+        'status' => 'integer',
     ];
 
     public static $rules = [
-        'to_id'   => 'nullable|string',
+        'to_id' => 'nullable|string',
         'from_id' => 'nullable|string',
         'message' => 'required|string',
     ];
@@ -103,15 +112,25 @@ class Conversation extends Model
     protected $appends = ['time_from_now_in_min'];
 
     const LIMIT = 5000;
+
     const PATH = 'conversation';
+
     const MEDIA_IMAGE = 1;
+
     const MEDIA_PDF = 2;
+
     const MEDIA_DOC = 3;
+
     const MEDIA_VOICE = 4;
+
     const MEDIA_VIDEO = 5;
+
     const YOUTUBE_URL = 6;
+
     const MEDIA_TXT = 7;
+
     const MEDIA_XLS = 8;
+
     const MESSAGE_TYPE_BADGES = 9;
 
     const MEDIA_MESSAGE_TYPES = [
@@ -129,8 +148,6 @@ class Conversation extends Model
     }
 
     /**
-     * @param $value
-     *
      * @return string
      */
     public function getPhotoUrlAttribute($value)
@@ -173,7 +190,6 @@ class Conversation extends Model
     {
         return $this->belongsTo(User::class, 'send_by');
     }
-
 
     /**
      * @return BelongsTo

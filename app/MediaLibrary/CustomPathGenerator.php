@@ -15,21 +15,11 @@ use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
  */
 class CustomPathGenerator implements PathGenerator
 {
-    /**
-     * @param  Media  $media
-     *
-     * @return string
-     */
     public function getPathForConversions(Media $media): string
     {
         return $this->getPath($media).'thumbnails/';
     }
 
-    /**
-     * @param  Media  $media
-     *
-     * @return string
-     */
     public function getPath(Media $media): string
     {
         $path = '{PARENT_DIR}'.DIRECTORY_SEPARATOR.$media->id.DIRECTORY_SEPARATOR;
@@ -50,11 +40,6 @@ class CustomPathGenerator implements PathGenerator
         }
     }
 
-    /**
-     * @param  Media  $media
-     *
-     * @return string
-     */
     public function getPathForResponsiveImages(Media $media): string
     {
         return $this->getPath($media).'rs-images/';

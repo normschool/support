@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API;
 use App\Http\Controllers\API\BlockUserAPIController;
 use App\Http\Controllers\API\ChatAPIController;
@@ -21,7 +22,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\WebUserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +38,8 @@ Auth::routes();
 
 Route::middleware(['xss'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('web.home');
-    Route::get('/login/{provider}',[SocialAuthController::class, 'redirectToSocial'])->name('social.login');
-    Route::get('/login/{provider}/callback',[SocialAuthController::class, 'handleSocialCallback']);
+    Route::get('/login/{provider}', [SocialAuthController::class, 'redirectToSocial'])->name('social.login');
+    Route::get('/login/{provider}/callback', [SocialAuthController::class, 'handleSocialCallback']);
     Route::get('/get-public-tickets', [HomeController::class, 'getPublicTickets'])->name('get.public.tickets');
     Route::get('/submit-ticket', [HomeController::class, 'createTicket'])->name('web.submit_ticket');
     Route::post('/store-ticket', [TicketController::class, 'webStore'])->name('web.ticket.store');
@@ -49,7 +49,7 @@ Route::middleware(['xss'])->group(function () {
     Route::get('tickets', [TicketController::class, 'showAllPublicTickets'])->name('public.tickets');
     Route::get('categories-list', [CategoryController::class, 'showAllCategories'])->name('categories-list');
     Route::get('/download-media/{mediaItem}', [DownloadMediaController::class, 'show'])->name('download.media');
-    
+
     Route::get('/ticket', [HomeController::class, 'searchTicket'])->name('web.search_ticket');
     Route::get('/faqs', [HomeController::class, 'faqs'])->name('web.faqs');
 
@@ -59,7 +59,7 @@ Route::middleware(['xss'])->group(function () {
     Route::post('web-read-message', [WebUserController::class, 'readMessages']);
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']], function () {
+Route::prefix('admin')->middleware('auth', 'xss', 'role:Admin')->group(function () {
     // Route for laravel log viewer
     Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
@@ -117,14 +117,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']
     Route::delete('ticket-attachment-delete', [TicketController::class, 'attachmentDelete'])->name('ticket.attachment');
 
     /** Translation Manager Routes */
-    Route::group(['prefix' => 'translation-manager'], function (){
+    Route::prefix('translation-manager')->group(function () {
         Route::get('/', [TranslationManagerController::class, 'index'])->name('translation-manager.index');
         Route::post('/', [TranslationManagerController::class, 'store'])->name('translation-manager.store');
         Route::post('/update', [TranslationManagerController::class, 'update'])->name('translation-manager.update');
     });
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']], function () {
+Route::prefix('admin')->middleware('auth', 'xss', 'role:Admin')->group(function () {
 
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -145,7 +145,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss', 'role:Admin']
     Route::put('tickets/{ticket}', [TicketController::class, 'update'])->name('ticket.update');
 });
 
-Route::group(['prefix' => 'agent', 'middleware' => ['auth', 'xss', 'role:Agent']], function () {
+Route::prefix('agent')->middleware('auth', 'xss', 'role:Agent')->group(function () {
 
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'agentDashBoard'])->name('agent.dashboard');
@@ -166,7 +166,7 @@ Route::group(['prefix' => 'agent', 'middleware' => ['auth', 'xss', 'role:Agent']
     Route::get('tickets/media/{id}', [TicketController::class, 'downloadAttachment'])->name('agent-download-attachment');
 });
 
-Route::group(['middleware' => ['auth', 'role:Admin|Agent|Customer', 'xss']], function () {
+Route::middleware('auth', 'role:Admin|Agent|Customer', 'xss')->group(function () {
     Route::post('/add-reply', [TicketReplayController::class, 'store'])->name('ticket.add-reply');
     Route::put('/reply-update/{ticketReplay}', [TicketReplayController::class, 'update'])->name('ticket.reply.update');
     Route::delete('reply/{ticketReplay}', [TicketReplayController::class, 'destroy'])->name('replay.destroy');
@@ -189,63 +189,59 @@ Route::group(['middleware' => ['auth', 'role:Admin|Agent|Customer', 'xss']], fun
     Route::post('/notification/{notification}/read',
         [UserNotificationController::class, 'readNotification'])->name('read-notification');
     Route::post('/read-all-notification', [UserNotificationController::class, 'readAllNotification'])->name('read-all-notification');
-    
+
     // Email setting
     Route::get('/email-update-setting', [UserController::class, 'getEmailUpdateSetting'])->name('get.email-update');
     Route::post('/email-update-setting', [UserController::class, 'setEmailUpdateSetting'])->name('set.email-update');
 });
 
-Route::group(['namespace' => 'API'], function () {
-    Route::post('send-message', [ChatAPIController::class, 'sendMessage'])->name('conversations.store');
-    Route::get('users/{id}/conversation', [ChatAPIController::class, 'getConversation']);
-    Route::get('user/{id}/conversation', [ChatAPIController::class, 'getFrontConversation']);
-    Route::post('assign-to-agent', [UserAPIController::class, 'assignAgent']);
-    Route::post('update-last-seen', [UserAPIController::class, 'updateLastSeen']);
-});
+Route::post('send-message', [ChatAPIController::class, 'sendMessage'])->name('conversations.store');
+Route::get('users/{id}/conversation', [ChatAPIController::class, 'getConversation']);
+Route::get('user/{id}/conversation', [ChatAPIController::class, 'getFrontConversation']);
+Route::post('assign-to-agent', [UserAPIController::class, 'assignAgent']);
+Route::post('update-last-seen', [UserAPIController::class, 'updateLastSeen']);
 
-Route::group(['middleware' => ['auth', 'xss']], function () {
+Route::middleware('auth', 'xss')->group(function () {
     //view routes
     Route::get('/conversations', [ChatController::class, 'index'])->name('conversations')->middleware('role:Admin|Agent');
     Route::get('profile', [UserController::class, 'getProfile']);
-    Route::group(['namespace' => 'API'], function () {
-//        Route::get('logout', [API\Auth\LoginController::class, 'logout']);
+    //        Route::get('logout', [API\Auth\LoginController::class, 'logout']);
 
-        //get all user list for chat
-        Route::get('users-list', [UserAPIController::class, 'getUsersList']);
-        Route::get('get-users', [UserAPIController::class, 'getUsers']);
-        Route::delete('remove-profile-image', [UserAPIController::class, 'removeProfileImage']);
-        Route::get('conversations/{ownerId}/archive-chat', [UserAPIController::class, 'archiveChat']);
+    //get all user list for chat
+    Route::get('users-list', [UserAPIController::class, 'getUsersList']);
+    Route::get('get-users', [UserAPIController::class, 'getUsers']);
+    Route::delete('remove-profile-image', [UserAPIController::class, 'removeProfileImage']);
+    Route::get('conversations/{ownerId}/archive-chat', [UserAPIController::class, 'archiveChat']);
 
-        Route::get('get-profile', [UserAPIController::class, 'getProfile']);
-        Route::get('conversations-list', [ChatAPIController::class, 'getLatestConversations']);
-        Route::get('archive-conversations', [ChatAPIController::class, 'getArchiveConversations']);
-        Route::post('read-message', [ChatAPIController::class, 'updateConversationStatus']);
-        Route::post('file-upload', [ChatAPIController::class, 'addAttachment'])->name('file-upload');
-        Route::post('image-upload', [ChatAPIController::class, 'imageUpload'])->name('image-upload');
-        Route::get('conversations/{userId}/delete', [ChatAPIController::class, 'deleteConversation']);
-        Route::post('conversations/message/{conversation}/delete', [ChatAPIController::class, 'deleteMessage']);
-        Route::post('conversations/{conversation}/delete', [ChatAPIController::class, 'deleteMessageForEveryone']);
-        Route::get('/conversations/{conversation}', [ChatAPIController::class, 'show']);
-        
-        // Conversation request route
-        Route::post('send-chat-request', [ChatAPIController::class, 'sendChatRequest'])->name('send-chat-request');
-        Route::post('accept-chat-request', [ChatAPIController::class, 'acceptChatRequest'])->name('accept-chat-request');
-        Route::post('decline-chat-request', [ChatAPIController::class, 'declineChatRequest'])->name('decline-chat-request');
+    Route::get('get-profile', [UserAPIController::class, 'getProfile']);
+    Route::get('conversations-list', [ChatAPIController::class, 'getLatestConversations']);
+    Route::get('archive-conversations', [ChatAPIController::class, 'getArchiveConversations']);
+    Route::post('read-message', [ChatAPIController::class, 'updateConversationStatus']);
+    Route::post('file-upload', [ChatAPIController::class, 'addAttachment'])->name('file-upload');
+    Route::post('image-upload', [ChatAPIController::class, 'imageUpload'])->name('image-upload');
+    Route::get('conversations/{userId}/delete', [ChatAPIController::class, 'deleteConversation']);
+    Route::post('conversations/message/{conversation}/delete', [ChatAPIController::class, 'deleteMessage']);
+    Route::post('conversations/{conversation}/delete', [ChatAPIController::class, 'deleteMessageForEveryone']);
+    Route::get('/conversations/{conversation}', [ChatAPIController::class, 'show']);
 
-        /** BLock-Unblock User */
-        Route::put('users/{user}/block-unblock', [BlockUserAPIController::class, 'blockUnblockUser']);
-        Route::get('blocked-users', [BlockUserAPIController::class, 'blockedUsers']);
+    // Conversation request route
+    Route::post('send-chat-request', [ChatAPIController::class, 'sendChatRequest'])->name('send-chat-request');
+    Route::post('accept-chat-request', [ChatAPIController::class, 'acceptChatRequest'])->name('accept-chat-request');
+    Route::post('decline-chat-request', [ChatAPIController::class, 'declineChatRequest'])->name('decline-chat-request');
 
-        Route::get('users-blocked-by-me', [BlockUserAPIController::class, 'blockUsersByMe']);
-        Route::get('notification/{notification}/read', [NotificationController::class, 'readNotification']);
-        Route::get('notification/read-all', [NotificationController::class, 'readAllNotification']);
+    /** BLock-Unblock User */
+    Route::put('users/{user}/block-unblock', [BlockUserAPIController::class, 'blockUnblockUser']);
+    Route::get('blocked-users', [BlockUserAPIController::class, 'blockedUsers']);
 
-        //report user
-        Route::post('report-user', [API\ReportUserController::class, 'store'])->name('report-user.store');
-    });
+    Route::get('users-blocked-by-me', [BlockUserAPIController::class, 'blockUsersByMe']);
+    Route::get('notification/{notification}/read', [NotificationController::class, 'readNotification']);
+    Route::get('notification/read-all', [NotificationController::class, 'readAllNotification']);
+
+    //report user
+    Route::post('report-user', [API\ReportUserController::class, 'store'])->name('report-user.store');
 });
 
-Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'xss', 'role:Customer']], function () {
+Route::prefix('customer')->middleware('auth', 'xss', 'role:Customer')->group(function () {
     Route::get('dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
 
     Route::get('tickets', [CustomerDashboardController::class, 'viewCustomerTicket'])->name('customer.myTicket');

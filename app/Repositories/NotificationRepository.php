@@ -21,7 +21,6 @@ class NotificationRepository extends BaseRepository
     /**
      * NotificationRepository constructor.
      *
-     * @param  Application  $app
      *
      * @throws Exception
      */
@@ -62,7 +61,7 @@ class NotificationRepository extends BaseRepository
 
     /**
      * @param  array  $notificationInput
-     * @param  integer  $receiverId
+     * @param  int  $receiverId
      */
     public function sendNotification($notificationInput, $receiverId, $userEventType = 0)
     {
@@ -74,12 +73,11 @@ class NotificationRepository extends BaseRepository
 
         $sender = (getLoggedInUser()) ? getLoggedInUser() : User::findOrFail($notificationInput['owner_id']);
 
-
         if ($notification->owner_type == User::class) {
             $sender = [
-                'id'          => $sender->id,
-                'name'        => $sender->name,
-                'is_online'   => $sender->is_online,
+                'id' => $sender->id,
+                'name' => $sender->name,
+                'is_online' => $sender->is_online,
                 'profile_url' => $sender->photo_url,
             ];
         }
@@ -98,10 +96,10 @@ class NotificationRepository extends BaseRepository
         $notifications = Notification::whereIsRead(0)->whereToId(getLoggedInUserId())->with([
             'sender', 'latestMsg',
         ])->selectRaw(
-            "max(notifications.id) as latest_id,
+            'max(notifications.id) as latest_id,
             sum(if(notifications.is_read = 0, 1, 0)) as unread_count,
-            notifications.*"
-        )->orderBy("notifications.created_at", 'desc')->groupBy('owner_id')->get();
+            notifications.*'
+        )->orderBy('notifications.created_at', 'desc')->groupBy('owner_id')->get();
 
         $notificationsArray = [];
         foreach ($notifications as $notification) {
@@ -110,9 +108,9 @@ class NotificationRepository extends BaseRepository
             $notificationArray['unread_count'] = $notification->unread_count;
             if ($notification->owner_type == User::class) {
                 $sender = [
-                    'id'          => $notification->sender->id ?? null,
-                    'name'        => $notification->sender->name ?? null,
-                    'is_online'   => $notification->sender->is_online ?? null,
+                    'id' => $notification->sender->id ?? null,
+                    'name' => $notification->sender->name ?? null,
+                    'is_online' => $notification->sender->is_online ?? null,
                     'profile_url' => $notification->sender->photo_url ?? null,
                 ];
             }
@@ -124,7 +122,7 @@ class NotificationRepository extends BaseRepository
     }
 
     /**
-     * @param  integer  $notificationId
+     * @param  int  $notificationId
      */
     public function readNotification($notificationId)
     {
@@ -136,7 +134,7 @@ class NotificationRepository extends BaseRepository
     }
 
     /**
-     * @param  integer  $senderId
+     * @param  int  $senderId
      */
     public function readNotificationWhenOpenChatWindow($senderId)
     {
@@ -163,8 +161,8 @@ class NotificationRepository extends BaseRepository
             broadcast(new UserEvent(
                 [
                     'user_id' => $authId,
-                    'ids'     => $messageIds,
-                    'type'    => User::PRIVATE_MESSAGE_READ,
+                    'ids' => $messageIds,
+                    'type' => User::PRIVATE_MESSAGE_READ,
                 ], $senderId))->toOthers();
         }
 

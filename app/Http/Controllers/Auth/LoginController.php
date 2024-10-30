@@ -44,7 +44,6 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  Request  $request
      *
      * @return Response
      */

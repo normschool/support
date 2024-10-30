@@ -29,16 +29,15 @@ class FAQController extends AppBaseController
     /**
      * Display a listing of the FAQ.
      *
-     * @param  Request  $request
-     *
-     * @throws Exception
      *
      * @return Factory|View
+     *
+     * @throws Exception
      */
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of((new FAQDataTable())->get())->make(true);
+            return Datatables::of((new FAQDataTable)->get())->make(true);
         }
 
         return view('faqs.index');
@@ -47,7 +46,6 @@ class FAQController extends AppBaseController
     /**
      * Store a newly created FAQ in storage.
      *
-     * @param  CreateFAQRequest  $request
      *
      * @return JsonResource
      */
@@ -62,7 +60,6 @@ class FAQController extends AppBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  FAQ  $faq
      *
      * @return JsonResponse
      */
@@ -74,7 +71,6 @@ class FAQController extends AppBaseController
     /**
      * Show the form for editing the specified FAQ.
      *
-     * @param  FAQ  $faq
      *
      * @return JsonResource
      */
@@ -86,9 +82,7 @@ class FAQController extends AppBaseController
     /**
      * Update the specified FAQ in storage.
      *
-     * @param  UpdateFAQRequest  $request
      *
-     * @param  FAQ  $faq
      *
      * @return JsonResource
      */
@@ -103,11 +97,10 @@ class FAQController extends AppBaseController
     /**
      * Remove the specified FAQ from storage.
      *
-     * @param  FAQ  $faq
-     *
-     * @throws Exception
      *
      * @return JsonResource
+     *
+     * @throws Exception
      */
     public function destroy(FAQ $faq)
     {
@@ -123,8 +116,8 @@ class FAQController extends AppBaseController
 
         $imageCheck = Media::where('collection_name', FAQ::FaqImg)->where('file_name',
             $input['image']->getClientOriginalName())->exists();
-        if (!$imageCheck) {
-            if ((!empty($input['image']))) {
+        if (! $imageCheck) {
+            if ((! empty($input['image']))) {
                 $media = $user->addMedia($input['image'])->toMediaCollection(FAQ::FaqImg);
             }
             $data['url'] = $media->getFullUrl();

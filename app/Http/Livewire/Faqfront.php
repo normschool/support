@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\FAQ;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\View\View;
 
 class Faqfront extends SearchableComponent
 {

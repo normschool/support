@@ -31,6 +31,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TicketReplay[] $replay
  * @property-read int|null $replay_count
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket query()
@@ -45,19 +46,23 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereTicketId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Ticket extends Model implements HasMedia
 {
-    use  InteractsWithMedia;
+    use InteractsWithMedia;
 
     public $table = 'tickets';
 
     public const COLLECTION_TICKET = 'tickets';
 
     const STATUS_OPEN = 1;
+
     const STATUS_IN_PROGRESS = 2;
+
     const STATUS_CLOSED = 3;
+
     const STATUS_ACTIVE = 0;
 
     const STATUS = [
@@ -84,11 +89,11 @@ class Ticket extends Model implements HasMedia
      * @var array
      */
     public static $rules = [
-        'title'       => 'required',
-        'email'       => 'required|email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,6}$/',
+        'title' => 'required',
+        'email' => 'required|email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,6}$/',
         'category_id' => 'required',
         'description' => 'required',
-        'created_by'  => 'nullable',
+        'created_by' => 'nullable',
     ];
 
     public static $messages = [
@@ -111,14 +116,14 @@ class Ticket extends Model implements HasMedia
      * @var array
      */
     public $casts = [
-        'id'          => 'integer',
+        'id' => 'integer',
         'category_id' => 'integer',
-        'is_public'   => 'boolean',
-        'ticket_id'   => 'string',
-        'status'      => 'integer',
-        'title'       => 'string',
+        'is_public' => 'boolean',
+        'ticket_id' => 'string',
+        'status' => 'integer',
+        'title' => 'string',
         'description' => 'string',
-        'email'       => 'string',
+        'email' => 'string',
     ];
 
     /**

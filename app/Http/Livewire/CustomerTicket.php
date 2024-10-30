@@ -16,15 +16,23 @@ use Livewire\WithPagination;
 class CustomerTicket extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $searchByCustomerTicket;
+
     public $ticketFilter = Ticket::STATUS_ACTIVE;
+
     public $isPublicFilter = '';
+
     public $status;
+
     public $isPublic = '';
+
     public $ticketCategories;
+
     public $categoryFilter;
+
     protected $listeners = ['changeStatus', 'changeFilter', 'deleteTicket'];
 
     public function mount()
@@ -42,19 +50,19 @@ class CustomerTicket extends Component
         return 'livewire.custom-pagenation';
     }
 
-//    public function nextPage($lastPage)
-//    {
-//        if ($this->page < $lastPage) {
-//            $this->page = $this->page + 1;
-//        }
-//    }
-//
-//    public function previousPage()
-//    {
-//        if ($this->page > 1) {
-//            $this->page = $this->page - 1;
-//        }
-//    }
+    //    public function nextPage($lastPage)
+    //    {
+    //        if ($this->page < $lastPage) {
+    //            $this->page = $this->page + 1;
+    //        }
+    //    }
+    //
+    //    public function previousPage()
+    //    {
+    //        if ($this->page > 1) {
+    //            $this->page = $this->page - 1;
+    //        }
+    //    }
 
     public function updatingsearchByCustomerTicket()
     {
@@ -80,11 +88,6 @@ class CustomerTicket extends Component
         $this->resetPage();
     }
 
-    /**
-     * @param $param
-     *
-     * @param $value
-     */
     public function changeFilter($param, $value)
     {
         $this->resetPage();
@@ -92,8 +95,7 @@ class CustomerTicket extends Component
     }
 
     /**
-     * @param $id
-     * @param $status
+     * @param  $id
      */
     public function changeStatus(Ticket $ticket, $status)
     {
@@ -103,9 +105,6 @@ class CustomerTicket extends Component
         }
     }
 
-    /**
-     * @param $id
-     */
     public function deleteTicket($id)
     {
         $result = app(TicketRepository::class)->deleteTicket($id);

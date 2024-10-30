@@ -27,8 +27,8 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password_current'      => 'required',
-            'password'              => 'required|min:6|same:password_confirmation',
+            'password_current' => 'required',
+            'password' => 'required|min:6|same:password_confirmation',
             'password_confirmation' => 'required|min:6',
         ];
     }
@@ -39,7 +39,7 @@ class ChangePasswordRequest extends FormRequest
     public function messages()
     {
         return [
-            'password.min'  => 'Password must contain at least 6 characters.',
+            'password.min' => 'Password must contain at least 6 characters.',
             'password.same' => 'The password and confirm password must be matched.',
         ];
     }

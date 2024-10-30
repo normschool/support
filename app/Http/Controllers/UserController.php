@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewCustomerArrived;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
@@ -10,7 +9,6 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
-use App\Queries\UserDataTable;
 use App\Repositories\UserRepository;
 use Auth;
 use Exception;
@@ -35,7 +33,6 @@ class UserController extends AppBaseController
 
     /**
      * UserController constructor.
-     * @param  UserRepository  $userRepo
      */
     public function __construct(UserRepository $userRepo)
     {
@@ -43,10 +40,9 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     * @throws Exception
-     *
      * @return Application|Factory|View
+     *
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -68,11 +64,9 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  CreateUserRequest  $request
+     * @return RedirectResponse
      *
      * @throws \Throwable
-     *
-     * @return RedirectResponse
      */
     public function store(CreateUserRequest $request)
     {
@@ -96,7 +90,6 @@ class UserController extends AppBaseController
 
     /**
      * @param  User  $id
-     *
      * @return Application|Factory|View
      */
     public function show($id)
@@ -111,8 +104,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  User  $user
-     *
      * @return Factory|View
      */
     public function edit(User $user)
@@ -129,9 +120,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  UpdateUserRequest  $request
-     * @param  User  $user
-     *
      * @return RedirectResponse
      */
     public function update(UpdateUserRequest $request, User $user)
@@ -155,11 +143,9 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  User  $user
+     * @return mixed
      *
      * @throws Exception
-     *
-     * @return mixed
      */
     public function destroy(User $user)
     {
@@ -172,8 +158,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  ChangePasswordRequest  $request
-     *
      * @return JsonResponse
      */
     public function changePassword(ChangePasswordRequest $request)
@@ -190,8 +174,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return mixed
      */
     public function changeLanguage(Request $request)
@@ -209,8 +191,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  UpdateUserProfileRequest  $request
-     *
      * @return JsonResponse
      */
     public function profileUpdate(UpdateUserProfileRequest $request)
@@ -247,7 +227,7 @@ class UserController extends AppBaseController
     public function getEmailUpdateSetting()
     {
         $emailSetting = Auth::user()->email_update;
-        
+
         return $this->sendResponse($emailSetting, 'Email setting retrieved successfully');
     }
 
@@ -257,7 +237,7 @@ class UserController extends AppBaseController
         /** @var User $user */
         $user = $request->user();
         $user->update([
-           'email_update' => $emailSetting
+            'email_update' => $emailSetting,
         ]);
 
         return $this->sendSuccess(__('messages.success_message.email_setting_update'));

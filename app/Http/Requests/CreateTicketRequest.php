@@ -27,7 +27,7 @@ class CreateTicketRequest extends FormRequest
         $rules = Ticket::$rules;
         $rules['user_name'] = getLoggedInUser() ? '' : 'required|string';
         $rules['email'] = getLoggedInUser() ? '' : 'required|email|unique:users,email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/';
-        $rules['password'] = getLoggedInUser() ? '' : 'required|min:6|same:confirm_password';
+        $rules['current_password'] = getLoggedInUser() ? '' : 'required|min:6|same:confirm_password';
         $rules['confirm_password'] = getLoggedInUser() ? '' : 'required|min:6';
 
         return $rules;

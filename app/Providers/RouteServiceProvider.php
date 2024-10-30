@@ -16,9 +16,13 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/';
+
     public const DASHBOARD = '/admin/dashboard';
+
     public const SUBMIT_TICKET = '/submit-ticket';
+
     public const CUSTOMER_DASHBOARD = '/customer/dashboard';
+
     public const AGENT_DASHBOARD = '/agent/dashboard';
 
     /**
@@ -74,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
 }

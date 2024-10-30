@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMediaTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateMediaTable extends Migration
             $table->string('model_type', 191);
             $table->unsignedBigInteger('model_id');
             $table->index(['model_id', 'model_type'], 'media_model_type_model_id_index');
-            
+
             $table->string('collection_name');
             $table->string('name');
             $table->string('file_name');
@@ -39,4 +39,4 @@ class CreateMediaTable extends Migration
     {
         Schema::dropIfExists('media');
     }
-}
+};

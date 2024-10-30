@@ -25,7 +25,7 @@ class CreateTicketReplaySeeder extends Seeder
         foreach (range(1, 30) as $index) {
             try {
                 $input = [
-                    'ticket_id'   => rand(1, 10),
+                    'ticket_id' => rand(1, 10),
                     'description' => $faker->realText(200),
                 ];
 
@@ -35,7 +35,7 @@ class CreateTicketReplaySeeder extends Seeder
             } catch (Exception $e) {
                 echo '<pre>';
                 print_r($e->getMessage());
-                die;
+                exit;
             }
         }
     }

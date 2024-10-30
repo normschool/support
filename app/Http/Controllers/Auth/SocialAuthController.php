@@ -20,40 +20,32 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class SocialAuthController extends Controller
 {
-    /**
-     * @param $provider
-     *
-     *
-     * @return RedirectResponse
-     */
     public function redirectToSocial($provider): RedirectResponse
     {
         return Socialite::driver($provider)->redirect();
     }
 
     /**
-     * @param $provider
-     *
-     *
      * @return Application|\Illuminate\Http\RedirectResponse|Redirector
      */
-    public function handleSocialCallback($provider){
-        if(Auth::check()){
+    public function handleSocialCallback($provider)
+    {
+        if (Auth::check()) {
             return redirect('/');
         }
         $socialUser = Socialite::driver($provider)->user();
-        if(empty($socialUser['email'])){
+        if (empty($socialUser['email'])) {
             Flash::error('We couldn\'t find email address in your Facebook account');
 
             return redirect(route('register'));
         }
-        
+
         try {
             DB::beginTransaction();
 
             /** @var User $user */
             $user = User::whereRaw('lower(email) = ?', strtolower($socialUser['email']))->first();
-            
+
             $existingAccount = null;
             if (! empty($user)) {
                 /** @var SocialAccount $existingProfile */
@@ -70,22 +62,22 @@ class SocialAuthController extends Controller
             }
 
             if (empty($existingAccount)) {
-                $socialAccount = new SocialAccount();
+                $socialAccount = new SocialAccount;
                 $socialAccount->user_id = $user->id;
                 $socialAccount->provider = $provider;
-                $socialAccount->provider_id = $socialUser->id ;
+                $socialAccount->provider_id = $socialUser->id;
                 $socialAccount->save();
             }
             Db::commit();
             Auth::login($user);
 
             return redirect(RouteServiceProvider::CUSTOMER_DASHBOARD);
-            
+
         } catch (Exception $e) {
             DB::rollBack();
-            
+
             throw new UnprocessableEntityHttpException($e->getMessage());
         }
-        
+
     }
 }

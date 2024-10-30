@@ -11,6 +11,7 @@ use Str;
 abstract class SearchableComponent extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     /**
@@ -28,8 +29,6 @@ abstract class SearchableComponent extends Component
 
     /**
      * SearchableComponent constructor.
-     *
-     * @param $id
      */
     public function __construct($id)
     {
@@ -78,9 +77,6 @@ abstract class SearchableComponent extends Component
         return $this->query;
     }
 
-    /**
-     * @param  Builder  $query
-     */
     protected function setQuery(Builder $query)
     {
         $this->query = $query;

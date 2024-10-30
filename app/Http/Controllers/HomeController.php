@@ -11,21 +11,19 @@ use App\Repositories\WebHomeRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View as ViewProvider;
 use Illuminate\View\View;
-use Laracasts\Flash\Flash;
 use Throwable;
 
 class HomeController extends Controller
 {
     private $webHomeRepository;
+
     public $settings = null;
 
     /**
      * HomeController constructor.
-     * @param  WebHomeRepository  $webHomeRepository
      */
     public function __construct(WebHomeRepository $webHomeRepository)
     {
@@ -85,8 +83,6 @@ class HomeController extends Controller
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return Application|Factory|View
      */
     public function searchTicket(Request $request)
@@ -98,17 +94,15 @@ class HomeController extends Controller
     }
 
     /**
-     * @param  Request  $request
+     * @return array|string
      *
      * @throws Throwable
-     *
-     * @return array|string
      */
     public function getPublicTickets(Request $request)
     {
         $searchTerm = strtolower($request->get('searchTerm'));
         if ($searchTerm) {
-            $publicTickets = Ticket::whereIsPublic(1)->where(function (Builder $query) use ($searchTerm){
+            $publicTickets = Ticket::whereIsPublic(1)->where(function (Builder $query) use ($searchTerm) {
                 return $query->where('title', 'LIKE', '%'.$searchTerm.'%')
                     ->orWhere('email', 'LIKE', '%'.$searchTerm.'%');
             })->get();

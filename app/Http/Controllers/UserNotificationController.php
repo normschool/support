@@ -9,8 +9,6 @@ use Illuminate\Http\JsonResponse;
 class UserNotificationController extends AppBaseController
 {
     /**
-     * @param  UserNotification  $notification
-     *
      * @return JsonResponse
      */
     public function readNotification(UserNotification $notification)

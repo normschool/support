@@ -19,18 +19,29 @@ use Livewire\WithPagination;
 class Tickets extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $searchByTicket;
+
     public $statusFilter = Ticket::STATUS_ACTIVE;
+
     public $ticketStatus;
+
     public $ticketCategories;
+
     public $status;
+
     public $isPublicFilterTickets = '';
+
     public $isEnabledCategory;
+
     public $category;
+
     public $ticketId = '';
+
     public $categoryFilter;
+
     protected $listeners = [
         'changeStatus', 'deleteTicket', 'RemoveAssignUserId', 'changeFilter', 'updateAssignees', 'resetFilter',
         'unassignedTicket',
@@ -59,26 +70,22 @@ class Tickets extends Component
         return view('livewire.tickets')->with($data);
     }
 
-    /**
-     * @param $input
-     * @param $id
-     */
     public function updateAssignees($input, $id)
     {
         $ticket = Ticket::findOrFail($id);
-        $oldAgentIds = array();
-        foreach ($ticket->assignTo as $agent){
+        $oldAgentIds = [];
+        foreach ($ticket->assignTo as $agent) {
             $oldAgentIds[] = $agent->id;
         }
 
         $assignees = ! empty($input) ? $input : $input = [getLoggedInUserId()];
         $newAgentIds = array_diff($assignees, $oldAgentIds);
         $ticket->assignTo()->sync($assignees);
-        
+
         if (! empty($newAgentIds)) {
             $input = $ticket->only('title', 'ticket_id', 'email');
             foreach ($newAgentIds as $agentId) {
-                if ($agentId != getLoggedInUserId()){
+                if ($agentId != getLoggedInUserId()) {
                     sendEmailToAgent($agentId,
                         'mail.ticket_assigned_you',
                         'Ticket Successfully Assigned You',
@@ -106,23 +113,21 @@ class Tickets extends Component
         return 'livewire.custom-pagenation';
     }
 
-//    public function nextPage($lastPage)
-//    {
-//        if ($this->page < $lastPage) {
-//            $this->page = $this->page + 1;
-//        }
-//    }
-//
-//    public function previousPage()
-//    {
-//        if ($this->page > 1) {
-//            $this->page = $this->page - 1;
-//        }
-//    }
+    //    public function nextPage($lastPage)
+    //    {
+    //        if ($this->page < $lastPage) {
+    //            $this->page = $this->page + 1;
+    //        }
+    //    }
+    //
+    //    public function previousPage()
+    //    {
+    //        if ($this->page > 1) {
+    //            $this->page = $this->page - 1;
+    //        }
+    //    }
 
     /**
-     * @param  $id
-     *
      * @throws Exception
      */
     public function deleteTicket($id)
@@ -143,9 +148,7 @@ class Tickets extends Component
     }
 
     /**
-     * @param $id
-     *
-     * @param $status
+     * @param  $id
      */
     public function changeStatus(Ticket $ticket, $status)
     {
@@ -169,11 +172,6 @@ class Tickets extends Component
         $this->resetPage();
     }
 
-    /**
-     * @param $param
-     *
-     * @param $value
-     */
     public function changeFilter($param, $value)
     {
         $this->resetPage();
