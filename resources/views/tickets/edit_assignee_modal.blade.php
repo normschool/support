@@ -11,17 +11,17 @@
                 <div class="row">
                     <input type="hidden" id="hiddenTicketId">
                     <div class="form-group col-sm-12">
-                        {{ Form::label('assign_to', __('messages.agent.agents').':') }}
-                        {{ Form::select('assignees[]',$users, $assignees, ['class' => 'form-control','id'=>'txtEditAssignee', 'multiple' => true]) }}
+                        {{ html()->label(__('messages.agent.agents') . ':', 'assign_to') }}
+                        {{ html()->multiselect('assignees[]', $users, $assignees)->class('form-control')->id('txtEditAssignee') }}
                     </div>
                 </div>
                 <div class="text-right">
-                    {{ Form::button(__('messages.common.save'), ['type' => 'button', 'class' => 'btn btn-primary ml-1', 'id' => 'btnSaveAssignees', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+                    {{ html()->button(__('messages.common.save'), 'button')->class('btn btn-primary ml-1')->id('btnSaveAssignees')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
                     <button type="button" class="btn btn-light ml-1"
                             data-dismiss="modal">{{ __('messages.common.cancel') }}</button>
                 </div>
             </div>
-            {{ Form::close() }}
+            {{ html()->form()->close() }}
         </div>
     </div>
 </div>

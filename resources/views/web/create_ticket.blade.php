@@ -30,20 +30,20 @@
                     @if(!Auth::user())
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('name', __('messages.common.name').':') }}<span
+                                {{ html()->label(__('messages.common.name') . ':', 'name') }}<span
                                         class="text-danger">*</span>
-                                {{ Form::text('user_name', null, ['class' => 'form-control','required','tabindex'=>1, 'id' => 'user-name', 'placeholder' => __('messages.web.enter_name')]) }}
+                                {{ html()->text('user_name')->class('form-control')->required()->attribute('tabindex', 1)->id('user-name')->placeholder(__('messages.web.enter_name')) }}
                             </div>
                             <div class="form-group  col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('email', __('messages.common.email').':') }}<span
+                                {{ html()->label(__('messages.common.email') . ':', 'email') }}<span
                                         class="text-danger">*</span>
-                                {{ Form::email('email', null, ['class' => 'form-control', 'required','tabindex'=>2, 'placeholder' => __('messages.web.enter_mail')]) }}
+                                {{ html()->email('email')->class('form-control')->attribute('required', )->attribute('tabindex', 2)->attribute('placeholder', __('messages.web.enter_mail')) }}
                             </div>
                             <div class="form-group  col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('password', __('messages.common.password').':') }}<span
+                                {{ html()->label(__('messages.common.password') . ':', 'password') }}<span
                                         class="text-danger">*</span>
                                 <div class="input-group">
-                                    {{ Form::password('password', ['class' => 'form-control', 'required', 'id' => 'password','tabindex'=>3, 'placeholder' => __('messages.login.enter_password')]) }}
+                                    {{ html()->password('password')->class('form-control')->attribute('required', )->id('password')->attribute('tabindex', 3)->attribute('placeholder', __('messages.login.enter_password')) }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <a href="javascript:void(0)" class=""
@@ -54,10 +54,10 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('confirm_password', __('messages.common.confirm_password').':') }}<span
+                                {{ html()->label(__('messages.common.confirm_password') . ':', 'confirm_password') }}<span
                                         class="text-danger">*</span>
                                 <div class="input-group">
-                                    {{ Form::password('confirm_password', ['class' => 'form-control', 'required', 'id' => 'confirmPassword','tabindex'=>4, 'placeholder' => __('messages.login.enter_confirm_password')]) }}
+                                    {{ html()->password('confirm_password')->class('form-control')->attribute('required', )->id('confirmPassword')->attribute('tabindex', 4)->attribute('placeholder', __('messages.login.enter_confirm_password')) }}
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <a href="javascript:void(0)" class=""
@@ -76,18 +76,18 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('title', __('messages.ticket.ticket_title').':') }}<span
+                                {{ html()->label(__('messages.ticket.ticket_title') . ':', 'title') }}<span
                                         class="text-danger">*</span>
-                                {{ Form::text('title', null, ['class' => 'form-control','required','tabindex'=>5, 'id' => 'ticket-title', 'placeholder' => __('messages.web.enter_ticket_title')]) }}
+                                {{ html()->text('title')->class('form-control')->required()->attribute('tabindex', 5)->id('ticket-title')->placeholder(__('messages.web.enter_ticket_title')) }}
                             </div>
                             <div class="form-group  col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('category_id', __('messages.category.category').':') }}<span
+                                {{ html()->label(__('messages.category.category') . ':', 'category_id') }}<span
                                         class="text-danger">*</span>
-                                {{ Form::select('category_id', $category ,null, ['id'=>'categoryId','class' => 'form-control','placeholder' => __('messages.admin_dashboard.select_category'),'required','tabindex'=>6]) }}
+                                {{ html()->select('category_id', $category)->id('categoryId')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category'))->required()->attribute('tabindex', 6) }}
                             </div>
                             <div class="form-group  col-lg-6 col-md-12 col-sm-12 col-12">
                                 <div class="selectgroup selectgroup-pills">
-                                    {{ Form::label('is_public', __('messages.ticket.ticket_type').':') }}<br>
+                                    {{ html()->label(__('messages.ticket.ticket_type') . ':', 'is_public') }}<br>
                                     <label class="selectgroup-item mb-0">
                                         <input type="radio" name="is_public" value="1" class="selectgroup-input">
                                         <span class="selectgroup-button auto-height mb-2"><span><i class="fas fa-users"></i>&nbsp;</span>{{ __('messages.ticket.is_public') }}</span>
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="form-group  col-lg-6 col-md-12 col-sm-12 col-12">
-                                {{ Form::label('attachments', __('messages.ticket.attachments').':') }}
+                                {{ html()->label(__('messages.ticket.attachments') . ':', 'attachments') }}
                                 <span><span id="attachment-counter">0</span> {{ strtolower(__('messages.ticket.attachments')) }}</span>
                                 <div class="d-flex">
                                     <a href="javascript:void(0)" id="attachmentButton" class="btn btn-primary px-8"
@@ -110,9 +110,9 @@
                                 </div>
                             </div>
                             <div class="form-group col-12">
-                                {{ Form::label('description', __('messages.common.description').':') }}<span
+                                {{ html()->label(__('messages.common.description') . ':', 'description') }}<span
                                         class="text-danger">*</span>
-                                {{ Form::textarea('description', null, ['class' => 'form-control' , 'id' => 'details', 'rows' => '5']) }}
+                                {{ html()->textarea('description')->class('form-control')->id('details')->rows('5') }}
                             </div>
                             <div class="text-center col-12 mt-2 mb-3">
                                 <button type="submit" class="btn btn-rounded btn-primary mt-1 font-weight-bold btn-lg">
@@ -127,9 +127,9 @@
                             <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class="title-ticket pl-2 pt-2 pb-2 mb-3">{{ __('messages.common.for_ticket') }}</h6>
                                 <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                                    {{ Form::label('title', __('messages.ticket.ticket_title').':') }}<span
+                                    {{ html()->label(__('messages.ticket.ticket_title') . ':', 'title') }}<span
                                             class="text-danger">*</span>
-                                    {{ Form::text('title', null, ['class' => 'form-control','required','tabindex'=>5, 'id' => 'ticket-title', 'placeholder' => __('messages.web.enter_ticket_title')]) }}
+                                    {{ html()->text('title')->class('form-control')->required()->attribute('tabindex', 5)->id('ticket-title')->placeholder(__('messages.web.enter_ticket_title')) }}
                                 </div>
                             </div>
 
@@ -138,7 +138,7 @@
                                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                         <div class="form-group col-xl-12 col-md-12 col-sm-12">
                                             <div class="selectgroup selectgroup-pills">
-                                                {{ Form::label('is_public', __('messages.ticket.ticket_type').':') }}
+                                                {{ html()->label(__('messages.ticket.ticket_type') . ':', 'is_public') }}
                                                 <br>
                                                 <label class="selectgroup-item mb-1">
                                                     <input type="radio" name="is_public" value="1"
@@ -155,9 +155,9 @@
                                     </div>
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                                            {{ Form::label('category_id', __('messages.category.category').':') }}<span
+                                            {{ html()->label(__('messages.category.category') . ':', 'category_id') }}<span
                                                     class="text-danger">*</span>
-                                            {{ Form::select('category_id', $category ,null, ['id'=>'webCategoryId','class' => 'form-control','placeholder' => __('messages.admin_dashboard.select_category'),'required','tabindex'=>6]) }}
+                                            {{ html()->select('category_id', $category)->id('webCategoryId')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category'))->required()->attribute('tabindex', 6) }}
                                         </div>
                                     </div>
                                 </div>
@@ -168,15 +168,15 @@
                                     @if(Auth::user()->hasRole('Admin|Agent'))
                                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                             <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                                                {{ Form::label('customer_id', __('messages.customer.customer').':') }}<span
+                                                {{ html()->label(__('messages.customer.customer') . ':', 'customer_id') }}<span
                                                         class="text-danger">*</span>
-                                                {{ Form::select('customer_id', $customers ,null, ['id'=>'customerId','class' => 'form-control','placeholder' => __('messages.user.select_customer'),'required']) }}
+                                                {{ html()->select('customer_id', $customers)->id('customerId')->class('form-control')->placeholder(__('messages.user.select_customer'))->required() }}
                                             </div>
                                         </div>
                                     @endif
                                     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="form-group col-xl-12 col-md-12 col-sm-12">
-                                            {{ Form::label('attachments', __('messages.ticket.attachments').':') }}
+                                            {{ html()->label(__('messages.ticket.attachments') . ':', 'attachments') }}
                                             <span><span id="attachment-counter">0</span> {{ strtolower(__('messages.ticket.attachments')) }}</span>
                                             <div class="d-flex">
                                                 <a href="javascript:void(0)" id="attachmentButton" class="btn btn-primary px-8"
@@ -191,9 +191,9 @@
 
                             <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    {{ Form::label('description', __('messages.common.description').':') }}<span
+                                    {{ html()->label(__('messages.common.description') . ':', 'description') }}<span
                                             class="text-danger">*</span>
-                                    {{ Form::textarea('description', null, ['class' => 'form-control' , 'id' => 'details', 'rows' => '5']) }}
+                                    {{ html()->textarea('description')->class('form-control')->id('details')->rows('5') }}
                                 </div>
                             </div>
                             <div class="text-center col-12 mt-2 mb-3">

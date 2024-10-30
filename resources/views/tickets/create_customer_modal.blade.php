@@ -6,23 +6,23 @@
                 <h5 class="modal-title">{{ __('messages.customer.add_customer') }}</h5>
                 <button type="button" aria-label="Close" class="close" data-dismiss="modal">×</button>
             </div>
-            {{ Form::open(['id' => 'createCustomer', 'files'=>true, 'autocomplete' => 'off']) }}
+            {{ html()->form('POST', url()->current())->id('createCustomer')->acceptsFiles()->attribute('autocomplete', 'off')->open() }}
             <div class="modal-body">
-                {{ Form::hidden('role', getCustomerRoleId()) }}
+                {{ html()->hidden('role', getCustomerRoleId()) }}
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        {{ Form::label('name', __('messages.common.name').':') }}<span
+                        {{ html()->label(__('messages.common.name') . ':', 'name') }}<span
                                 class="text-danger">*</span>
-                        {{ Form::text('name', null, ['id'=>'customerFirstName','class' => 'form-control','required']) }}
+                        {{ html()->text('name')->id('customerFirstName')->class('form-control')->required() }}
                     </div>
                     <div class="form-group col-sm-6">
-                        {{ Form::label('email',__('messages.common.email').':') }}<span class="text-danger">*</span>
-                        {{ Form::email('email', null, ['id'=>'customerEmail','class' => 'form-control','required']) }}
+                        {{ html()->label(__('messages.common.email') . ':', 'email') }}<span class="text-danger">*</span>
+                        {{ html()->email('email')->id('customerEmail')->class('form-control')->attribute('required', ) }}
                     </div>
 
                     <div class="form-group col-sm-6">
-                        {{ Form::label('password', __('messages.common.password').':') }}<span
+                        {{ html()->label(__('messages.common.password') . ':', 'password') }}<span
                                 class="text-danger">*</span>
                         <div class="input-group">
                             <input name="password" type="password" id="password"
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
-                        {{ Form::label('password_confirmation',  __('messages.common.confirm_password').':') }}<span
+                        {{ html()->label(__('messages.common.confirm_password') . ':', 'password_confirmation') }}<span
                                 class="text-danger">*</span>
                         <div class="input-group">
                             <input name="password_confirmation" type="password" id="confirmPassword"
@@ -51,13 +51,13 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    {{ Form::button(__('messages.common.save'), ['type' => 'submit', 'class' => 'btn btn-primary', 'id' => 'btnSave', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+                    {{ html()->submit(__('messages.common.save'))->class('btn btn-primary')->id('btnSave')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
                     <button type="button" class="btn btn-light left-margin"
                             data-dismiss="modal">{{ __('messages.common.cancel') }}
                     </button>
                 </div>
             </div>
-            {{ Form::close() }}
+            {{ html()->form()->close() }}
         </div>
     </div>
 </div>

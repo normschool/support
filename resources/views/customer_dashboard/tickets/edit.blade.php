@@ -22,11 +22,11 @@
             @include('layouts.errors')
             <div class="card">
                 <div class="card-body">
-                    {{ Form::model($ticket, ['route' => ['customer.updateTicket', $ticket->id], 'method' => 'put', 'autocomplete' => 'off', 'files' => 'true', 'id' => 'editTicketForm']) }}
+                    {{ html()->modelForm($ticket, 'PUT', route('customer.updateTicket', [$ticket->id]))->attribute('autocomplete', 'off')->acceptsFiles()->id('editTicketForm')->open() }}
 
                     @include('customer_dashboard.tickets.edit_fields')
 
-                    {{ Form::close() }}
+                    {{ html()->closeModelForm() }}
                 </div>
             </div>
         </div>

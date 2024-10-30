@@ -3,31 +3,31 @@
 @endphp
 <div class="row details-page mb-2">
     <div class="col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('name', __('messages.common.name').':') }}
+        {{ html()->label(__('messages.common.name') . ':', 'name') }}
         <p>{{ $user->name }}</p>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('email', __('messages.common.email').':') }}
+        {{ html()->label(__('messages.common.email') . ':', 'email') }}
         <p>{{ $user->email }}</p>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('phone', __('messages.common.phone').':') }}
+        {{ html()->label(__('messages.common.phone') . ':', 'phone') }}
         <p>{{ !empty($user->phone) ? $user->phone:__('messages.common.n/a') }}</p>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('gender', __('messages.user.gender').':') }}
+        {{ html()->label(__('messages.user.gender') . ':', 'gender') }}
         <p>{{ !empty($user->gender) ? ($user->gender == \App\Models\User::MALE) ? 'Male' : 'Female'  :__('messages.common.n/a') }}</p>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('created_on', __('messages.common.created_on').':') }}
+        {{ html()->label(__('messages.common.created_on') . ':', 'created_on') }}
         <p>{{ Illuminate\Support\Carbon::parse($user->created_at)->isoFormat('Do MMMM, YYYY')}}</p>
     </div>
     <div class="col-xl-4 col-md-4 col-sm-12">
-        {{ Form::label('image', __('messages.user.profile').':') }}
+        {{ html()->label(__('messages.user.profile') . ':', 'image') }}
         <img src="{{$user->photo_url}}" alt="No Image" class="thumbnail-preview ml-3"/>
     </div>
     <div class="col-xl-6 col-md-6 col-sm-12">
-        {{ Form::label('about', __('messages.user.about').':') }}
+        {{ html()->label(__('messages.user.about') . ':', 'about') }}
         <div class="user-about-us">
             <p>{!! !empty($user->about) ? $user->about : __('messages.common.n/a') !!}</p>
         </div>

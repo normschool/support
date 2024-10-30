@@ -25,10 +25,10 @@
                         </div>
                         <div class="mt-4 position-relative ">
                             <div class="dataTable_custom_filter_category">
-                                {{ Form::select('category_id', $categories, null, ['id' => 'category-filter', 'class' => 'form-control', 'placeholder' => __('messages.admin_dashboard.select_category')]) }}
+                                {{ html()->select('category_id', $categories)->id('category-filter')->class('form-control')->placeholder(__('messages.admin_dashboard.select_category')) }}
                             </div>
                             <div class="dataTable_custom_filter">
-                                {{ Form::select('status_id', $statusArray, \App\Models\Ticket::STATUS_OPEN, ['id' => 'status-filter', 'class' => 'form-control', 'placeholder' => __('messages.user.select_status')]) }}
+                                {{ html()->select('status_id', $statusArray, \App\Models\Ticket::STATUS_OPEN)->id('status-filter')->class('form-control')->placeholder(__('messages.user.select_status')) }}
                             </div>
                             @include('users.ticket_table')
                         </div>

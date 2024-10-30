@@ -1,14 +1,14 @@
 <div class="row">
     <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        {{ Form::label('name', __('messages.common.name').':') }}<span class="text-danger">*</span>
-        {{ Form::text('name', null, ['class' => 'form-control','required','autofocus'=>'true']) }}
+        {{ html()->label(__('messages.common.name') . ':', 'name') }}<span class="text-danger">*</span>
+        {{ html()->text('name')->class('form-control')->required()->autofocus('true') }}
     </div>
     <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        {{ Form::label('email', __('messages.common.email').':') }}<span class="text-danger">*</span>
-        {{ Form::email('email', null, ['class' => 'form-control', 'required','id'=>'editEmail']) }}
+        {{ html()->label(__('messages.common.email') . ':', 'email') }}<span class="text-danger">*</span>
+        {{ html()->email('email')->class('form-control')->attribute('required', )->id('editEmail') }}
     </div>
     <div class="form-group col-xl-4 col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('phone', __('messages.common.phone').':') }}<span class="text-danger">*</span><br>
+        {{ html()->label(__('messages.common.phone') . ':', 'phone') }}<span class="text-danger">*</span><br>
         <div class="d-flex">
             <div class="region-code">
                 <button type="button" class="btn btn-default mr-0 f16 dropdown-toggle region-code-button"
@@ -36,15 +36,15 @@
         </div>
     </div>
     <div class="form-group col-xl-2 col-lg-4 col-md-4 col-sm-12">
-        {{ Form::label('gender', __('messages.user.gender').':') }}<br>
+        {{ html()->label(__('messages.user.gender') . ':', 'gender') }}<br>
         <div class="selectgroup selectgroup-pills">
             <label class="selectgroup-item">
-                {{ Form::radio('gender',\App\Models\User::MALE, true, ['class' => 'selectgroup-input']) }}
+                {{ html()->radio('gender', true, \App\Models\User::MALE)->class('selectgroup-input') }}
                 <span class="selectgroup-button selectgroup-button-icon gender-pill" data-toggle="tooltip"
                       data-placement="bottom" title="{{ __('messages.common.male') }}"><i class="fa fa-male"></i></span>
             </label>
             <label class="selectgroup-item">
-                {{ Form::radio('gender', \App\Models\User::FEMALE, null, ['class' => 'selectgroup-input']) }}
+                {{ html()->radio('gender', false, \App\Models\User::FEMALE)->class('selectgroup-input') }}
                 <span class="selectgroup-button selectgroup-button-icon gender-pill" data-toggle="tooltip"
                       data-placement="bottom" title="{{ __('messages.common.female') }}"><i class="fa fa-female"></i></span>
             </label>
@@ -54,9 +54,9 @@
         <span id="userProfilePictureValidationErrorsBox" class="text-danger d-none"></span>
         <div class="d-flex">
             <div>
-                {{ Form::label('profile_picture', __('messages.user.profile').':') }}
+                {{ html()->label(__('messages.user.profile') . ':', 'profile_picture') }}
                 <label class="image__file-upload text-white"> {{ __('messages.common.choose') }}
-                    {{ Form::file('image',['id'=>'userProfilePicture','class' => 'd-none']) }}
+                    {{ html()->file('image')->id('userProfilePicture')->class('d-none') }}
                 </label>
             </div>
             <div>
@@ -66,13 +66,13 @@
         </div>
     </div>
     <div class="form-group col-sm-12 custom-editor">
-        {{ Form::label('about',  __('messages.user.about').':') }}
-        {{ Form::textarea('about' ,$user->description, ['id'=>'editAbout','class' => 'form-control' ,'rows'=>'5']) }}
+        {{ html()->label(__('messages.user.about') . ':', 'about') }}
+        {{ html()->textarea('about', $user->description)->id('editAbout')->class('form-control')->rows('5') }}
     </div>
 
     <!-- Submit Field -->
     <div class="form-group col-sm-12">
-        {{ Form::button(__('messages.common.save'), ['type' => 'submit', 'class' => 'btn btn-primary', 'id' => 'btnSave', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span>". __('messages.placeholder.processing')]) }}
+        {{ html()->submit(__('messages.common.save'))->class('btn btn-primary')->id('btnSave')->data('loading-text', "<span class='spinner-border spinner-border-sm'></span>" . __('messages.placeholder.processing')) }}
         <a href="{{ $isAgent ? route('agent.index') : route('customer.index') }}"
            class="btn btn-secondary text-dark">{{__('messages.common.cancel')}}</a>
     </div>

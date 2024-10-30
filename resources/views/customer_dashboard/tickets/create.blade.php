@@ -22,11 +22,11 @@
             @include('layouts.errors')
             <div class="card">
                 <div class="card-body">
-                    {{ Form::open(['route' => 'customer.ticket.store', 'files' => 'true', 'id' => 'addTicketForm', 'autocomplete' => 'off']) }}
+                    {{ html()->form('POST', route('customer.ticket.store'))->acceptsFiles()->id('addTicketForm')->attribute('autocomplete', 'off')->open() }}
 
                     @include('customer_dashboard.tickets.fields')
 
-                    {{ Form::close() }}
+                    {{ html()->form()->close() }}
                 </div>
             </div>
         </div>
