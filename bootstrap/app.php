@@ -14,7 +14,29 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectUsersTo(RouteServiceProvider::DASHBOARD);
+
+        $middleware->throttleApi();
+
+        $middleware->alias([
+            'auth' => \App\Http\Middleware\Authenticate::class,
+            'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+            'sendMessage' => \App\Http\Middleware\SendMessage::class,
+            'user.activated' => \App\Http\Middleware\CheckUserIsActivated::class,
+            'verified.user' => \App\Http\Middleware\CheckUserIsVerified::class,
+            'xss' => \App\Http\Middleware\XSS::class,
+        ]);
+
+        $middleware->priority([
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\Authenticate::class,
+            \Illuminate\Routing\Middleware\ThrottleRequests::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Illuminate\Auth\Middleware\Authorize::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
