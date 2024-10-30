@@ -19,31 +19,31 @@ class CreateCategorySeeder extends Seeder
         $input = [
             [
                 'name' => 'Customer Services',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
             [
                 'name' => 'Services',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
             [
                 'name' => 'Password Reset',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
             [
                 'name' => 'Data Restore',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
             [
                 'name' => 'Technical questions',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
             [
                 'name' => 'Billing issues',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
             [
                 'name' => 'Server issues',
-                'color' => $faker->hexColor,
+                'color' => $faker->hexColor(),
             ],
         ];
 
