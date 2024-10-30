@@ -26,8 +26,8 @@ class CreateTicketSeeder extends Seeder
         foreach (range(1, 10) as $index) {
             try {
                 $input = [
-                    'title' => $faker->firstName,
-                    'email' => $faker->unique()->safeEmail,
+                    'title' => $faker->firstName(),
+                    'email' => $faker->unique()->safeEmail(),
                     'category_id' => rand(1, 7),
                     'description' => $faker->realText(),
                 ];

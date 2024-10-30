@@ -41,8 +41,8 @@ class CreateUserSeeder extends Seeder
         foreach (range(1, 10) as $index) {
             try {
                 $input = [
-                    'name' => $faker->name,
-                    'email' => $faker->unique()->safeEmail,
+                    'name' => $faker->name(),
+                    'email' => $faker->unique()->safeEmail(),
                     'phone' => $faker->numerify('##########'),
                     'password' => '123456',
                     'role' => $agentRole->id,
