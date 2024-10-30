@@ -1,4 +1,4 @@
-require('../app');
+import '../app';
 let chatUser = getCookie('chat_user');
 let userId = '';
 let textMessageEle = $('#chatSend');
