@@ -1,14 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\ServiceProvider;
 
 return [
 
     'media_disc' => env('MEDIA_DISK', 'public'),
 
     'upgrade_mode' => env('UPGRADE_MODE'),
-
 
     'aliases' => Facade::defaultAliases()->merge([
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
