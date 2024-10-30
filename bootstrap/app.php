@@ -5,7 +5,18 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
-    ->withProviders()
+    ->withProviders([
+        \Yajra\DataTables\DataTablesServiceProvider::class,
+        \Barryvdh\Debugbar\ServiceProvider::class,
+        \Berkayk\OneSignal\OneSignalServiceProvider::class,
+        \Laracasts\Flash\FlashServiceProvider::class,
+        \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        \Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        \Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        \Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        \Mews\Purifier\PurifierServiceProvider::class,
+        \Laravel\Socialite\SocialiteServiceProvider::class,
+    ])
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         // api: __DIR__.'/../routes/api.php',

@@ -9,30 +9,6 @@ return [
 
     'upgrade_mode' => env('UPGRADE_MODE'),
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
-         * Package Service Providers...
-         */
-        Yajra\DataTables\DataTablesServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Berkayk\OneSignal\OneSignalServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
-        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
-        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-        Mews\Purifier\PurifierServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-    ])->toArray(),
 
     'aliases' => Facade::defaultAliases()->merge([
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
