@@ -42,10 +42,7 @@ class CustomerTicket extends Component
         $this->ticketCategories = array_flip(Category::orderBy('name')->pluck('name', 'id')->toArray());
     }
 
-    /**
-     * @return string
-     */
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
     }
@@ -124,10 +121,7 @@ class CustomerTicket extends Component
         return view('livewire.customer-ticket', compact('tickets'));
     }
 
-    /**
-     * @return LengthAwarePaginator
-     */
-    public function customerTicket()
+    public function customerTicket(): LengthAwarePaginator
     {
         $query = Ticket::with(['category', 'user.media'])->where('created_by', '=', Auth::id());
 

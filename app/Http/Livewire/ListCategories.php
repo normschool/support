@@ -13,10 +13,7 @@ class ListCategories extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    /**
-     * @return string
-     */
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
     }

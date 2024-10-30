@@ -47,10 +47,7 @@ class ArchivedUser extends Model
         'archived_by' => 'integer',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function archivedBy()
+    public function archivedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'archived_by');
     }

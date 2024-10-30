@@ -68,26 +68,17 @@ class Notification extends Model
         'notification' => 'required|string',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function receiver()
+    public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'to_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function sender()
+    public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function latestMsg()
+    public function latestMsg(): BelongsTo
     {
         return $this->belongsTo(Notification::class, 'latest_id');
     }

@@ -43,11 +43,8 @@ class LoginController extends Controller
 
     /**
      * Send the response after the user was authenticated.
-     *
-     *
-     * @return Response
      */
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(Request $request): Response
     {
         $request->session()->regenerate();
 

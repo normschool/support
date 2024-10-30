@@ -22,10 +22,9 @@ class UserEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param  array  $data
      * @param  int|array  $userIds
      */
-    public function __construct($data, $userIds)
+    public function __construct(array $data, $userIds)
     {
         $this->data = $data;
         $this->userIds = $userIds;
@@ -34,7 +33,7 @@ class UserEvent implements ShouldBroadcast
     /**
      * @return \Illuminate\Broadcasting\Channel|\Illuminate\Broadcasting\Channel[]|PrivateChannel
      */
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
         $channels = [];
 
@@ -49,10 +48,7 @@ class UserEvent implements ShouldBroadcast
         return new PrivateChannel('user.'.$this->userIds);
     }
 
-    /**
-     * @return array
-     */
-    public function broadcastWith()
+    public function broadcastWith(): array
     {
         return $this->data;
     }

@@ -57,15 +57,12 @@ class Category extends Model
         'color' => 'required',
     ];
 
-    /**
-     * @return HasMany
-     */
-    public function ticket()
+    public function ticket(): HasMany
     {
         return $this->hasMany(Ticket::class, 'category_id');
     }
 
-    public function openTickets()
+    public function openTickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'category_id')->where('status', Ticket::STATUS_OPEN);
     }

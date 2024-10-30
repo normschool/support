@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\AssignedChat
@@ -40,7 +41,7 @@ class AssignedChat extends Model
         'user_id' => 'integer',
     ];
 
-    public function agent()
+    public function agent(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id')->without('media', 'roles');
     }

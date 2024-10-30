@@ -6,17 +6,16 @@ use App\Models\BlockedUser;
 use Auth;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class SendMessage
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         $input = $request->all();
 

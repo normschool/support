@@ -5,6 +5,7 @@ namespace App\Queries;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -12,10 +13,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class TicketDataTable
 {
-    /**
-     * @return array
-     */
-    public function get()
+    public function get(): array
     {
         $query = Ticket::with(['user', 'category'])->select('tickets.*')->get();
 
@@ -42,10 +40,7 @@ class TicketDataTable
         return $result;
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getTicketByUser($id, $statusId, $categoryId)
+    public function getTicketByUser($id, $statusId, $categoryId): Collection
     {
         $query = User::find($id)->ticket()->with('category');
         $query->when($statusId != null, function (Builder $q) use ($statusId) {

@@ -38,14 +38,11 @@ class SettingRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return bool
-     *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function updateSetting($input)
+    public function updateSetting(array $input): bool
     {
         $inputArr = Arr::except($input, ['_token']);
         foreach ($inputArr as $key => $value) {
@@ -68,14 +65,13 @@ class SettingRepository extends BaseRepository
     }
 
     /**
-     * @param  Setting  $setting
      * @return mixed
      *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function fileUpload($setting, $file)
+    public function fileUpload(Setting $setting, $file)
     {
         $setting->clearMediaCollection(Setting::PATH);
         $media = $setting->addMedia($file)->toMediaCollection(Setting::PATH, config('app.media_disc'));

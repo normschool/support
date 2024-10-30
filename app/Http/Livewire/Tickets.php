@@ -105,10 +105,7 @@ class Tickets extends Component
         $this->dispatchBrowserEvent('assigneeUpdated');
     }
 
-    /**
-     * @return string
-     */
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
     }
@@ -178,10 +175,7 @@ class Tickets extends Component
         $this->$param = $value;
     }
 
-    /**
-     * @return LengthAwarePaginator
-     */
-    public function searchTicket()
+    public function searchTicket(): LengthAwarePaginator
     {
         if (Auth::user()->hasRole('Agent')) {
             $query = User::find(Auth::id())->ticket()->with('user.media', 'assignTo', 'category');

@@ -9,6 +9,7 @@ use App\Models\Conversation;
 use App\Models\Notification;
 use App\Models\User;
 use App\Repositories\ChatRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -16,10 +17,7 @@ use Spatie\Permission\Models\Role;
 
 class WebUserController extends AppBaseController
 {
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function storeChatUser(ChatUserRequest $request)
+    public function storeChatUser(ChatUserRequest $request): JsonResponse
     {
         try {
             $input = $request->all();
@@ -55,10 +53,7 @@ class WebUserController extends AppBaseController
         }
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getAssignAgent(Request $request)
+    public function getAssignAgent(Request $request): JsonResponse
     {
         $id = $request->get('id');
         /** @var AssignedChat $assignAgent */
@@ -68,10 +63,7 @@ class WebUserController extends AppBaseController
         return $this->sendResponse($assignAgent, 'Assign Agent retrieved successfully.');
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function readMessages(Request $request)
+    public function readMessages(Request $request): JsonResponse
     {
         $data = app(ChatRepository::class)->markMessagesAsRead($request->all());
 

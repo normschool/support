@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -147,10 +148,7 @@ class Conversation extends Model
         return $value;
     }
 
-    /**
-     * @return string
-     */
-    public function getPhotoUrlAttribute($value)
+    public function getPhotoUrlAttribute($value): string
     {
         if (! empty($value)) {
             return $this->imageUrl(User::$PATH.DIRECTORY_SEPARATOR.$value);
@@ -159,68 +157,44 @@ class Conversation extends Model
         return asset('assets/images/avatar.png');
     }
 
-    /**
-     * @return string
-     */
-    public function getTimeFromNowInMinAttribute()
+    public function getTimeFromNowInMinAttribute(): string
     {
         return Carbon::now()->diffInMinutes($this->created_at);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function sender()
+    public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'from_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function receiver()
+    public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'to_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function sendByUser()
+    public function sendByUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'send_by');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function archiveConversation()
+    public function archiveConversation(): BelongsTo
     {
         return $this->belongsTo(ArchivedUser::class, 'to_id', 'owner_id')->where('archived_by', '=',
             getLoggedInUserId());
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function archiveUsers()
+    public function archiveUsers(): BelongsTo
     {
         return $this->belongsTo(ArchivedUser::class, DB::raw('user_id'), 'owner_id')->where('archived_by', '=',
             getLoggedInUserId());
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function messageAction()
+    public function messageAction(): HasOne
     {
         return $this->hasOne(MessageAction::class, 'conversation_id')->where('deleted_by', getLoggedInUserId());
     }

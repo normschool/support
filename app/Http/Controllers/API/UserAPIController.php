@@ -33,10 +33,7 @@ class UserAPIController extends AppBaseController
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function getUsersList()
+    public function getUsersList(): JsonResponse
     {
         $userIds = BlockedUser::orwhere('blocked_by', getLoggedInUserId())
             ->orWhere('blocked_to', getLoggedInUserId())
@@ -55,20 +52,14 @@ class UserAPIController extends AppBaseController
         return $this->sendResponse(['users' => $users], 'Users retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function getUsers()
+    public function getUsers(): JsonResponse
     {
         $users = User::orderBy('name', 'asc')->get()->except(getLoggedInUserId());
 
         return $this->sendResponse(['users' => $users], 'Users retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function getProfile()
+    public function getProfile(): JsonResponse
     {
         /** @var User $authUser * */
         $authUser = getLoggedInUser();
@@ -78,10 +69,7 @@ class UserAPIController extends AppBaseController
         return $this->sendResponse(['user' => $authUser], 'Users retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function updateLastSeen(Request $request)
+    public function updateLastSeen(Request $request): JsonResponse
     {
         /** @var User $user */
         $user = ($request->user()) ? $request->user() : User::find($request->get('userId'));
@@ -101,10 +89,7 @@ class UserAPIController extends AppBaseController
         return $this->sendResponse(['user' => $user], 'Last seen updated successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function removeProfileImage()
+    public function removeProfileImage(): JsonResponse
     {
         /** @var User $user */
         $user = Auth::user();
@@ -115,11 +100,9 @@ class UserAPIController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws Exception
      */
-    public function archiveChat($ownerId)
+    public function archiveChat($ownerId): JsonResponse
     {
         $archivedUser = ArchivedUser::whereOwnerId($ownerId)->whereArchivedBy(getLoggedInUserId())->first();
         $ownerType = User::class;

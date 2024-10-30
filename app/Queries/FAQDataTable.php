@@ -9,10 +9,7 @@ use App\Models\FAQ;
  */
 class FAQDataTable
 {
-    /**
-     * @return FAQ
-     */
-    public function get()
+    public function get(): FAQ
     {
         /** @var FAQ $query */
         $query = FAQ::query()->select('faqs.*');

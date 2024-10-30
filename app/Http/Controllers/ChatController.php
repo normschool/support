@@ -20,7 +20,7 @@ class ChatController extends AppBaseController
      *
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $conversationId = $request->get('conversationId');
         $data['conversationId'] = ! empty($conversationId) ? $conversationId : 0;

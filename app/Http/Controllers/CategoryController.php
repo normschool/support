@@ -34,18 +34,15 @@ class CategoryController extends AppBaseController
      *
      * @throws Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('categories.index');
     }
 
     /**
      * Store a newly created Category in storage.
-     *
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CreateCategoryRequest $request): JsonResponse
     {
         $input = $request->all();
 
@@ -60,7 +57,7 @@ class CategoryController extends AppBaseController
      *
      * @return Application|Factory|JsonResponse|View
      */
-    public function show(Category $category)
+    public function show(Category $category): View
     {
         $users = $assignees = User::whereHas('roles', function (Builder $query) {
             $query->where('id', '!=', getCustomerRoleId());
@@ -71,22 +68,16 @@ class CategoryController extends AppBaseController
 
     /**
      * Show the form for editing the specified Category.
-     *
-     *
-     * @return Response
      */
-    public function edit(Category $category)
+    public function edit(Category $category): Response
     {
         return $this->sendResponse($category, 'Category Retrieved Successfully.');
     }
 
     /**
      * Update the specified Category in storage.
-     *
-     *
-     * @return Response
      */
-    public function update(Category $category, UpdateCategoryRequest $request)
+    public function update(Category $category, UpdateCategoryRequest $request): Response
     {
         $input = $request->all();
 
@@ -95,10 +86,7 @@ class CategoryController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.category_update'));
     }
 
-    /**
-     * @return Response
-     */
-    public function destroy(Category $category)
+    public function destroy(Category $category): Response
     {
         $Models = [
             Ticket::class,
@@ -112,7 +100,7 @@ class CategoryController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.category_delete'));
     }
 
-    public function showAllCategories()
+    public function showAllCategories(): View
     {
         return view('web.category_list');
     }

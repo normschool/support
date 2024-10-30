@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use App\Repositories\TicketRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Laracasts\Flash\Flash;
@@ -29,7 +30,7 @@ class CustomerDashboardController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View
     {
         $data['totalOpenTickets'] = Ticket::whereCreatedBy(Auth::id())->whereStatus(Ticket::STATUS_OPEN)->count();
         $data['totalClosedTickets'] = Ticket::whereCreatedBy(Auth::id())->whereStatus(Ticket::STATUS_CLOSED)->count();
@@ -40,7 +41,7 @@ class CustomerDashboardController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function viewCustomerTicket()
+    public function viewCustomerTicket(): View
     {
         return view('customer_dashboard.tickets.index');
     }
@@ -59,11 +60,9 @@ class CustomerDashboardController extends AppBaseController
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
-     *
      * @throws \Throwable
      */
-    public function updateCustomerTicket(UpdateTicketRequest $request, Ticket $ticket)
+    public function updateCustomerTicket(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse
     {
         $input = $request->all();
         $this->ticketRepository->update($input, $ticket);
@@ -75,7 +74,7 @@ class CustomerDashboardController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function createTicket()
+    public function createTicket(): View
     {
         $data = $this->ticketRepository->prepareData();
 

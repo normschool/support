@@ -31,11 +31,7 @@ class ChatAPIController extends AppBaseController
         $this->chatRepository = $chatRepository;
     }
 
-    /**
-     * @param  int  $id
-     * @return JsonResponse
-     */
-    public function getConversation($id, Request $request)
+    public function getConversation(int $id, Request $request): JsonResponse
     {
         $input = $request->all();
         $data = $this->chatRepository->getConversation($id, $input);
@@ -43,11 +39,7 @@ class ChatAPIController extends AppBaseController
         return $this->sendResponse($data, 'Conversation retrieved successfully.');
     }
 
-    /**
-     * @param  int  $id
-     * @return JsonResponse
-     */
-    public function getFrontConversation($id, Request $request)
+    public function getFrontConversation(int $id, Request $request): JsonResponse
     {
         $input = $request->all();
         $data = $this->chatRepository->getConversation($id, $input);
@@ -57,10 +49,8 @@ class ChatAPIController extends AppBaseController
 
     /**
      * This function return latest conversations of users.
-     *
-     * @return JsonResponse
      */
-    public function getLatestConversations()
+    public function getLatestConversations(): JsonResponse
     {
         $conversations = $this->chatRepository->getLatestConversations();
 
@@ -69,10 +59,8 @@ class ChatAPIController extends AppBaseController
 
     /**
      * This function return latest conversations of users.
-     *
-     * @return JsonResponse
      */
-    public function getArchiveConversations()
+    public function getArchiveConversations(): JsonResponse
     {
         $conversations = $this->chatRepository->getLatestConversations(['isArchived' => 1]);
 
@@ -80,21 +68,16 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws \Exception
      */
-    public function sendMessage(SendMessageRequest $request)
+    public function sendMessage(SendMessageRequest $request): JsonResponse
     {
         $conversation = $this->chatRepository->sendMessage($request->all());
 
         return $this->sendResponse(['message' => $conversation], 'Message sent successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function updateConversationStatus(Request $request)
+    public function updateConversationStatus(Request $request): JsonResponse
     {
         $data = $this->chatRepository->markMessagesAsRead($request->all());
 
@@ -102,11 +85,9 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws ApiOperationFailedException
      */
-    public function addAttachment(Request $request)
+    public function addAttachment(Request $request): JsonResponse
     {
         $files = $request->file('file');
         foreach ($files as $file) {
@@ -124,19 +105,15 @@ class ChatAPIController extends AppBaseController
 
     /**
      * @param  int|string  $id
-     * @return JsonResponse
      */
-    public function deleteConversation($id, Request $request)
+    public function deleteConversation($id, Request $request): JsonResponse
     {
         $this->chatRepository->deleteConversation($id, $request->all());
 
         return $this->sendSuccess('Conversation deleted successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function deleteMessage(Conversation $conversation, Request $request)
+    public function deleteMessage(Conversation $conversation, Request $request): JsonResponse
     {
         $deleteMessageTime = config('configurable.delete_message_time');
         if ($conversation->time_from_now_in_min > $deleteMessageTime) {
@@ -154,20 +131,15 @@ class ChatAPIController extends AppBaseController
         return $this->sendResponse(['previousMessage' => $previousMessage], 'Message deleted successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function show(Conversation $conversation)
+    public function show(Conversation $conversation): JsonResponse
     {
         return $this->sendResponse($conversation->toArray(), 'Conversation retrieved successfully');
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws Exception
      */
-    public function deleteMessageForEveryone(Conversation $conversation, Request $request)
+    public function deleteMessageForEveryone(Conversation $conversation, Request $request): JsonResponse
     {
         $deleteMessageTime = config('configurable.delete_message_for_everyone_time');
         if ($conversation->time_from_now_in_min > $deleteMessageTime) {
@@ -202,11 +174,9 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws ApiOperationFailedException
      */
-    public function imageUpload(Request $request)
+    public function imageUpload(Request $request): JsonResponse
     {
         $input = $request->all();
         $images = $input['images'];

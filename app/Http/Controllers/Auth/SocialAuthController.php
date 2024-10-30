@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
     /**
      * @return Application|\Illuminate\Http\RedirectResponse|Redirector
      */
-    public function handleSocialCallback($provider)
+    public function handleSocialCallback($provider): \Illuminate\Http\RedirectResponse
     {
         if (Auth::check()) {
             return redirect('/');

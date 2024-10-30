@@ -36,7 +36,7 @@ class HomeController extends Controller
     /**
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View
     {
         $categories = Category::withCount([
             'ticket' => function ($query) {
@@ -54,7 +54,7 @@ class HomeController extends Controller
     /**
      * @return Factory|View
      */
-    public function createTicket()
+    public function createTicket(): View
     {
         $category = Category::orderBy('name')->pluck('name', 'id')->toArray();
         $customers = User::whereHas('roles', function (Builder $query) {
@@ -67,7 +67,7 @@ class HomeController extends Controller
     /**
      * @return Factory|View
      */
-    public function faqs()
+    public function faqs(): View
     {
         $faqs = FAQ::all();
 
@@ -77,7 +77,7 @@ class HomeController extends Controller
     /**
      * @return Factory|View
      */
-    public function searchTicketForm()
+    public function searchTicketForm(): View
     {
         return view('web.search_ticket_form');
     }
@@ -85,7 +85,7 @@ class HomeController extends Controller
     /**
      * @return Application|Factory|View
      */
-    public function searchTicket(Request $request)
+    public function searchTicket(Request $request): View
     {
         $input = $request->only(['ticket_id', 'email']);
         $ticket = $this->webHomeRepository->searchTicket($input);

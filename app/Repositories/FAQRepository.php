@@ -18,10 +18,8 @@ class FAQRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }

@@ -47,10 +47,7 @@ class DashboardRepository
         return $data;
     }
 
-    /**
-     * @return array
-     */
-    public function getCategoryReport($status)
+    public function getCategoryReport($status): array
     {
         $categoriesTicketCounter = [];
         if (getLoggedInUserRoleId() == getAdminRoleId()) {
@@ -89,10 +86,7 @@ class DashboardRepository
         return $result;
     }
 
-    /**
-     * @return array
-     */
-    public function ticketChart($input)
+    public function ticketChart($input): array
     {
         $dateS = Carbon::parse($input['start_date']);
         $dateE = Carbon::parse($input['end_date']);
@@ -181,10 +175,7 @@ class DashboardRepository
         return $result;
     }
 
-    /**
-     * @return array
-     */
-    public function agentTicketChart($input)
+    public function agentTicketChart($input): array
     {
         $status = $input['status'] ?? null;
         $data = [];

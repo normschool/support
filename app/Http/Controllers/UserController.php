@@ -44,7 +44,7 @@ class UserController extends AppBaseController
      *
      * @throws Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('users.index');
     }
@@ -52,7 +52,7 @@ class UserController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View
     {
         $isAgent = str_contains(url()->current(), 'agents');
         $roleName = $isAgent ? 'Customer' : 'Agent';
@@ -64,11 +64,9 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
-     *
      * @throws \Throwable
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateUserRequest $request): RedirectResponse
     {
         $input = $request->all();
         $isAgent = str_contains(url()->previous(), 'agents');
@@ -89,10 +87,9 @@ class UserController extends AppBaseController
     }
 
     /**
-     * @param  User  $id
      * @return Application|Factory|View
      */
-    public function show($id)
+    public function show(User $id): View
     {
         $user = User::with(['ticket', 'media'])->findOrFail($id);
         $isAgent = str_contains(url()->current(), 'agents');
@@ -106,7 +103,7 @@ class UserController extends AppBaseController
     /**
      * @return Factory|View
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         $user->media;
         $user->load('roles');
@@ -119,10 +116,7 @@ class UserController extends AppBaseController
         return view('users.edit', compact('user', 'role', 'isAgent'));
     }
 
-    /**
-     * @return RedirectResponse
-     */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $input = $request->all();
         $isAgent = str_contains(url()->previous(), 'agents');
@@ -157,10 +151,7 @@ class UserController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.user_delete'));
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function changePassword(ChangePasswordRequest $request)
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
         $input = $request->all();
 
@@ -190,10 +181,7 @@ class UserController extends AppBaseController
         }
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function profileUpdate(UpdateUserProfileRequest $request)
+    public function profileUpdate(UpdateUserProfileRequest $request): JsonResponse
     {
         $input = $request->all();
 
@@ -206,10 +194,7 @@ class UserController extends AppBaseController
         }
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function editProfile()
+    public function editProfile(): JsonResponse
     {
         $user = Auth::user();
 
@@ -219,7 +204,7 @@ class UserController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function customers()
+    public function customers(): View
     {
         return view('users.customers');
     }

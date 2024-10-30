@@ -30,10 +30,8 @@ class TicketReplayRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -47,12 +45,9 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return TicketReplay
-     *
      * @throws Throwable
      */
-    public function store($input)
+    public function store(array $input): TicketReplay
     {
         try {
             DB::beginTransaction();
@@ -82,10 +77,9 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
      * @return Builder|Builder[]|Collection|Model|int
      */
-    public function update($input, $id)
+    public function update(array $input, $id)
     {
         try {
             DB::beginTransaction();
@@ -114,11 +108,9 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     * @return array
-     *
      * @throws Throwable
      */
-    public function updateReplyWithAttachment($input, $id)
+    public function updateReplyWithAttachment($input, $id): array
     {
         try {
             DB::beginTransaction();

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TranslationManagerRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -44,10 +46,7 @@ class TranslationManagerController extends AppBaseController
             compact('selectedLangMessages', 'allLanguagesArr', 'selectedLang', 'allFilesArr', 'selectedFile'));
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|regex:/^[a-zA-Z]+$/u|min:2',
@@ -63,10 +62,7 @@ class TranslationManagerController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.language_add'));
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $lang = $request->get('lang');
         $file = $request->get('file');

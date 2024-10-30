@@ -68,18 +68,12 @@ class TicketReplay extends Model implements HasMedia
         'description' => 'string',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function ticket()
+    public function ticket(): BelongsTo
     {
         return $this->belongsTo(Ticket::class, 'ticket_id');
     }

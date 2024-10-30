@@ -23,10 +23,8 @@ class WebHomeRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -48,10 +46,7 @@ class WebHomeRepository extends BaseRepository
             ->withCount('replay')->orderByDesc('created_at')->limit(5)->get();
     }
 
-    /**
-     * @return Ticket|null
-     */
-    public function searchTicket($input)
+    public function searchTicket($input): ?Ticket
     {
         /** @var Ticket $ticket */
         $ticket = Ticket::with(['category', 'replay.user', 'assignTo'])->whereTicketId($input['ticket_id'])->whereEmail($input['email'])->first();

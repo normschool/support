@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -10,7 +10,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Artisan::call('db:seed', ['--class' => 'DefaultCountryCodeSeeder', '--force' => true]);
+        Schema::rename('password_resets', 'password_reset_tokens');
     }
 
     /**
@@ -18,6 +18,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::rename('password_reset_tokens', 'password_resets');
     }
 };

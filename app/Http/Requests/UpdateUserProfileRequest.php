@@ -10,10 +10,8 @@ class UpdateUserProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +21,7 @@ class UpdateUserProfileRequest extends FormRequest
      *
      * @return array The given data was invalid.
      */
-    public function rules()
+    public function rules(): array
     {
         $id = Auth::user()->id;
         $rules = [
@@ -35,10 +33,7 @@ class UpdateUserProfileRequest extends FormRequest
         return $rules;
     }
 
-    /**
-     * @return array
-     */
-    public function messages()
+    public function messages(): array
     {
         return User::$messages;
     }

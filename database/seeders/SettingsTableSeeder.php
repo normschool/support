@@ -9,10 +9,8 @@ class SettingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $imageUrl = 'assets/img/infyom-logo.png';
         $favicon = 'favicon.ico';

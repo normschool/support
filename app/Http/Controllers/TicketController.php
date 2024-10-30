@@ -45,7 +45,7 @@ class TicketController extends AppBaseController
      *
      * @throws Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $statusArray = Ticket::STATUS;
         $statusColorArray = Ticket::STATUS_COLOR;
@@ -61,7 +61,7 @@ class TicketController extends AppBaseController
     /**
      * @return Factory|View
      */
-    public function create()
+    public function create(): View
     {
         $data = $this->ticketRepository->prepareData();
 
@@ -69,11 +69,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
-     *
      * @throws Throwable
      */
-    public function store(CreateTicketRequest $request)
+    public function store(CreateTicketRequest $request): RedirectResponse
     {
         $input = $request->all();
         $data = $this->ticketRepository->store($input);
@@ -91,7 +89,7 @@ class TicketController extends AppBaseController
     /**
      * @return Factory|View
      */
-    public function show($id)
+    public function show($id): View
     {
         /** @var Ticket $ticket */
         $ticket = Ticket::with(['media', 'replay.media', 'replay.user.media', 'assignTo.media']);
@@ -137,11 +135,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @return RedirectResponse
-     *
      * @throws Throwable
      */
-    public function update(UpdateTicketRequest $request, Ticket $ticket)
+    public function update(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse
     {
         $input = $request->all();
         $this->ticketRepository->update($input, $ticket);
@@ -186,7 +182,7 @@ class TicketController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function ticketSuccessView($ticketId)
+    public function ticketSuccessView($ticketId): View
     {
         /** @var Ticket $ticket */
         $ticket = Ticket::whereTicketId($ticketId)->firstOrFail();
@@ -222,9 +218,8 @@ class TicketController extends AppBaseController
 
     /**
      * @param  $id
-     * @return JsonResponse
      */
-    public function changeStatus(Request $request, Ticket $ticket)
+    public function changeStatus(Request $request, Ticket $ticket): JsonResponse
     {
         $status = $request->input('ticket_status');
         $this->ticketRepository->updateStatus($status, $ticket);
@@ -235,7 +230,7 @@ class TicketController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function viewTicket($ticketId)
+    public function viewTicket($ticketId): View
     {
         $ticket = Ticket::whereTicketId($ticketId)->firstOrFail();
         abort_if(! $ticket->is_public, 404, 'Ticket Not Found');
@@ -249,7 +244,7 @@ class TicketController extends AppBaseController
     /**
      * @return Factory|View
      */
-    public function showAllPublicTickets()
+    public function showAllPublicTickets(): View
     {
         return view('web.public_tickets');
     }
@@ -259,17 +254,14 @@ class TicketController extends AppBaseController
      *
      * @throws Throwable
      */
-    public function showFilterPublicTickets(Request $request)
+    public function showFilterPublicTickets(Request $request): View
     {
         $tickets = $this->ticketRepository->getFilteredTickets($request->all());
 
         return view('web.public_ticket_lists', compact('tickets'))->render();
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function attachmentDelete(Request $request)
+    public function attachmentDelete(Request $request): JsonResponse
     {
         $mediaId = $request->all();
         $attachment = Media::findOrFail($mediaId['mediaId'])->delete();
@@ -277,10 +269,7 @@ class TicketController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.attachment_delete'));
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function editAssignee(Ticket $ticket)
+    public function editAssignee(Ticket $ticket): JsonResponse
     {
         $data['assignUsers'] = $ticket->assignTo->pluck('id');
         $data['ticket'] = $ticket;
@@ -291,10 +280,7 @@ class TicketController extends AppBaseController
         return $this->sendResponse($data, 'Ticket Assignee retrieved successfully.');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function getAttachment(Ticket $ticket)
+    public function getAttachment(Ticket $ticket): JsonResponse
     {
         $result = $this->ticketRepository->getAttachments($ticket->id);
 
@@ -313,11 +299,9 @@ class TicketController extends AppBaseController
     }
 
     /**
-     * @return JsonResponse
-     *
      * @throws \Exception
      */
-    public function deleteAttachment(Media $media)
+    public function deleteAttachment(Media $media): JsonResponse
     {
         if (getLoggedInUserRoleId() == getCustomerRoleId()) {
             if ($media->getCustomProperty('user_id') != getLoggedInUserId()) {
@@ -329,10 +313,7 @@ class TicketController extends AppBaseController
         return $this->sendSuccess(__('messages.success_message.file_delete'));
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function addAttachment(Ticket $ticket, Request $request)
+    public function addAttachment(Ticket $ticket, Request $request): JsonResponse
     {
         $input = $request->all();
         $this->ticketRepository->update($input, $ticket);
@@ -357,10 +338,7 @@ class TicketController extends AppBaseController
         return redirect()->route('ticket.index');
     }
 
-    /**
-     * @return JsonResponse
-     */
-    public function unassignedFromTicket(Request $request)
+    public function unassignedFromTicket(Request $request): JsonResponse
     {
         $result = app(TicketRepository::class)->unassignedFromTicket($request->get('id'));
 

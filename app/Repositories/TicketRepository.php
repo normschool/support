@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -35,10 +36,8 @@ class TicketRepository extends BaseRepository
 
     /**
      * Return searchable fields
-     *
-     * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -69,12 +68,9 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @return array
-     *
      * @throws Throwable
      */
-    public function store($input)
+    public function store(array $input): array
     {
         try {
             DB::beginTransaction();
@@ -161,12 +157,11 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
      * @return mixed
      *
      * @throws Throwable
      */
-    public function webStore($input)
+    public function webStore(array $input)
     {
         try {
             DB::beginTransaction();
@@ -241,13 +236,9 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     * @param  array  $input
-     * @param  Ticket  $ticket
-     * @return array
-     *
      * @throws Throwable
      */
-    public function update($input, $ticket)
+    public function update(array $input, Ticket $ticket): array
     {
         try {
             DB::beginTransaction();
@@ -359,10 +350,7 @@ class TicketRepository extends BaseRepository
 
     }
 
-    /**
-     * @return array
-     */
-    public function prepareData()
+    public function prepareData(): array
     {
         $data['categories'] = Category::orderBy('name')->pluck('name', 'id');
         $data['users'] = User::whereHas('roles', function (Builder $query) {
@@ -376,10 +364,7 @@ class TicketRepository extends BaseRepository
         return $data;
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function deleteTicket($id)
+    public function deleteTicket($id): Collection
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->assignTo()->detach($id);
@@ -399,10 +384,7 @@ class TicketRepository extends BaseRepository
         return $ticket;
     }
 
-    /**
-     * @return array
-     */
-    public function getAttachments($ticketId)
+    public function getAttachments($ticketId): array
     {
         /** @var Ticket $ticket */
         $ticket = $this->find($ticketId);
@@ -422,10 +404,7 @@ class TicketRepository extends BaseRepository
         return $result;
     }
 
-    /**
-     * @return bool
-     */
-    public function uploadFile($ticket, $attachments)
+    public function uploadFile($ticket, $attachments): bool
     {
         try {
             if (! empty($attachments)) {
