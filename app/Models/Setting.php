@@ -60,15 +60,18 @@ class Setting extends Model implements HasMedia
     ];
 
     /**
-     * The attributes that should be casted to native types.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'id' => 'integer',
-        'key' => 'string',
-        'value' => 'string',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'id' => 'integer',
+            'key' => 'string',
+            'value' => 'string',
+        ];
+    }
 
     /**
      * @return mixed

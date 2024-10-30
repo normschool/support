@@ -59,14 +59,19 @@ class TicketReplay extends Model implements HasMedia
     ];
 
     /**
-     * @var array
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
      */
-    public $casts = [
-        'id' => 'integer',
-        'user_id' => 'integer',
-        'ticket_id' => 'integer',
-        'description' => 'string',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'id' => 'integer',
+            'user_id' => 'integer',
+            'ticket_id' => 'integer',
+            'description' => 'string',
+        ];
+    }
 
     public function user(): BelongsTo
     {

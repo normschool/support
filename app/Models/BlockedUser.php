@@ -35,8 +35,11 @@ class BlockedUser extends Model
         'blocked_to',
     ];
 
-    protected $casts = [
-        'blocked_by' => 'integer',
-        'blocked_to' => 'integer',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'blocked_by' => 'integer',
+            'blocked_to' => 'integer',
+        ];
+    }
 }

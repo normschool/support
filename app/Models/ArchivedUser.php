@@ -41,11 +41,14 @@ class ArchivedUser extends Model
         'archived_by',
     ];
 
-    protected $casts = [
-        'owner_id' => 'string',
-        'owner_type' => 'string',
-        'archived_by' => 'integer',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'owner_id' => 'string',
+            'owner_type' => 'string',
+            'archived_by' => 'integer',
+        ];
+    }
 
     public function archivedBy(): BelongsTo
     {

@@ -88,21 +88,6 @@ class Conversation extends Model
         'send_by',
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'from_id' => 'integer',
-        'to_id' => 'string',
-        'message' => 'string',
-        'message_type' => 'integer',
-        'file_name' => 'string',
-        'url_details' => 'json',
-        'status' => 'integer',
-    ];
-
     public static $rules = [
         'to_id' => 'nullable|string',
         'from_id' => 'nullable|string',
@@ -111,6 +96,24 @@ class Conversation extends Model
 
     // time from now in minuts
     protected $appends = ['time_from_now_in_min'];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'from_id' => 'integer',
+            'to_id' => 'string',
+            'message' => 'string',
+            'message_type' => 'integer',
+            'file_name' => 'string',
+            'url_details' => 'json',
+            'status' => 'integer',
+        ];
+    }
 
     const LIMIT = 5000;
 
