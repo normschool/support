@@ -18,7 +18,7 @@ class AddRegionCodeFlagIntoUsers extends Migration
         });
 
         \App\Models\Setting::firstOrCreate([
-            'key'   => 'region_code_flag',
+            'key' => 'region_code_flag',
             'value' => 'in',
         ]);
     }

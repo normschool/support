@@ -17,8 +17,6 @@ class NotificationController extends AppBaseController
 
     /**
      * Create a new controller instance.
-     *
-     * @param  NotificationRepository  $notificationRepository
      */
     public function __construct(NotificationRepository $notificationRepository)
     {
@@ -26,8 +24,6 @@ class NotificationController extends AppBaseController
     }
 
     /**
-     * @param  Notification  $notification
-     *
      * @return JsonResponse
      */
     public function readNotification(Notification $notification)

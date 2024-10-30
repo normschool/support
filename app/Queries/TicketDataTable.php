@@ -43,10 +43,6 @@ class TicketDataTable
     }
 
     /**
-     * @param $id
-     * @param $statusId
-     * @param $categoryId
-     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getTicketByUser($id, $statusId, $categoryId)

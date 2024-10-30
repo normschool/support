@@ -24,7 +24,7 @@ class ChatUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required',
+            'name' => 'required',
             'email' => 'required|email|unique:users,email|regex:/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
         ];
     }

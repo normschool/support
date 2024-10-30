@@ -15,7 +15,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Laracasts\Flash\Flash;
-use Spatie\Permission\Models\Role;
 
 class AdminController extends AppBaseController
 {
@@ -35,7 +34,7 @@ class AdminController extends AppBaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of((new AdminDataTable())->get())->make(true);
+            return Datatables::of((new AdminDataTable)->get())->make(true);
         }
 
         return view('admins.index');
@@ -54,7 +53,7 @@ class AdminController extends AppBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function store(CreateUserRequest $request)
@@ -71,7 +70,6 @@ class AdminController extends AppBaseController
     /**
      * Display the specified resource.
      *
-     * @param User $admin
      * @return Application|Factory|View
      */
     public function show(User $admin)
@@ -82,7 +80,6 @@ class AdminController extends AppBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $admin
      * @return Application|Factory|View
      */
     public function edit(User $admin)
@@ -95,8 +92,7 @@ class AdminController extends AppBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param User $admin
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function update(UpdateUserRequest $request, User $admin)
@@ -112,7 +108,6 @@ class AdminController extends AppBaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $admin
      * @return Response
      */
     public function destroy(User $admin)

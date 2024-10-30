@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Role;
 use App\Models\Ticket;
 use App\Models\User;
 use Auth;
@@ -17,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
  * Class UserRepository
+ *
  * @version January 11, 2020, 11:09 am UTC
  */
 class UserRepository extends BaseRepository
@@ -49,11 +49,9 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     * @param $input
+     * @return User
      *
      * @throws \Throwable
-     *
-     * @return User
      */
     public function store($input)
     {
@@ -63,7 +61,7 @@ class UserRepository extends BaseRepository
             $input['password'] = Hash::make($input['password']);
             $input['is_system'] = 1;
             /** @var User $user */
-            $user = User::create(Arr::only($input, (new User())->getFillable()));
+            $user = User::create(Arr::only($input, (new User)->getFillable()));
 
             $user->assignRole($input['role']);
             if (isset($input['image']) && ! empty($input['image'])) {
@@ -81,7 +79,6 @@ class UserRepository extends BaseRepository
 
     /**
      * @param  array  $input
-     *
      * @return bool
      */
     public function profileUpdate($input)
@@ -106,7 +103,6 @@ class UserRepository extends BaseRepository
 
     /**
      * @param  array  $input
-     *
      * @return bool
      */
     public function changePassword($input)
@@ -128,7 +124,6 @@ class UserRepository extends BaseRepository
 
     /**
      * @param  array  $input
-     *
      * @return bool
      */
     public function storeAndUpdateNotification($input)
@@ -144,7 +139,6 @@ class UserRepository extends BaseRepository
     /**
      * @param  array  $input
      * @param  int  $id
-     *
      * @return bool|Builder|Builder[]|Collection|Model
      */
     public function update($input, $id)

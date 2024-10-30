@@ -9,7 +9,6 @@
 
 namespace App\Traits;
 
-use App\Exceptions\ApiOperationFailedException;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Response;
@@ -43,10 +42,9 @@ trait ImageTrait
      * @param  UploadedFile  $file
      * @param  string  $path
      * @param  array  $options
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public static function makeImage($file, $path, $options = [])
     {
@@ -55,7 +53,7 @@ trait ImageTrait
             if (! empty($file)) {
                 $extension = $file->getClientOriginalExtension(); // getting image extension
                 if (! in_array(strtolower($extension), ['jpg', 'gif', 'png', 'jpeg'])) {
-                    throw  new UnprocessableEntityHttpException('invalid image with extension :'.$extension);
+                    throw new UnprocessableEntityHttpException('invalid image with extension :'.$extension);
                 }
                 $originalName = $file->getClientOriginalName();
                 $date = \Illuminate\Support\Carbon::now()->format('Y-m-d');
@@ -83,6 +81,7 @@ trait ImageTrait
     /**
      * @param  string  $path
      * @return string
+     *
      * @internal param $type
      * @internal param bool $full
      */
@@ -95,10 +94,9 @@ trait ImageTrait
      * @param  \Symfony\Component\HttpFoundation\File\UploadedFile  $file
      * @param  array  $input
      * @param  string  $fileName
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public static function makeThumbnail($file, $input, $fileName = '')
     {
@@ -107,7 +105,7 @@ trait ImageTrait
                 $path = $input['path'].DIRECTORY_SEPARATOR.'thumbnails';
                 $extension = $file->getClientOriginalExtension(); // getting image extension
                 if (! in_array(strtolower($extension), ['jpg', 'gif', 'png', 'jpeg'])) {
-                    throw  new UnprocessableEntityHttpException('invalid image', Response::HTTP_BAD_REQUEST);
+                    throw new UnprocessableEntityHttpException('invalid image', Response::HTTP_BAD_REQUEST);
                 }
                 if (empty($fileName)) {
                     $originalName = $file->getClientOriginalName();
@@ -131,7 +129,6 @@ trait ImageTrait
 
     /**
      * @param  string  $url
-     *
      * @return mixed
      */
     public function urlEncoding($url)
@@ -148,12 +145,9 @@ trait ImageTrait
     }
 
     /**
-     * @param  $file
-     * @param $path
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public static function uploadVideo($file, $path)
     {
@@ -162,7 +156,7 @@ trait ImageTrait
             if (! empty($file)) {
                 $extension = $file->getClientOriginalExtension(); // getting image extension
                 if (! in_array(strtolower($extension), ['mp4', 'mov', 'ogg', 'qt'])) {
-                    throw  new UnprocessableEntityHttpException('invalid Video', Response::HTTP_BAD_REQUEST);
+                    throw new UnprocessableEntityHttpException('invalid Video', Response::HTTP_BAD_REQUEST);
                 }
                 $originalName = $file->getClientOriginalName();
                 $date = Carbon::now()->format('Y-m-d');
@@ -180,12 +174,9 @@ trait ImageTrait
     }
 
     /**
-     * @param  $file
-     * @param $path
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public static function uploadFile($file, $path)
     {
@@ -194,7 +185,7 @@ trait ImageTrait
             if (! empty($file)) {
                 $extension = $file->getClientOriginalExtension(); // getting file extension
                 if (! in_array(strtolower($extension), ['mp3', 'ogg', 'wav', 'aac', 'alac'])) {
-                    throw  new UnprocessableEntityHttpException('invalid Video', Response::HTTP_BAD_REQUEST);
+                    throw new UnprocessableEntityHttpException('invalid Video', Response::HTTP_BAD_REQUEST);
                 }
                 $originalName = $file->getClientOriginalName();
                 $date = Carbon::now()->format('Y-m-d');
@@ -212,9 +203,6 @@ trait ImageTrait
     }
 
     /**
-     * @param $sourceWidth
-     * @param $sourceHeight
-     *
      * @return array
      */
     private static function getSizeAdjustedToAspectRatio($sourceWidth, $sourceHeight)
@@ -227,18 +215,15 @@ trait ImageTrait
         $result = $data / 100;
 
         return [
-            'width'  => round($sourceWidth / $result),
+            'width' => round($sourceWidth / $result),
             'height' => round($sourceHeight / $result),
         ];
     }
 
     /**
-     * @param  $file
-     * @param $path
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public static function makeAttachment($file, $path)
     {
@@ -247,7 +232,7 @@ trait ImageTrait
             if (! empty($file)) {
                 $extension = $file->getClientOriginalExtension(); // getting image extension
                 if (! in_array(strtolower($extension), ['xls', 'pdf', 'doc', 'docx', 'xlsx', 'txt'])) {
-                    throw  new UnprocessableEntityHttpException('invalid Attachment', Response::HTTP_BAD_REQUEST);
+                    throw new UnprocessableEntityHttpException('invalid Attachment', Response::HTTP_BAD_REQUEST);
                 }
                 $originalName = $file->getClientOriginalName();
                 $date = Carbon::now()->format('Y-m-d');
@@ -264,12 +249,9 @@ trait ImageTrait
     }
 
     /**
-     * @param $url
-     * @param $path
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public function importImageFromUrl($url, $path)
     {
@@ -289,19 +271,17 @@ trait ImageTrait
     }
 
     /**
-     * @param $file
      * @param  string  $path
+     * @return string
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string
      */
     public static function uploadBase64Image($file, $path)
     {
         try {
             if (! empty($file)) {
                 $originalName = time().'.'.explode('/',
-                        explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
+                    explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
                 $date = \Illuminate\Support\Carbon::now()->format('Y-m-d');
                 $fileName = $date.'_'.uniqid().'_'.$originalName;
                 $image = Image::make($file);

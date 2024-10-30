@@ -44,8 +44,6 @@ class DashboardController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function categoryTicketChart(Request $request)
@@ -56,8 +54,6 @@ class DashboardController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function ticketChart(Request $request)

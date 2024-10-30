@@ -12,14 +12,21 @@ use Livewire\WithPagination;
 class ListPublicTicket extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
 
     public $status;
+
     public $ticketCategories;
+
     public $categoryFilter;
+
     public $statusFilter = Ticket::STATUS_ACTIVE;
+
     public $search;
+
     public $searchTickets = '';
+
     protected $listeners = ['changeFilter'];
 
     public function mount(Request $request)
@@ -41,19 +48,19 @@ class ListPublicTicket extends Component
         return 'livewire.custom-pagenation';
     }
 
-//    public function nextPage($lastPage)
-//    {
-//        if ($this->page < $lastPage) {
-//            $this->page = $this->page + 1;
-//        }
-//    }
-//
-//    public function previousPage()
-//    {
-//        if ($this->page > 1) {
-//            $this->page = $this->page - 1;
-//        }
-//    }
+    //    public function nextPage($lastPage)
+    //    {
+    //        if ($this->page < $lastPage) {
+    //            $this->page = $this->page + 1;
+    //        }
+    //    }
+    //
+    //    public function previousPage()
+    //    {
+    //        if ($this->page > 1) {
+    //            $this->page = $this->page - 1;
+    //        }
+    //    }
 
     public function updatingcategoryFilter()
     {
@@ -78,11 +85,6 @@ class ListPublicTicket extends Component
         $this->resetPage();
     }
 
-    /**
-     * @param $param
-     *
-     * @param $value
-     */
     public function changeFilter($param, $value)
     {
         $this->resetPage();
@@ -115,13 +117,13 @@ class ListPublicTicket extends Component
         $tickets->when($this->categoryFilter != '', function (Builder $query) {
             $query->where('category_id', '=', $this->categoryFilter);
         })
-        ->when($this->statusFilter !== '', function (Builder $query) {
-            if ($this->statusFilter == Ticket::STATUS_ACTIVE) {
-                $query->whereIn('status', [Ticket::STATUS_OPEN, Ticket::STATUS_IN_PROGRESS]);
-            } else {
-                $query->where('status', '=', $this->statusFilter);
-            }
-        })
+            ->when($this->statusFilter !== '', function (Builder $query) {
+                if ($this->statusFilter == Ticket::STATUS_ACTIVE) {
+                    $query->whereIn('status', [Ticket::STATUS_OPEN, Ticket::STATUS_IN_PROGRESS]);
+                } else {
+                    $query->where('status', '=', $this->statusFilter);
+                }
+            })
             ->when($this->searchTickets != '', function (Builder $query) {
                 $query->where(function (Builder $searchQuery) {
                     $searchQuery->orWhere('title', 'like', '%'.strtolower($this->searchTickets).'%');
@@ -131,12 +133,12 @@ class ListPublicTicket extends Component
                 });
             });
 
-//        $all = $tickets->paginate(8);
-//        $currentPage = $all->currentPage();
-//        $lastPage = $all->lastPage();
-//        if ($currentPage > $lastPage) {
-//            $this->page = $lastPage;
-//        }
+        //        $all = $tickets->paginate(8);
+        //        $currentPage = $all->currentPage();
+        //        $lastPage = $all->lastPage();
+        //        if ($currentPage > $lastPage) {
+        //            $this->page = $lastPage;
+        //        }
 
         return $tickets->paginate(8);
     }

@@ -27,8 +27,6 @@ class UserAPIController extends AppBaseController
 
     /**
      * Create a new controller instance.
-     *
-     * @param  UserRepository  $userRepository
      */
     public function __construct(UserRepository $userRepository)
     {
@@ -80,10 +78,7 @@ class UserAPIController extends AppBaseController
         return $this->sendResponse(['user' => $authUser], 'Users retrieved successfully.');
     }
 
-
     /**
-     * @param  Request  $request
-     *
      * @return JsonResponse
      */
     public function updateLastSeen(Request $request)
@@ -98,8 +93,8 @@ class UserAPIController extends AppBaseController
         if ($request->get('userId')) {
             broadcast(new UpdatesEvent([
                 'user_id' => $user->id,
-                'type'    => User::FRONT_USER_ONLINE,
-                'status'  => $request->get('status'),
+                'type' => User::FRONT_USER_ONLINE,
+                'status' => $request->get('status'),
             ]))->toOthers();
         }
 
@@ -120,11 +115,9 @@ class UserAPIController extends AppBaseController
     }
 
     /**
-     * @param $ownerId
+     * @return JsonResponse
      *
      * @throws Exception
-     *
-     * @return JsonResponse
      */
     public function archiveChat($ownerId)
     {
@@ -133,8 +126,8 @@ class UserAPIController extends AppBaseController
 
         if (empty($archivedUser)) {
             ArchivedUser::create([
-                'owner_id'    => $ownerId,
-                'owner_type'  => $ownerType,
+                'owner_id' => $ownerId,
+                'owner_type' => $ownerType,
                 'archived_by' => getLoggedInUserId(),
             ]);
         } else {
@@ -147,9 +140,6 @@ class UserAPIController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
-     *
      * @return mixed
      */
     public function assignAgent(Request $request)
@@ -159,13 +149,13 @@ class UserAPIController extends AppBaseController
         /** @var AssignedChat $assignChat */
         $assignChat = AssignedChat::create([
             'customer_id' => $userId,
-            'user_id'     => $agentId,
+            'user_id' => $agentId,
         ]);
         Conversation::whereFromId(getAdminUserId())->whereToId($userId)->update(['from_id' => $agentId]);
         Conversation::whereFromId($userId)->whereToId(getAdminUserId())->update(['to_id' => $agentId]);
 
         broadcast(new PublicUserEvent([
-            'type'       => User::PUBLIC_CHAT_ASSIGNED,
+            'type' => User::PUBLIC_CHAT_ASSIGNED,
             'assignedTo' => $agentId,
         ], $userId))->toOthers();
 

@@ -76,25 +76,25 @@ class ChatRepository extends BaseRepository
             $fromId = $user->assign->user_id ?? $user->id;
             $toId = $user->assign ? $user->id : $authUser->id;
 
-            $query->where(function (Builder $q) use ($toId, $fromId, $id) {
-                $q->orWhere(function (Builder $q) use ($toId, $fromId, $id) {
+            $query->where(function (Builder $q) use ($toId, $fromId) {
+                $q->orWhere(function (Builder $q) use ($toId, $fromId) {
                     $q->where('to_id', '=', $toId);
                     $q->where('from_id', '=', $fromId);
                 });
-                $q->orWhere(function (Builder $q) use ($toId, $fromId, $id) {
+                $q->orWhere(function (Builder $q) use ($toId, $fromId) {
                     $q->where('from_id', '=', $toId);
                     $q->where('to_id', '=', $fromId);
                 });
             });
-//            if(!isset($input['isCustomerChat']) && $input['isCustomerChat'] != 1){
-//                $query->where('send_by', '=', null);
-//            }
+            //            if(!isset($input['isCustomerChat']) && $input['isCustomerChat'] != 1){
+            //                $query->where('send_by', '=', null);
+            //            }
         } else {
             // only font customer chat
-            $query->where(function (Builder $q) use ($user, $id) {
-                $q->where(function (Builder $q) use ($user, $id) {
+            $query->where(function (Builder $q) use ($user) {
+                $q->where(function (Builder $q) use ($user) {
                     $q->where('from_id', '=', $user->id);
-                })->orWhere(function (Builder $q) use ($user, $id) {
+                })->orWhere(function (Builder $q) use ($user) {
                     $q->where('to_id', '=', $user->id);
                 });
             });
@@ -135,15 +135,14 @@ class ChatRepository extends BaseRepository
         $notificationRepo->readNotificationWhenOpenChatWindow($id);
 
         return [
-            'user'          => $user,
+            'user' => $user,
             'conversations' => $messages,
-            'media'         => $allMedia,
+            'media' => $allMedia,
         ];
     }
 
     /**
      * @param  array  $input
-     *
      * @return array
      */
     public function getLatestConversations($input = [])
@@ -172,7 +171,6 @@ class ChatRepository extends BaseRepository
             });
         }
 
-
         $subQuery->where(function (Builder $q) {
             $q->whereColumn('ma.conversation_id', '!=', 'conversations.id')
                 ->orWhereNull('ma.conversation_id');
@@ -186,7 +184,6 @@ class ChatRepository extends BaseRepository
             $subQuery->groupBy(DB::raw("if(from_id = $authId, to_id, from_id)"));
         }
 
-
         $bindings = $subQuery->getBindings();
         $subQueryStr = $subQuery->toSql();
 
@@ -198,12 +195,12 @@ class ChatRepository extends BaseRepository
             ->pluck('owner_id')->toArray();
 
         $chatList = Conversation::with('user.media', 'receiver.media', 'user.roles', 'receiver.roles')->newQuery();
-        $chatList = $chatList->select("temp.*", "cc.*");
+        $chatList = $chatList->select('temp.*', 'cc.*');
         $chatList->from(DB::raw("($subQueryStr) as temp"));
         $chatList->setBindings($bindings)
-            ->leftJoin("conversations as cc", 'cc.id', '=', 'temp.latest_id');
+            ->leftJoin('conversations as cc', 'cc.id', '=', 'temp.latest_id');
         if (! $isArchived) {
-            if($isAuthUserAdmin){
+            if ($isAuthUserAdmin) {
                 $chatList->whereNotIn('to_id', $archiveUsers);
             }
             $chatList->whereNotIn('temp.user_id', $archiveUsers);
@@ -211,15 +208,15 @@ class ChatRepository extends BaseRepository
         } else {
             $chatList = $chatList->where(function ($query) use ($isAuthUserAdmin, $archiveUsers) {
                 $query->whereIn('temp.user_id', $archiveUsers);
-                if($isAuthUserAdmin){
+                if ($isAuthUserAdmin) {
                     $query->orWhereIn('to_id', $archiveUsers);
                 }
             });
         }
-//        $query = str_replace(array('?'), array('\'%s\''), $chatList->toSql());
-//        $query = vsprintf($query, $chatList->getBindings());
-//        dd($query);
-        $chatList = $chatList->orderBy("cc.created_at", 'desc')
+        //        $query = str_replace(array('?'), array('\'%s\''), $chatList->toSql());
+        //        $query = vsprintf($query, $chatList->getBindings());
+        //        dd($query);
+        $chatList = $chatList->orderBy('cc.created_at', 'desc')
             ->get()->keyBy('id');
 
         $chatList = array_values($chatList->toArray());
@@ -229,10 +226,9 @@ class ChatRepository extends BaseRepository
 
     /**
      * @param  array  $input
+     * @return Conversation
      *
      * @throws Exception
-     *
-     * @return Conversation
      */
     public function sendMessage($input)
     {
@@ -254,7 +250,6 @@ class ChatRepository extends BaseRepository
 
         $input['send_by'] = (isset($input['send_by']) && $input['send_by'] != '') ? $input['send_by'] : null;
 
-
         if (isValidURL($input['message'])) {
             $input['message_type'] = detectURL($input['message']);
         }
@@ -268,10 +263,10 @@ class ChatRepository extends BaseRepository
                 $info = Embed::create($link[0]);
 
                 $input['url_details'] = [
-                    'title'       => $info->title,
-                    'image'       => $info->image,
+                    'title' => $info->title,
+                    'image' => $info->image,
                     'description' => $info->description,
-                    'url'         => $info->url,
+                    'url' => $info->url,
                 ];
             } catch (Exception $e) {
             }
@@ -290,12 +285,12 @@ class ChatRepository extends BaseRepository
         broadcast(new PublicUserEvent($broadcastData, ($conversation->to_id ?? getAdminUserId())))->toOthers();
 
         $notificationInput = [
-            'owner_id'     => $conversation['from_id'],
-            'owner_type'   => User::class,
+            'owner_id' => $conversation['from_id'],
+            'owner_type' => User::class,
             'notification' => $conversation['message'],
-            'to_id'        => $conversation['to_id'],
+            'to_id' => $conversation['to_id'],
             'message_type' => $conversation['message_type'],
-            'file_name'    => $conversation['file_name'],
+            'file_name' => $conversation['file_name'],
         ];
         /** @var NotificationRepository $notificationRepo */
         $notificationRepo = app(NotificationRepository::class);
@@ -304,13 +299,11 @@ class ChatRepository extends BaseRepository
         return $conversation;
     }
 
-
     /**
      * @param  UploadedFile  $file
+     * @return string|void
      *
      * @throws UnprocessableEntityHttpException
-     *
-     * @return string|void
      */
     public function addAttachment($file)
     {
@@ -350,7 +343,6 @@ class ChatRepository extends BaseRepository
 
     /**
      * @param  string  $extension
-     *
      * @return int
      */
     public function getMessageTypeByExtension($extension)
@@ -377,7 +369,6 @@ class ChatRepository extends BaseRepository
 
     /**
      * @param  array  $input
-     *
      * @return array
      */
     public function markMessagesAsRead($input)
@@ -396,16 +387,16 @@ class ChatRepository extends BaseRepository
             $remainingUnread = $this->getUnreadMessageCount($senderId);
 
             broadcast(new UserEvent(
-            [
-                'user_id' => $receiverId,
-                'ids'     => $unreadIds,
-                'type'    => User::PRIVATE_MESSAGE_READ,
-            ], $conversation->from_id))->toOthers();
-            
+                [
+                    'user_id' => $receiverId,
+                    'ids' => $unreadIds,
+                    'type' => User::PRIVATE_MESSAGE_READ,
+                ], $conversation->from_id))->toOthers();
+
             broadcast(new PublicUserEvent([
                 'user_id' => $receiverId,
-                'ids'     => $unreadIds,
-                'type'    => User::PRIVATE_MESSAGE_READ,
+                'ids' => $unreadIds,
+                'type' => User::PRIVATE_MESSAGE_READ,
             ], $conversation->from_id))->toOthers();
         }
 
@@ -415,7 +406,6 @@ class ChatRepository extends BaseRepository
     /**
      * @param  int  $senderId
      * @param  bool  $isGroup
-     *
      * @return int
      */
     public function getUnreadMessageCount($senderId, $isGroup = false)
@@ -425,10 +415,6 @@ class ChatRepository extends BaseRepository
         })->where('status', '=', 0)->count();
     }
 
-    /**
-     * @param $userId
-     * @param $input
-     */
     public function deleteConversation($userId, $input)
     {
         $chatIds = Conversation::leftJoin('message_action as ma', function (JoinClause $join) {
@@ -465,26 +451,22 @@ class ChatRepository extends BaseRepository
         foreach ($chatIds as $chatId) {
             $input[] = [
                 'conversation_id' => $chatId,
-                'deleted_by'      => getLoggedInUserId(),
+                'deleted_by' => getLoggedInUserId(),
             ];
         }
         Conversation::where('from_id', '=', $userId)->where('to_id', '=', getLoggedInUserId())->update([
-            'status' => 1
+            'status' => 1,
         ]);
 
         MessageAction::insert($input);
     }
 
-
-    /**
-     * @param $id
-     */
     public function deleteMessage($id)
     {
         MessageAction::create([
             'conversation_id' => $id,
-            'deleted_by'      => getLoggedInUserId(),
-            'is_hard_delete'  => 1,
+            'deleted_by' => getLoggedInUserId(),
+            'is_hard_delete' => 1,
         ]);
     }
 }

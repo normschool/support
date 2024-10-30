@@ -24,8 +24,9 @@ class AdminUsersAPIController extends AppBaseController
     /**
      * Display a listing of the User.
      *
-     * @throws Exception
      * @return Response
+     *
+     * @throws Exception
      */
     public function index()
     {
@@ -41,7 +42,6 @@ class AdminUsersAPIController extends AppBaseController
     /**
      * Display the specified User.
      *
-     * @param  User  $user
      * @return Response
      */
     public function show(User $user)

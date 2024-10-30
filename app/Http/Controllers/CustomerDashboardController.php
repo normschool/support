@@ -18,7 +18,6 @@ class CustomerDashboardController extends AppBaseController
 
     /**
      * TicketController constructor.
-     * @param  TicketRepository  $ticketRepository
      */
     public function __construct(TicketRepository $ticketRepository)
     {
@@ -60,12 +59,9 @@ class CustomerDashboardController extends AppBaseController
     }
 
     /**
-     * @param  UpdateTicketRequest  $request
-     * @param  Ticket  $ticket
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Throwable
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function updateCustomerTicket(UpdateTicketRequest $request, Ticket $ticket)
     {
@@ -87,10 +83,9 @@ class CustomerDashboardController extends AppBaseController
     }
 
     /**
-     * @param  CreateTicketRequest  $request
-     * @throws \Throwable
-     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     *
+     * @throws \Throwable
      */
     public function storeTicket(CreateTicketRequest $request)
     {
@@ -105,5 +100,5 @@ class CustomerDashboardController extends AppBaseController
         }
 
         return redirect()->route('customer.myTicket');
-    }  
+    }
 }

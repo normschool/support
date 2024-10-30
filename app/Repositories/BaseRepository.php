@@ -19,8 +19,6 @@ abstract class BaseRepository
     protected $app;
 
     /**
-     * @param  Application  $app
-     *
      * @throws \Exception
      */
     public function __construct(Application $app)
@@ -46,9 +44,9 @@ abstract class BaseRepository
     /**
      * Make Model instance
      *
-     * @throws \Exception
-     *
      * @return Model
+     *
+     * @throws \Exception
      */
     public function makeModel()
     {
@@ -113,7 +111,6 @@ abstract class BaseRepository
      * @param  int|null  $skip
      * @param  int|null  $limit
      * @param  array  $columns
-     *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
@@ -127,7 +124,6 @@ abstract class BaseRepository
      * Create model record
      *
      * @param  array  $input
-     *
      * @return Model
      */
     public function create($input)
@@ -144,7 +140,6 @@ abstract class BaseRepository
      *
      * @param  int  $id
      * @param  array  $columns
-     *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
      */
     public function find($id, $columns = ['*'])
@@ -159,7 +154,6 @@ abstract class BaseRepository
      *
      * @param  array  $input
      * @param  int  $id
-     *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Model
      */
     public function update($input, $id)
@@ -177,10 +171,9 @@ abstract class BaseRepository
 
     /**
      * @param  int  $id
+     * @return bool|mixed|null
      *
      * @throws \Exception
-     *
-     * @return bool|mixed|null
      */
     public function delete($id)
     {
@@ -194,7 +187,6 @@ abstract class BaseRepository
     /**
      * @param  int  $id
      * @param  array  $columns
-     *
      * @return mixed
      */
     public function findWithoutFail($id, $columns = ['*'])

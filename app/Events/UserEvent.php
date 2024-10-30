@@ -16,6 +16,7 @@ class UserEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $data;
+
     private $userIds;
 
     /**

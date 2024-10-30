@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DefaultRoleSeeder::class);
         $this->call(AdminUserSeeder::class);
-//        $this->call(CreateUserSeeder::class);
+        //        $this->call(CreateUserSeeder::class);
         $this->call(CreateCategorySeeder::class);
-//        $this->call(CreateTicketSeeder::class);
-//        $this->call(CreateTicketReplaySeeder::class);
-//        $this->call(CreateFAQsSeeder::class);
+        //        $this->call(CreateTicketSeeder::class);
+        //        $this->call(CreateTicketReplaySeeder::class);
+        //        $this->call(CreateFAQsSeeder::class);
         $this->call(SettingsTableSeeder::class);
         $this->call(AddRegionCodeInSettingsSeeder::class);
     }

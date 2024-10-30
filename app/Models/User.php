@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
@@ -57,6 +56,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $ticket_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $tickets
  * @property-read int|null $tickets_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
@@ -83,50 +83,71 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegionCodeFlag($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
+ *
  * @property int $email_update
  * @property-read \App\Models\AssignedChat|null $assign
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BlockedUser[] $blockedBy
  * @property-read int|null $blocked_by_count
+ *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailUpdate($value)
  */
 class User extends Authenticatable implements HasMedia
 {
     use HasFactory;
+    use HasRoles, Notifiable;
     use InteractsWithMedia;
-    use Notifiable, HasRoles;
 
     public static $PATH = 'users';
+
     const Faq = 'faq';
+
     const HEIGHT = 250;
+
     const WIDTH = 250;
 
     const MALE = 1;
+
     const FEMALE = 2;
+
     const IS_SYSTEM = 1;
 
     const BLOCK_UNBLOCK_EVENT = 1;
+
     const NEW_PRIVATE_CONVERSATION = 2;
+
     const PRIVATE_MESSAGE_READ = 4;
+
     const MESSAGE_DELETED = 5;
+
     const MESSAGE_NOTIFICATION = 6;
+
     const CHAT_REQUEST = 7;
+
     const CHAT_REQUEST_ACCEPTED = 8;
+
     const NEW_CUSTOMER_ARRIVED = 9;
 
     const PROFILE_UPDATES = 1;
+
     const STATUS_UPDATE = 2;
+
     const STATUS_CLEAR = 3;
 
     const PUBLIC_USER_MESSAGE_RECEIVED = 1;
+
     const PUBLIC_CHAT_ASSIGNED = 2;
+
     const FRONT_USER_ONLINE = 3;
 
     const PROFILE = 'profile-pictures';
 
     const ROLE_ALL = 0;
+
     const ADMIN = 1;
+
     const AGENT = 2;
 
     const LANGUAGES = [
@@ -166,12 +187,12 @@ class User extends Authenticatable implements HasMedia
         'email_update',
     ];
 
-//    /**
-//     * @var array
-//     */
-//    protected $appends = ['role_name'];
-//
-//    protected $with = ['media', 'roles'];
+    //    /**
+    //     * @var array
+    //     */
+    //    protected $appends = ['role_name'];
+    //
+    //    protected $with = ['media', 'roles'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -188,14 +209,14 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $casts = [
-        'id'                => 'integer',
-        'name'              => 'string',
+        'id' => 'integer',
+        'name' => 'string',
         'email_verified_at' => 'datetime',
-        'created_at'        => 'datetime',
-        'updated_at'        => 'datetime',
-        'gender'            => 'integer',
-        'archive'           => 'integer',
-        'email_update'      => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'gender' => 'integer',
+        'archive' => 'integer',
+        'email_update' => 'boolean',
     ];
 
     /**
@@ -259,14 +280,14 @@ class User extends Authenticatable implements HasMedia
     public function webObj()
     {
         return [
-            'id'        => $this->id,
-            'name'      => $this->name,
-            'email'     => $this->email,
-            'phone'     => $this->phone,
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
             'last_seen' => $this->last_seen,
-            'about'     => $this->about,
+            'about' => $this->about,
             'photo_url' => $this->photo_url,
-            'gender'    => $this->gender,
+            'gender' => $this->gender,
         ];
     }
 
@@ -276,24 +297,24 @@ class User extends Authenticatable implements HasMedia
     public function apiObj()
     {
         return [
-            'id'                => $this->id,
-            'name'              => $this->name,
-            'email'             => $this->email,
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
             'email_verified_at' => (! empty($this->email_verified_at)) ? $this->email_verified_at->toDateTimeString() : '',
-            'phone'             => $this->phone,
-            'last_seen'         => $this->last_seen,
-            'is_online'         => $this->is_online,
-            'is_active'         => $this->is_active,
-            'gender'            => $this->gender,
-            'about'             => $this->about,
-            'photo_url'         => $this->photo_url,
-            'activation_code'   => $this->activation_code,
-            'created_at'        => (! empty($this->created_at)) ? $this->created_at->toDateTimeString() : '',
-            'updated_at'        => (! empty($this->updated_at)) ? $this->updated_at->toDateTimeString() : '',
-            'is_system'         => $this->is_system,
-            'role_name'         => (! $this->roles->isEmpty()) ? $this->roles->first()->name : null,
-            'role_id'           => (! $this->roles->isEmpty()) ? $this->roles->first()->id : null,
-            'archive'           => (! empty($this->deleted_at)) ? 1 : 0,
+            'phone' => $this->phone,
+            'last_seen' => $this->last_seen,
+            'is_online' => $this->is_online,
+            'is_active' => $this->is_active,
+            'gender' => $this->gender,
+            'about' => $this->about,
+            'photo_url' => $this->photo_url,
+            'activation_code' => $this->activation_code,
+            'created_at' => (! empty($this->created_at)) ? $this->created_at->toDateTimeString() : '',
+            'updated_at' => (! empty($this->updated_at)) ? $this->updated_at->toDateTimeString() : '',
+            'is_system' => $this->is_system,
+            'role_name' => (! $this->roles->isEmpty()) ? $this->roles->first()->name : null,
+            'role_id' => (! $this->roles->isEmpty()) ? $this->roles->first()->id : null,
+            'archive' => (! empty($this->deleted_at)) ? 1 : 0,
         ];
     }
 
@@ -356,7 +377,7 @@ class User extends Authenticatable implements HasMedia
         return $this->hasOne(AssignedChat::class, 'customer_id', 'id');
     }
 
-    public function socialAccount() : HasMany
+    public function socialAccount(): HasMany
     {
         return $this->hasMany(SocialAccount::class, 'user_id');
     }

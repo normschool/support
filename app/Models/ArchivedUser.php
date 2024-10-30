@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read User $archivedBy
+ *
  * @method static Builder|ArchivedUser newModelQuery()
  * @method static Builder|ArchivedUser newQuery()
  * @method static Builder|ArchivedUser query()
@@ -27,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|ArchivedUser whereOwnerId($value)
  * @method static Builder|ArchivedUser whereOwnerType($value)
  * @method static Builder|ArchivedUser whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class ArchivedUser extends Model
@@ -40,8 +42,8 @@ class ArchivedUser extends Model
     ];
 
     protected $casts = [
-        'owner_id'    => 'string',
-        'owner_type'  => 'string',
+        'owner_id' => 'string',
+        'owner_type' => 'string',
         'archived_by' => 'integer',
     ];
 

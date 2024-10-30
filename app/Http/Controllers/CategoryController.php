@@ -30,10 +30,9 @@ class CategoryController extends AppBaseController
     /**
      *  Display a listing of the Category.
      *
-     * @param  Request  $request
-     * @throws Exception
-     *
      * @return Application|Factory|View
+     *
+     * @throws Exception
      */
     public function index(Request $request)
     {
@@ -43,7 +42,6 @@ class CategoryController extends AppBaseController
     /**
      * Store a newly created Category in storage.
      *
-     * @param  CreateCategoryRequest  $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -59,7 +57,6 @@ class CategoryController extends AppBaseController
     /**
      * Display the specified Category.
      *
-     * @param  Category  $category
      *
      * @return Application|Factory|JsonResponse|View
      */
@@ -75,7 +72,6 @@ class CategoryController extends AppBaseController
     /**
      * Show the form for editing the specified Category.
      *
-     * @param Category $category
      *
      * @return Response
      */
@@ -87,8 +83,6 @@ class CategoryController extends AppBaseController
     /**
      * Update the specified Category in storage.
      *
-     * @param Category $category
-     * @param UpdateCategoryRequest $request
      *
      * @return Response
      */
@@ -102,8 +96,6 @@ class CategoryController extends AppBaseController
     }
 
     /**
-     * @param Category $category
-     *
      * @return Response
      */
     public function destroy(Category $category)

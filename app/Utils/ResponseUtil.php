@@ -5,24 +5,21 @@ namespace App\Utils;
 class ResponseUtil
 {
     /**
-     * @param string $message
-     * @param mixed  $data
-     *
+     * @param  string  $message
+     * @param  mixed  $data
      * @return array
      */
     public static function makeResponse($message, $data)
     {
         return [
             'success' => true,
-            'data'    => $data,
+            'data' => $data,
             'message' => $message,
         ];
     }
 
     /**
-     * @param string $message
-     * @param array  $data
-     *
+     * @param  string  $message
      * @return array
      */
     public static function makeError($message, array $data = [])

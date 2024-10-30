@@ -17,8 +17,6 @@ use Spatie\Permission\Models\Role;
 class WebUserController extends AppBaseController
 {
     /**
-     * @param  ChatUserRequest  $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function storeChatUser(ChatUserRequest $request)
@@ -34,10 +32,10 @@ class WebUserController extends AppBaseController
             $formId = getAdminUserId();
             $toId = $user->id;
             $message = 'Hello'.' '.$user->name;
-            
+
             /** @var Conversation $conversation */
             $conversation = Conversation::create([
-                'from_id' => $formId, 'to_id' => $toId, 'message' => $message, 'send_by' => $formId, 'status' => 1
+                'from_id' => $formId, 'to_id' => $toId, 'message' => $message, 'send_by' => $formId, 'status' => 1,
             ])->fresh();
             $conversation['sender'] = $conversation->receiver->toArray();
             Notification::create([
@@ -58,14 +56,12 @@ class WebUserController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getAssignAgent(Request $request)
     {
         $id = $request->get('id');
-        /** @var  AssignedChat $assignAgent */
+        /** @var AssignedChat $assignAgent */
         $assignAgent = AssignedChat::with('agent')->where('customer_id', $id)->first();
         $assignAgent = (empty($assignAgent)) ? getAdminUserId() : $assignAgent;
 
@@ -73,8 +69,6 @@ class WebUserController extends AppBaseController
     }
 
     /**
-     * @param  Request  $request
-     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function readMessages(Request $request)
