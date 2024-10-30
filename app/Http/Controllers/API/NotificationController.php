@@ -26,7 +26,7 @@ class NotificationController extends AppBaseController
     /**
      * @return JsonResponse
      */
-    public function readNotification(Notification $notification)
+    public function readNotification(Notification $notification): JsonResponse
     {
         $this->notificationRepo->readNotification($notification->id);
 
@@ -36,7 +36,7 @@ class NotificationController extends AppBaseController
     /**
      * @return JsonResponse
      */
-    public function readAllNotification()
+    public function readAllNotification(): JsonResponse
     {
         $messageSenderIds = $this->notificationRepo->readAllNotification();
 

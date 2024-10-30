@@ -28,7 +28,7 @@ class BlockUserRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -47,7 +47,7 @@ class BlockUserRepository extends BaseRepository
      *
      * @throws Exception
      */
-    public function blockUnblockUser($input)
+    public function blockUnblockUser(array $input): ?bool
     {
         /** @var User $blockedTo */
         $blockedTo = User::findOrFail($input['blocked_to']);
@@ -77,7 +77,7 @@ class BlockUserRepository extends BaseRepository
     /**
      * @return array
      */
-    public function blockedUserIds()
+    public function blockedUserIds(): array
     {
         $blockedUserIds = BlockedUser::toBase()->whereBlockedBy(Auth::id())
             ->orWhere('blocked_to', Auth::id())

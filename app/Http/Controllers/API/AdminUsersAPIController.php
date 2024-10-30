@@ -28,7 +28,7 @@ class AdminUsersAPIController extends AppBaseController
      *
      * @throws Exception
      */
-    public function index()
+    public function index(): Response
     {
         $users = User::with(['roles'])->orderBy('name', 'asc')->get()->except(getLoggedInUserId());
         foreach ($users as $key => $user) {
@@ -44,7 +44,7 @@ class AdminUsersAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function show(User $user)
+    public function show(User $user): Response
     {
         $user->roles;
         $user = $user->apiObj();

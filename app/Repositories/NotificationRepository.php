@@ -46,7 +46,7 @@ class NotificationRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -63,7 +63,7 @@ class NotificationRepository extends BaseRepository
      * @param  array  $notificationInput
      * @param  int  $receiverId
      */
-    public function sendNotification($notificationInput, $receiverId, $userEventType = 0)
+    public function sendNotification(array $notificationInput, int $receiverId, $userEventType = 0)
     {
         /** @var Notification $notification */
         $notification = $this->create($notificationInput);
@@ -91,7 +91,7 @@ class NotificationRepository extends BaseRepository
     /**
      * @return array
      */
-    public function getNotifications()
+    public function getNotifications(): array
     {
         $notifications = Notification::whereIsRead(0)->whereToId(getLoggedInUserId())->with([
             'sender', 'latestMsg',
@@ -124,7 +124,7 @@ class NotificationRepository extends BaseRepository
     /**
      * @param  int  $notificationId
      */
-    public function readNotification($notificationId)
+    public function readNotification(int $notificationId)
     {
         $notification = Notification::find($notificationId);
 
@@ -136,7 +136,7 @@ class NotificationRepository extends BaseRepository
     /**
      * @param  int  $senderId
      */
-    public function readNotificationWhenOpenChatWindow($senderId)
+    public function readNotificationWhenOpenChatWindow(int $senderId)
     {
         Notification::whereOwnerId($senderId)->whereToId(getLoggedInUserId())->update([
             'is_read' => 1, 'read_at' => Carbon::now(),
@@ -146,7 +146,7 @@ class NotificationRepository extends BaseRepository
     /**
      * @return array
      */
-    public function readAllNotification()
+    public function readAllNotification(): array
     {
         $authId = getLoggedInUserId();
 

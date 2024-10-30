@@ -22,7 +22,7 @@ class UpdatesEvent implements ShouldBroadcast
      *
      * @param  array  $user
      */
-    public function __construct($user)
+    public function __construct(array $user)
     {
         $this->user = $user;
     }
@@ -40,7 +40,7 @@ class UpdatesEvent implements ShouldBroadcast
     /**
      * @return array
      */
-    public function broadcastWith()
+    public function broadcastWith(): array
     {
         return $this->user;
     }

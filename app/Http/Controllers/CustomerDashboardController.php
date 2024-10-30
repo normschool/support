@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreateTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
@@ -29,7 +30,7 @@ class CustomerDashboardController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View
     {
         $data['totalOpenTickets'] = Ticket::whereCreatedBy(Auth::id())->whereStatus(Ticket::STATUS_OPEN)->count();
         $data['totalClosedTickets'] = Ticket::whereCreatedBy(Auth::id())->whereStatus(Ticket::STATUS_CLOSED)->count();
@@ -40,7 +41,7 @@ class CustomerDashboardController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function viewCustomerTicket()
+    public function viewCustomerTicket(): View
     {
         return view('customer_dashboard.tickets.index');
     }
@@ -63,7 +64,7 @@ class CustomerDashboardController extends AppBaseController
      *
      * @throws \Throwable
      */
-    public function updateCustomerTicket(UpdateTicketRequest $request, Ticket $ticket)
+    public function updateCustomerTicket(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse
     {
         $input = $request->all();
         $this->ticketRepository->update($input, $ticket);
@@ -75,7 +76,7 @@ class CustomerDashboardController extends AppBaseController
     /**
      * @return Application|Factory|View
      */
-    public function createTicket()
+    public function createTicket(): View
     {
         $data = $this->ticketRepository->prepareData();
 

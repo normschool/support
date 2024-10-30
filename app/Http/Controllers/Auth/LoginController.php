@@ -47,7 +47,7 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(Request $request): Response
     {
         $request->session()->regenerate();
 

@@ -135,7 +135,7 @@ class Ticket extends Model implements HasMedia
     /**
      * @return bool
      */
-    public function getAttachmentsAttribute()
+    public function getAttachmentsAttribute(): bool
     {
         $media = $this->getMedia(self::COLLECTION_TICKET)->first();
         if (! empty($media)) {

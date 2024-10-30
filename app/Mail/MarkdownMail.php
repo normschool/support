@@ -26,7 +26,7 @@ class MarkdownMail extends Mailable
      * @param  array  $data
      * @return void
      */
-    public function __construct($view, $subject, $data = [])
+    public function __construct(string $view, string $subject, array $data = [])
     {
         $this->data = $data;
         $this->view = $view;
@@ -38,7 +38,7 @@ class MarkdownMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         return $this->subject($this->subject)->markdown($this->view)->with($this->data);
     }

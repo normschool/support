@@ -12,7 +12,7 @@ class CategoryDataTable
     /**
      * @return Category
      */
-    public function get()
+    public function get(): Category
     {
         /** @var Category $query */
         $query = Category::withCount('ticket')->get(['id', 'name', 'ticket_count', 'color']);

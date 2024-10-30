@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Collection;
 use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
@@ -38,7 +39,7 @@ class TicketRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -74,7 +75,7 @@ class TicketRepository extends BaseRepository
      *
      * @throws Throwable
      */
-    public function store($input)
+    public function store(array $input): array
     {
         try {
             DB::beginTransaction();
@@ -166,7 +167,7 @@ class TicketRepository extends BaseRepository
      *
      * @throws Throwable
      */
-    public function webStore($input)
+    public function webStore(array $input)
     {
         try {
             DB::beginTransaction();
@@ -247,7 +248,7 @@ class TicketRepository extends BaseRepository
      *
      * @throws Throwable
      */
-    public function update($input, $ticket)
+    public function update(array $input, Ticket $ticket): array
     {
         try {
             DB::beginTransaction();
@@ -362,7 +363,7 @@ class TicketRepository extends BaseRepository
     /**
      * @return array
      */
-    public function prepareData()
+    public function prepareData(): array
     {
         $data['categories'] = Category::orderBy('name')->pluck('name', 'id');
         $data['users'] = User::whereHas('roles', function (Builder $query) {
@@ -379,7 +380,7 @@ class TicketRepository extends BaseRepository
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function deleteTicket($id)
+    public function deleteTicket($id): Collection
     {
         $ticket = Ticket::findOrFail($id);
         $ticket->assignTo()->detach($id);
@@ -402,7 +403,7 @@ class TicketRepository extends BaseRepository
     /**
      * @return array
      */
-    public function getAttachments($ticketId)
+    public function getAttachments($ticketId): array
     {
         /** @var Ticket $ticket */
         $ticket = $this->find($ticketId);
@@ -425,7 +426,7 @@ class TicketRepository extends BaseRepository
     /**
      * @return bool
      */
-    public function uploadFile($ticket, $attachments)
+    public function uploadFile($ticket, $attachments): bool
     {
         try {
             if (! empty($attachments)) {

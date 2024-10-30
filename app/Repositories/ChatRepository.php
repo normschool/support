@@ -44,7 +44,7 @@ class ChatRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -145,7 +145,7 @@ class ChatRepository extends BaseRepository
      * @param  array  $input
      * @return array
      */
-    public function getLatestConversations($input = [])
+    public function getLatestConversations(array $input = []): array
     {
         $isArchived = isset($input['isArchived']) ? 1 : 0;
         $authUser = Auth::user();
@@ -230,7 +230,7 @@ class ChatRepository extends BaseRepository
      *
      * @throws Exception
      */
-    public function sendMessage($input)
+    public function sendMessage(array $input): Conversation
     {
         if (isset($input['is_archive_chat']) && $input['is_archive_chat'] == 1) {
             $archivedUser = ArchivedUser::whereOwnerId($input['to_id'])->whereArchivedBy(getLoggedInUserId())->first();
@@ -305,7 +305,7 @@ class ChatRepository extends BaseRepository
      *
      * @throws UnprocessableEntityHttpException
      */
-    public function addAttachment($file)
+    public function addAttachment(UploadedFile $file)
     {
         $extension = strtolower($file->getClientOriginalExtension());
         if (! in_array($extension,
@@ -345,7 +345,7 @@ class ChatRepository extends BaseRepository
      * @param  string  $extension
      * @return int
      */
-    public function getMessageTypeByExtension($extension)
+    public function getMessageTypeByExtension(string $extension): int
     {
         $extension = strtolower($extension);
         if (in_array($extension, ['jpg', 'gif', 'png', 'jpeg'])) {
@@ -371,7 +371,7 @@ class ChatRepository extends BaseRepository
      * @param  array  $input
      * @return array
      */
-    public function markMessagesAsRead($input)
+    public function markMessagesAsRead(array $input): array
     {
         $senderId = Auth::id();
         $remainingUnread = 0;
@@ -408,7 +408,7 @@ class ChatRepository extends BaseRepository
      * @param  bool  $isGroup
      * @return int
      */
-    public function getUnreadMessageCount($senderId, $isGroup = false)
+    public function getUnreadMessageCount(int $senderId, bool $isGroup = false): int
     {
         return Conversation::where(function (Builder $q) use ($senderId) {
             $q->where('from_id', '=', $senderId)->where('to_id', '=', getLoggedInUserId());

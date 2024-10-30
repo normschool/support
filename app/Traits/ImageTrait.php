@@ -27,7 +27,7 @@ trait ImageTrait
      * @param  string  $file
      * @return bool
      */
-    public static function deleteImage($file)
+    public static function deleteImage(string $file): bool
     {
         if (Storage::exists($file)) {
             Storage::delete($file);
@@ -46,7 +46,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public static function makeImage($file, $path, $options = [])
+    public static function makeImage(UploadedFile $file, string $path, array $options = []): string
     {
         try {
             $fileName = '';
@@ -85,7 +85,7 @@ trait ImageTrait
      * @internal param $type
      * @internal param bool $full
      */
-    public function imageUrl($path)
+    public function imageUrl(string $path): string
     {
         return $this->urlEncoding(Storage::url($path));
     }
@@ -98,7 +98,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public static function makeThumbnail($file, $input, $fileName = '')
+    public static function makeThumbnail(\Symfony\Component\HttpFoundation\File\UploadedFile $file, array $input, string $fileName = ''): string
     {
         try {
             if (! empty($file)) {
@@ -131,7 +131,7 @@ trait ImageTrait
      * @param  string  $url
      * @return mixed
      */
-    public function urlEncoding($url)
+    public function urlEncoding(string $url)
     {
         $entities = [
             '%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F',
@@ -149,7 +149,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public static function uploadVideo($file, $path)
+    public static function uploadVideo($file, $path): string
     {
         try {
             $fileName = '';
@@ -178,7 +178,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public static function uploadFile($file, $path)
+    public static function uploadFile($file, $path): string
     {
         try {
             $fileName = '';
@@ -205,7 +205,7 @@ trait ImageTrait
     /**
      * @return array
      */
-    private static function getSizeAdjustedToAspectRatio($sourceWidth, $sourceHeight)
+    private static function getSizeAdjustedToAspectRatio($sourceWidth, $sourceHeight): array
     {
         if ($sourceWidth > $sourceHeight) {
             $data = $sourceHeight;
@@ -225,7 +225,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public static function makeAttachment($file, $path)
+    public static function makeAttachment($file, $path): string
     {
         try {
             $fileName = '';
@@ -253,7 +253,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public function importImageFromUrl($url, $path)
+    public function importImageFromUrl($url, $path): string
     {
         try {
             $extension = '.png';
@@ -276,7 +276,7 @@ trait ImageTrait
      *
      * @throws UnprocessableEntityHttpException
      */
-    public static function uploadBase64Image($file, $path)
+    public static function uploadBase64Image($file, string $path): string
     {
         try {
             if (! empty($file)) {

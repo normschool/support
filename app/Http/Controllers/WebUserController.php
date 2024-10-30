@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use App\Events\UserEvent;
 use App\Http\Requests\ChatUserRequest;
 use App\Models\AssignedChat;
@@ -19,7 +20,7 @@ class WebUserController extends AppBaseController
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeChatUser(ChatUserRequest $request)
+    public function storeChatUser(ChatUserRequest $request): JsonResponse
     {
         try {
             $input = $request->all();
@@ -58,7 +59,7 @@ class WebUserController extends AppBaseController
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAssignAgent(Request $request)
+    public function getAssignAgent(Request $request): JsonResponse
     {
         $id = $request->get('id');
         /** @var AssignedChat $assignAgent */
@@ -71,7 +72,7 @@ class WebUserController extends AppBaseController
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function readMessages(Request $request)
+    public function readMessages(Request $request): JsonResponse
     {
         $data = app(ChatRepository::class)->markMessagesAsRead($request->all());
 

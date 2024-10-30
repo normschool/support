@@ -45,7 +45,7 @@ class SettingRepository extends BaseRepository
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function updateSetting($input)
+    public function updateSetting(array $input): bool
     {
         $inputArr = Arr::except($input, ['_token']);
         foreach ($inputArr as $key => $value) {
@@ -75,7 +75,7 @@ class SettingRepository extends BaseRepository
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function fileUpload($setting, $file)
+    public function fileUpload(Setting $setting, $file)
     {
         $setting->clearMediaCollection(Setting::PATH);
         $media = $setting->addMedia($file)->toMediaCollection(Setting::PATH, config('app.media_disc'));

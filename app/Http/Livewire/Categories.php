@@ -22,7 +22,7 @@ class Categories extends Component
     /**
      * @return string
      */
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
     }
@@ -46,7 +46,7 @@ class Categories extends Component
      *
      * @throws Exception
      */
-    public function deleteCategory($id)
+    public function deleteCategory(Category $id)
     {
         $Models = [
             Ticket::class,

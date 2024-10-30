@@ -35,7 +35,7 @@ class AdminRepository extends BaseRepository
      *
      * @return array
      */
-    public function getFieldsSearchable()
+    public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
     }
@@ -53,7 +53,7 @@ class AdminRepository extends BaseRepository
      *
      * @throws \Throwable
      */
-    public function store($input)
+    public function store($input): User
     {
         try {
             DB::beginTransaction();
@@ -81,7 +81,7 @@ class AdminRepository extends BaseRepository
      * @param  array  $input
      * @return bool
      */
-    public function profileUpdate($input)
+    public function profileUpdate(array $input): bool
     {
         /** @var User $user */
         $user = Auth::user();
@@ -105,7 +105,7 @@ class AdminRepository extends BaseRepository
      * @param  array  $input
      * @return bool
      */
-    public function changePassword($input)
+    public function changePassword(array $input): bool
     {
         try {
             /** @var User $user */
@@ -126,7 +126,7 @@ class AdminRepository extends BaseRepository
      * @param  array  $input
      * @return bool
      */
-    public function storeAndUpdateNotification($input)
+    public function storeAndUpdateNotification(array $input): bool
     {
         /** @var User $user */
         $user = Auth::user();
@@ -141,7 +141,7 @@ class AdminRepository extends BaseRepository
      * @param  int  $id
      * @return bool|Builder|Builder[]|Collection|Model
      */
-    public function update($input, $id)
+    public function update(array $input, int $id)
     {
         /** @var User $user */
         $user = User::findOrFail($id);

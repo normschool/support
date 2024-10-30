@@ -23,7 +23,7 @@ class NoSpaceContaine implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, $value): bool
     {
         return preg_match('/\s/', $value) ? false : true;
     }
@@ -33,7 +33,7 @@ class NoSpaceContaine implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'Space can not be allowed in :attribute.';
     }

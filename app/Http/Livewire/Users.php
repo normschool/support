@@ -26,7 +26,7 @@ class Users extends Component
     /**
      * @return string
      */
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
     }
@@ -75,7 +75,7 @@ class Users extends Component
     /**
      * @return LengthAwarePaginator
      */
-    public function searchUser()
+    public function searchUser(): LengthAwarePaginator
     {
         /** @var User $query */
         $query = User::with(['roles', 'media'])->whereHas('roles', function (Builder $q) {

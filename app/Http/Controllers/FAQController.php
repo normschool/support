@@ -49,7 +49,7 @@ class FAQController extends AppBaseController
      *
      * @return JsonResource
      */
-    public function store(CreateFAQRequest $request)
+    public function store(CreateFAQRequest $request): JsonResource
     {
         $input = $request->all();
         $this->FAQRepository->create($input);
@@ -63,7 +63,7 @@ class FAQController extends AppBaseController
      *
      * @return JsonResponse
      */
-    public function edit(FAQ $faq)
+    public function edit(FAQ $faq): JsonResponse
     {
         return $this->sendResponse($faq, 'FAQ Retrieved Successfully.');
     }
@@ -74,7 +74,7 @@ class FAQController extends AppBaseController
      *
      * @return JsonResource
      */
-    public function show(FAQ $faq)
+    public function show(FAQ $faq): JsonResource
     {
         return $this->sendResponse($faq, 'FAQ Retrieved Successfully.');
     }
@@ -86,7 +86,7 @@ class FAQController extends AppBaseController
      *
      * @return JsonResource
      */
-    public function update(UpdateFAQRequest $request, FAQ $faq)
+    public function update(UpdateFAQRequest $request, FAQ $faq): JsonResource
     {
         $input = $request->all();
         $this->FAQRepository->update($input, $faq->id);
@@ -102,7 +102,7 @@ class FAQController extends AppBaseController
      *
      * @throws Exception
      */
-    public function destroy(FAQ $faq)
+    public function destroy(FAQ $faq): JsonResource
     {
         $faq->delete();
 

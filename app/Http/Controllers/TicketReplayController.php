@@ -26,7 +26,7 @@ class TicketReplayController extends AppBaseController
      *
      * @throws \Throwable
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $input = $request->all();
 
@@ -50,7 +50,7 @@ class TicketReplayController extends AppBaseController
     /**
      * @return JsonResponse
      */
-    public function update(TicketReplay $ticketReplay, Request $request)
+    public function update(TicketReplay $ticketReplay, Request $request): JsonResponse
     {
         $input = $request->all();
         $ticketReply = $this->ticketReplayRepository->update($input, $ticketReplay->id);
@@ -63,7 +63,7 @@ class TicketReplayController extends AppBaseController
      *
      * @throws Exception
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $ticketReply = TicketReplay::find($id)->delete();
 
@@ -75,7 +75,7 @@ class TicketReplayController extends AppBaseController
      *
      * @throws Exception
      */
-    public function deleteAttachment(Media $media)
+    public function deleteAttachment(Media $media): JsonResponse
     {
         $media->delete();
 
@@ -87,7 +87,7 @@ class TicketReplayController extends AppBaseController
      *
      * @throws \Throwable
      */
-    public function addAttachment(Request $request)
+    public function addAttachment(Request $request): JsonResponse
     {
         $input = $request->all();
         $attachment = $this->ticketReplayRepository->updateReplyWithAttachment($input, $input['replyId']);

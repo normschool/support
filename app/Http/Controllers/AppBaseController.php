@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use App\Utils\ResponseUtil;
 use Response;
 
@@ -19,17 +20,17 @@ use Response;
  */
 class AppBaseController extends Controller
 {
-    public function sendResponse($result, $message)
+    public function sendResponse($result, $message): JsonResponse
     {
         return Response::json(ResponseUtil::makeResponse($message, $result));
     }
 
-    public function sendError($error, $code = 422)
+    public function sendError($error, $code = 422): JsonResponse
     {
         return Response::json(ResponseUtil::makeError($error), $code);
     }
 
-    public function sendSuccess($message)
+    public function sendSuccess($message): JsonResponse
     {
         return Response::json([
             'success' => true,
@@ -37,7 +38,7 @@ class AppBaseController extends Controller
         ], 200);
     }
 
-    public function sendData($data)
+    public function sendData($data): JsonResponse
     {
         return Response::json($data, 200);
     }

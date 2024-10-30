@@ -16,7 +16,7 @@ class ListCategories extends Component
     /**
      * @return string
      */
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'livewire.custom-pagenation';
     }

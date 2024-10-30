@@ -12,7 +12,7 @@ class AdminDataTable
     /**
      * @return User
      */
-    public function get()
+    public function get(): User
     {
         /** @var User $query */
         $query = User::query()->role('admin')->with('media')->where('id', '!=', getLoggedInUserId());

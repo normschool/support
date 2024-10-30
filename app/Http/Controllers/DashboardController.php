@@ -24,7 +24,7 @@ class DashboardController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View
     {
         $data['dashboardData'] = $this->dashboardRepository->getDashboardAssociatedData();
 
@@ -36,7 +36,7 @@ class DashboardController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function agentDashBoard()
+    public function agentDashBoard(): View
     {
         $data['dashboardData'] = $this->dashboardRepository->getDashboardAssociatedData();
 
@@ -46,7 +46,7 @@ class DashboardController extends AppBaseController
     /**
      * @return JsonResponse
      */
-    public function categoryTicketChart(Request $request)
+    public function categoryTicketChart(Request $request): JsonResponse
     {
         $data = $this->dashboardRepository->getCategoryReport($request->input('status'));
 
@@ -56,7 +56,7 @@ class DashboardController extends AppBaseController
     /**
      * @return JsonResponse
      */
-    public function ticketChart(Request $request)
+    public function ticketChart(Request $request): JsonResponse
     {
         $input = $request->all();
         $data = $this->dashboardRepository->ticketChart($input);
@@ -67,7 +67,7 @@ class DashboardController extends AppBaseController
     /**
      * @return JsonResponse
      */
-    public function agentTicketReport(Request $request)
+    public function agentTicketReport(Request $request): JsonResponse
     {
         $data = $this->dashboardRepository->agentTicketChart($request->all());
 

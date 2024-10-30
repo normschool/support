@@ -15,7 +15,7 @@ class APIRequest extends FormRequest
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function response(array $errors)
+    public function response(array $errors): \Symfony\Component\HttpFoundation\Response
     {
         $messages = implode(' ', Arr::flatten($errors));
 

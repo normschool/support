@@ -229,7 +229,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return string
      */
-    public function getNameAttribute($value)
+    public function getNameAttribute($value): string
     {
         return ucfirst($value);
     }
@@ -237,7 +237,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return string
      */
-    public function getRoleNameAttribute()
+    public function getRoleNameAttribute(): string
     {
         $userRoles = $this->roles->first();
 
@@ -247,7 +247,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return string
      */
-    public function getRoleIdAttribute()
+    public function getRoleIdAttribute(): string
     {
         $userRoles = $this->roles->first();
 
@@ -277,7 +277,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return array
      */
-    public function webObj()
+    public function webObj(): array
     {
         return [
             'id' => $this->id,
@@ -294,7 +294,7 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return array
      */
-    public function apiObj()
+    public function apiObj(): array
     {
         return [
             'id' => $this->id,

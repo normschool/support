@@ -25,7 +25,7 @@ class UserEvent implements ShouldBroadcast
      * @param  array  $data
      * @param  int|array  $userIds
      */
-    public function __construct($data, $userIds)
+    public function __construct(array $data, $userIds)
     {
         $this->data = $data;
         $this->userIds = $userIds;
@@ -52,7 +52,7 @@ class UserEvent implements ShouldBroadcast
     /**
      * @return array
      */
-    public function broadcastWith()
+    public function broadcastWith(): array
     {
         return $this->data;
     }

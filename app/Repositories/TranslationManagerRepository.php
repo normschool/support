@@ -57,7 +57,7 @@ class TranslationManagerRepository
     /**
      * @return array
      */
-    public function getAllFiles($lang)
+    public function getAllFiles($lang): array
     {
         $files = File::allFiles(App::langPath().'/'.$lang.'/');
         $allFilesArr = [];
@@ -71,7 +71,7 @@ class TranslationManagerRepository
     /**
      * @return array
      */
-    public function getAllLanguage($selectedLang, $selectedFile)
+    public function getAllLanguage($selectedLang, $selectedFile): array
     {
         $allLanguagesArr = $selectedLangMessages = [];
         $allLanguagesFiles = File::directories(App::langPath());

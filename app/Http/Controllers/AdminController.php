@@ -45,7 +45,7 @@ class AdminController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): \Illuminate\View\View
     {
         return view('admins.create');
     }
@@ -56,7 +56,7 @@ class AdminController extends AppBaseController
      * @param  Request  $request
      * @return RedirectResponse
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateUserRequest $request): RedirectResponse
     {
         $input = $request->all();
         $input['role'] = User::ADMIN;
@@ -72,7 +72,7 @@ class AdminController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function show(User $admin)
+    public function show(User $admin): \Illuminate\View\View
     {
         return view('admins.show', compact('admin'));
     }
@@ -82,7 +82,7 @@ class AdminController extends AppBaseController
      *
      * @return Application|Factory|View
      */
-    public function edit(User $admin)
+    public function edit(User $admin): \Illuminate\View\View
     {
         $admin->load('media');
 
@@ -95,7 +95,7 @@ class AdminController extends AppBaseController
      * @param  Request  $request
      * @return RedirectResponse
      */
-    public function update(UpdateUserRequest $request, User $admin)
+    public function update(UpdateUserRequest $request, User $admin): RedirectResponse
     {
         $input = $request->all();
         $this->adminRepository->update($input, $admin->id);
@@ -110,7 +110,7 @@ class AdminController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy(User $admin)
+    public function destroy(User $admin): Response
     {
         $admin->delete();
 

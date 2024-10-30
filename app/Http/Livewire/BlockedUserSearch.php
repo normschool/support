@@ -25,7 +25,7 @@ class BlockedUserSearch extends Component
     /**
      * @param  array  $ids
      */
-    public function setBlockedContactIds($ids)
+    public function setBlockedContactIds(array $ids)
     {
         $this->blockedContactIds = $ids;
     }
@@ -33,7 +33,7 @@ class BlockedUserSearch extends Component
     /**
      * @return array
      */
-    public function getBlockedContactIds()
+    public function getBlockedContactIds(): array
     {
         return $this->blockedContactIds;
     }
@@ -89,7 +89,7 @@ class BlockedUserSearch extends Component
     /**
      * @param  int  $userId
      */
-    public function addBlockedUserId($userId)
+    public function addBlockedUserId(int $userId)
     {
         $blockedContactIds = $this->getBlockedContactIds();
         array_push($blockedContactIds, $userId);
@@ -99,7 +99,7 @@ class BlockedUserSearch extends Component
     /**
      * @param  int  $userId
      */
-    public function removeBlockedUserId($userId)
+    public function removeBlockedUserId(int $userId)
     {
         $blockedContactIds = $this->getBlockedContactIds();
         if (($key = array_search($userId, $blockedContactIds)) !== false) {

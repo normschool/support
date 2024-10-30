@@ -24,7 +24,7 @@ class Faqfront extends SearchableComponent
     /**
      * @return LengthAwarePaginator
      */
-    public function searchFAQs()
+    public function searchFAQs(): LengthAwarePaginator
     {
         return $this->paginate();
     }
@@ -32,7 +32,7 @@ class Faqfront extends SearchableComponent
     /**
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return FAQ::class;
     }
@@ -40,7 +40,7 @@ class Faqfront extends SearchableComponent
     /**
      * @return array
      */
-    public function searchableFields()
+    public function searchableFields(): array
     {
         return [
             'title',

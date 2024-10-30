@@ -34,7 +34,7 @@ class SettingController extends AppBaseController
      *
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $setting = Setting::pluck('value', 'key')->toArray();
         $sectionName = ($request->section === null) ? 'general' : $request->section;
@@ -52,7 +52,7 @@ class SettingController extends AppBaseController
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function update(UpdateSettingRequest $request)
+    public function update(UpdateSettingRequest $request): RedirectResponse
     {
         $this->settingRepository->updateSetting($request->all());
 

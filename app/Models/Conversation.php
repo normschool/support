@@ -151,7 +151,7 @@ class Conversation extends Model
     /**
      * @return string
      */
-    public function getPhotoUrlAttribute($value)
+    public function getPhotoUrlAttribute($value): string
     {
         if (! empty($value)) {
             return $this->imageUrl(User::$PATH.DIRECTORY_SEPARATOR.$value);
@@ -163,7 +163,7 @@ class Conversation extends Model
     /**
      * @return string
      */
-    public function getTimeFromNowInMinAttribute()
+    public function getTimeFromNowInMinAttribute(): string
     {
         return Carbon::now()->diffInMinutes($this->created_at);
     }
