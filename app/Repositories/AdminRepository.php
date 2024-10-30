@@ -47,7 +47,6 @@ class AdminRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws \Throwable
      */
     public function store($input): User

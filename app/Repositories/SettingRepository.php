@@ -38,7 +38,6 @@ class SettingRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig

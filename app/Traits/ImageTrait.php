@@ -35,7 +35,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public static function makeImage(UploadedFile $file, string $path, array $options = []): string
@@ -71,7 +70,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @internal param $type
      * @internal param bool $full
      */
@@ -81,7 +79,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public static function makeThumbnail(\Symfony\Component\HttpFoundation\File\UploadedFile $file, array $input, string $fileName = ''): string
@@ -130,7 +127,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public static function uploadVideo($file, $path): string
@@ -158,7 +154,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public static function uploadFile($file, $path): string
@@ -201,7 +196,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public static function makeAttachment($file, $path): string
@@ -228,7 +222,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public function importImageFromUrl($url, $path): string
@@ -249,7 +242,6 @@ trait ImageTrait
     }
 
     /**
-     *
      * @throws UnprocessableEntityHttpException
      */
     public static function uploadBase64Image($file, string $path): string

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CreateTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
 use App\Repositories\TicketRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Laracasts\Flash\Flash;
@@ -60,7 +60,6 @@ class CustomerDashboardController extends AppBaseController
     }
 
     /**
-     *
      * @throws \Throwable
      */
     public function updateCustomerTicket(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use App\Events\UserEvent;
 use App\Http\Requests\ChatUserRequest;
 use App\Models\AssignedChat;
@@ -10,6 +9,7 @@ use App\Models\Conversation;
 use App\Models\Notification;
 use App\Models\User;
 use App\Repositories\ChatRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;

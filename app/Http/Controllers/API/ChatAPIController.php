@@ -68,7 +68,6 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     *
      * @throws \Exception
      */
     public function sendMessage(SendMessageRequest $request): JsonResponse
@@ -86,7 +85,6 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     *
      * @throws ApiOperationFailedException
      */
     public function addAttachment(Request $request): JsonResponse
@@ -139,7 +137,6 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     *
      * @throws Exception
      */
     public function deleteMessageForEveryone(Conversation $conversation, Request $request): JsonResponse
@@ -177,7 +174,6 @@ class ChatAPIController extends AppBaseController
     }
 
     /**
-     *
      * @throws ApiOperationFailedException
      */
     public function imageUpload(Request $request): JsonResponse

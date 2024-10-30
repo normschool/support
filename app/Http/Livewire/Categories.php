@@ -39,7 +39,6 @@ class Categories extends Component
     //    }
 
     /**
-     *
      * @throws Exception
      */
     public function deleteCategory(Category $id)

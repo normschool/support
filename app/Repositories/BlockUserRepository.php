@@ -40,7 +40,6 @@ class BlockUserRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws Exception
      */
     public function blockUnblockUser(array $input): ?bool

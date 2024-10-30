@@ -64,7 +64,6 @@ class UserController extends AppBaseController
     }
 
     /**
-     *
      * @throws \Throwable
      */
     public function store(CreateUserRequest $request): RedirectResponse

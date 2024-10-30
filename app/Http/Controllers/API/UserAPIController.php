@@ -100,7 +100,6 @@ class UserAPIController extends AppBaseController
     }
 
     /**
-     *
      * @throws Exception
      */
     public function archiveChat($ownerId): JsonResponse

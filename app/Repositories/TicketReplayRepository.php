@@ -45,7 +45,6 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws Throwable
      */
     public function store(array $input): TicketReplay
@@ -109,7 +108,6 @@ class TicketReplayRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws Throwable
      */
     public function updateReplyWithAttachment($input, $id): array

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use Illuminate\Support\Collection;
 use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
@@ -11,6 +10,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -68,7 +68,6 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws Throwable
      */
     public function store(array $input): array
@@ -237,7 +236,6 @@ class TicketRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws Throwable
      */
     public function update(array $input, Ticket $ticket): array

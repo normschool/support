@@ -69,7 +69,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     *
      * @throws Throwable
      */
     public function store(CreateTicketRequest $request): RedirectResponse
@@ -136,7 +135,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     *
      * @throws Throwable
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse
@@ -301,7 +299,6 @@ class TicketController extends AppBaseController
     }
 
     /**
-     *
      * @throws \Exception
      */
     public function deleteAttachment(Media $media): JsonResponse

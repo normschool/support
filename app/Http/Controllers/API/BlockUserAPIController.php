@@ -27,7 +27,6 @@ class BlockUserAPIController extends AppBaseController
     }
 
     /**
-     *
      * @throws Exception
      */
     public function blockUnblockUser(Request $request): JsonResponse

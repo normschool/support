@@ -46,7 +46,6 @@ class SettingController extends AppBaseController
     }
 
     /**
-     *
      * @throws DiskDoesNotExist
      * @throws FileDoesNotExist
      * @throws FileIsTooBig

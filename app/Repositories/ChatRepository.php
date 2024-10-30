@@ -219,7 +219,6 @@ class ChatRepository extends BaseRepository
     }
 
     /**
-     *
      * @throws Exception
      */
     public function sendMessage(array $input): Conversation

@@ -22,7 +22,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     *
      * @throws \Throwable
      */
     public function store(Request $request): JsonResponse
@@ -55,7 +54,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     *
      * @throws Exception
      */
     public function destroy($id): JsonResponse
@@ -66,7 +64,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     *
      * @throws Exception
      */
     public function deleteAttachment(Media $media): JsonResponse
@@ -77,7 +74,6 @@ class TicketReplayController extends AppBaseController
     }
 
     /**
-     *
      * @throws \Throwable
      */
     public function addAttachment(Request $request): JsonResponse
